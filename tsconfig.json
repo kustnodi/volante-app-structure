@@ -3,6 +3,10 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
+      "@volante/slottrak-app": [
+        "dist/volante/slottrak-app/volante-slottrak-app",
+        "dist/volante/slottrak-app"
+      ],
       "@volante/slottrak-machines": [
         "dist/volante/slottrak-machines/volante-slottrak-machines",
         "dist/volante/slottrak-machines"

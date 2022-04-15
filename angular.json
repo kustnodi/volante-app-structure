@@ -272,6 +272,37 @@
           }
         }
       }
+    },
+    "@volante/slottrak-app": {
+      "projectType": "library",
+      "root": "projects/volante/slottrak-app",
+      "sourceRoot": "projects/volante/slottrak-app/src",
+      "prefix": "slottrak-app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/volante/slottrak-app/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/volante/slottrak-app/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/volante/slottrak-app/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/volante/slottrak-app/src/test.ts",
+            "tsConfig": "projects/volante/slottrak-app/tsconfig.spec.json",
+            "karmaConfig": "projects/volante/slottrak-app/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "@volante-app/san-manuel"
