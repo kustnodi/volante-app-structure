@@ -241,6 +241,37 @@
           }
         }
       }
+    },
+    "@volante/slottrak-meal-log": {
+      "projectType": "library",
+      "root": "projects/volante/slottrak-meal-log",
+      "sourceRoot": "projects/volante/slottrak-meal-log/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/volante/slottrak-meal-log/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/volante/slottrak-meal-log/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/volante/slottrak-meal-log/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/volante/slottrak-meal-log/src/test.ts",
+            "tsConfig": "projects/volante/slottrak-meal-log/tsconfig.spec.json",
+            "karmaConfig": "projects/volante/slottrak-meal-log/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "@volante-app/san-manuel"
