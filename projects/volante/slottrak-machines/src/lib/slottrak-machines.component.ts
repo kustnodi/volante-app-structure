@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-slottrak-machines',
+  selector: 'slottrak-machines-slottrak-machines',
   template: `
     <p>
       slottrak-machines works!

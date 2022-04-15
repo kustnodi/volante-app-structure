@@ -32,7 +32,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-                "projects/volante-app/san-manuel/src/styles.sass"
+              "projects/volante-app/san-manuel/src/styles.sass"
             ],
             "scripts": []
           },
@@ -101,7 +101,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-                "projects/volante-app/san-manuel/src/styles.sass"
+              "projects/volante-app/san-manuel/src/styles.sass"
             ],
             "scripts": []
           }
@@ -215,7 +215,7 @@
       "projectType": "library",
       "root": "projects/volante/slottrak-machines",
       "sourceRoot": "projects/volante/slottrak-machines/src",
-      "prefix": "lib",
+      "prefix": "slottrak-machines",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -246,7 +246,7 @@
       "projectType": "library",
       "root": "projects/volante/slottrak-meal-log",
       "sourceRoot": "projects/volante/slottrak-meal-log/src",
-      "prefix": "lib",
+      "prefix": "slottrak-meal-log",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
