@@ -31,7 +31,8 @@
               "projects/volante-app/san-manuel/src/assets"
             ],
             "styles": [
-              "projects/volante-app/san-manuel/src/styles.sass"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+                "projects/volante-app/san-manuel/src/styles.sass"
             ],
             "scripts": []
           },
@@ -99,7 +100,8 @@
               "projects/volante-app/san-manuel/src/assets"
             ],
             "styles": [
-              "projects/volante-app/san-manuel/src/styles.sass"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+                "projects/volante-app/san-manuel/src/styles.sass"
             ],
             "scripts": []
           }
