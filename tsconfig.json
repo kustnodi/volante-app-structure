@@ -2,6 +2,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@volante/slottrak-machines": [
+        "dist/volante/slottrak-machines/volante-slottrak-machines",
+        "dist/volante/slottrak-machines"
+      ]
+    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
