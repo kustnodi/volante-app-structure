@@ -1,16 +1,9 @@
 import { NgModule } from '@angular/core';
-import { SlottrakMealLogComponent } from './slottrak-meal-log.component';
-
-
 
 @NgModule({
-  declarations: [
-    SlottrakMealLogComponent
-  ],
+  declarations: [],
   imports: [
   ],
-  exports: [
-    SlottrakMealLogComponent
-  ]
+  exports: []
 })
 export class SlottrakMealLogModule { }
