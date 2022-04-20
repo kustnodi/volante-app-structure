@@ -2,4 +2,4 @@
  * Public API Surface of slottrak-meal-log
  */
 
-export * from './lib/slottrak-meal-log.module';
+export * from '@volante/slottrak-meal-log/src/lib/slottrak-meal-log-config';

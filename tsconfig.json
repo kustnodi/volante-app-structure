@@ -22,6 +22,10 @@
       "@volante/slottrak-meal-log": [
         "dist/volante/slottrak-meal-log/volante-slottrak-meal-log",
         "dist/volante/slottrak-meal-log"
+      ],
+      "@volante/slottrak-meal-log/*": [
+        "dist/volante/slottrak-meal-log/volante-slottrak-meal-log/*",
+        "dist/volante/slottrak-meal-log/*"
       ]
     },
     "baseUrl": "./",
