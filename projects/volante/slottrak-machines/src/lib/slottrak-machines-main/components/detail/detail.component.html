@@ -1,0 +1,9 @@
+<h2>Machine Detail</h2>
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <a mat-tab-link [routerLink]="['.']">Configurations</a>
+  <a mat-tab-link [routerLink]="['meal-log']">MEAL Log</a>
+</nav>
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet>
+  </router-outlet>
+</mat-tab-nav-panel>
