@@ -11,6 +11,10 @@
         "dist/volante/slottrak-machines/volante-slottrak-machines",
         "dist/volante/slottrak-machines"
       ],
+      "@volante/slottrak-machines/*": [
+        "dist/volante/slottrak-machines/volante-slottrak-machines/*",
+        "dist/volante/slottrak-machines/*"
+      ],
       "@volante/slottrak-meal-log": [
         "dist/volante/slottrak-meal-log/volante-slottrak-meal-log",
         "dist/volante/slottrak-meal-log"
