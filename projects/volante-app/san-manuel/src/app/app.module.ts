@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlottrakMachinesConfigModule } from '@volante/slottrak-machines';
+import { SlottrakAppConfigModule, SlottrakAppConfigService } from '@volante/slottrak-app';
+import { Router, RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -12,10 +13,15 @@ import { SlottrakMachinesConfigModule } from '@volante/slottrak-machines';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    RouterModule.forRoot([]),
     BrowserAnimationsModule,
-    SlottrakMachinesConfigModule
+    SlottrakMachinesConfigModule,
+    SlottrakAppConfigModule
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(router: Router, slottrakAppConfigService: SlottrakAppConfigService) {
+    router.resetConfig(slottrakAppConfigService.rootRoutes)
+  }
+}
