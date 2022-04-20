@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlottrakMachinesConfigModule } from '@volante/slottrak-machines';
 import { SlottrakAppConfigModule, SlottrakAppConfigService } from '@volante/slottrak-app';
 import { Router, RouterModule } from '@angular/router';
+import { SlottrakMealLogConfigModule } from '@volante/slottrak-meal-log';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { Router, RouterModule } from '@angular/router';
     RouterModule.forRoot([]),
     BrowserAnimationsModule,
     SlottrakMachinesConfigModule,
-    SlottrakAppConfigModule
+    SlottrakAppConfigModule,
+    SlottrakMealLogConfigModule
   ],
   bootstrap: [AppComponent]
 })
