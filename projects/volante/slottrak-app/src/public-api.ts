@@ -2,4 +2,4 @@
  * Public API Surface of slottrak-app
  */
 
-export * from './lib/slottrak-app.module';
+export * from '@volante/slottrak-app/src/lib/slottrak-app-config';
