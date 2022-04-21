@@ -22,8 +22,4 @@ import { SlottrakMealLogConfigModule } from '@volante/slottrak-meal-log';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor(router: Router, slottrakAppConfigService: SlottrakAppConfigService) {
-    router.resetConfig(slottrakAppConfigService.rootRoutes)
-  }
-}
+export class AppModule { }

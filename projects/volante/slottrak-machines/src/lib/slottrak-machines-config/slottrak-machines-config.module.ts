@@ -1,24 +1,18 @@
-import { NgModule, InjectionToken } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SlottrakAppConfigModule, SlottrakAppConfigService, DetailRouteConfig } from '@volante/slottrak-app';
+import { SlottrakAppConfigModule, SlottrakAppConfigService } from '@volante/slottrak-app';
+import { SlottrakMachinesConfigRoutingModule } from './slottrak-machines-config-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    SlottrakAppConfigModule
+    SlottrakAppConfigModule,
+    SlottrakMachinesConfigRoutingModule
   ]
 })
 export class SlottrakMachinesConfigModule {
-  constructor(appConfig: SlottrakAppConfigService) {
-
-    appConfig.addRootRoute({
-      path: 'machines',
-      loadChildren: () => import('@volante/slottrak-machines/src/lib/slottrak-machines-main').then(m => {
-        return m.SlottrakMachinesMainModule
-      })
-    })
-  }
+  constructor(appConfig: SlottrakAppConfigService) { }
 }
