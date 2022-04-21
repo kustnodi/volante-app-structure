@@ -1,7 +1,7 @@
 <h2>Machine Detail</h2>
 <nav mat-tab-nav-bar [tabPanel]="tabPanel">
-  <a mat-tab-link [routerLink]="['.']">Configurations</a>
-  <a mat-tab-link [routerLink]="['meal-log']">MEAL Log</a>
+  <a mat-tab-link *ngFor="let detailRoute of this.detailRoutes"
+    [routerLink]="[detailRoute.route.path || '.']">{{detailRoute.displayText}}</a>
 </nav>
 <mat-tab-nav-panel #tabPanel>
   <router-outlet>
