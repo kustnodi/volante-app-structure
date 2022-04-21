@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
-import { SlottrakMachinesConfigModule, SlottrakMachinesConfigService } from '@volante/slottrak-machines';
+import { MACHINE_DETAIL_ROUTES } from '@volante/slottrak-machines';
 
 @NgModule({
   declarations: [],
-  imports: [
-    SlottrakMachinesConfigModule
+  providers: [
+    {
+      provide: MACHINE_DETAIL_ROUTES,
+      multi: true,
+      useValue: {
+        displayText: 'MEAL Log',
+        route: {
+          path: 'meal-log',
+          loadChildren: () => import('@volante/slottrak-meal-log/src/lib/slottrak-meal-log-machine-detail').then(m => m.SlottrakMealLogMachineDetailModule)
+        }
+      }
+    }
   ]
 })
-export class SlottrakMealLogConfigModule {
-  constructor(slottrakMachinesConfigService: SlottrakMachinesConfigService) {
-    slottrakMachinesConfigService.machineDetailRoutes.push({
-      path: 'meal-log',
-      loadChildren: () => import('@volante/slottrak-meal-log/src/lib/slottrak-meal-log-machine-detail').then(m => m.SlottrakMealLogMachineDetailModule)
-    })
-  }
-}
+export class SlottrakMealLogConfigModule { }
