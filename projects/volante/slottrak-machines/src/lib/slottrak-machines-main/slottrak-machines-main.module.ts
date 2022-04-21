@@ -4,6 +4,7 @@ import { SlottrakMachinesMainRoutingModule } from './slottrak-machines-main-rout
 import { EntryComponent } from './components/entry/entry.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { ConfigurationsComponent } from './components/detail/configurations/configurations.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ConfigurationsComponent } from './components/detail/configurations/conf
   ],
   imports: [
     SlottrakMachinesMainRoutingModule,
-    MatTabsModule
+    MatTabsModule,
+    CommonModule
   ]
 })
 export class SlottrakMachinesMainModule { }
