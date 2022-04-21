@@ -11,14 +11,12 @@ const machineDetailChildren: Routes = []
 const routes: Routes = [
   {
     path: '',
-    component: EntryComponent,
-    children: [
-      {
-        path: ':id',
-        component: DetailComponent,
-        children: machineDetailChildren
-      }
-    ]
+    component: EntryComponent
+  },
+  {
+    path: ':id',
+    component: DetailComponent,
+    children: machineDetailChildren
   }
 ]
 
