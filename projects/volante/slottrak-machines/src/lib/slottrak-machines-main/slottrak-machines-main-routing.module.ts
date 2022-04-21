@@ -1,15 +1,12 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, ROUTES, Routes } from '@angular/router';
+import { Inject, NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { DetailRouteConfig } from '@volante/slottrak-app';
+import { MACHINE_DETAIL_ROUTES } from '@volante/slottrak-machines/src/lib/slottrak-machines-services';
 import { ConfigurationsComponent } from './components/detail/configurations/configurations.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { EntryComponent } from './components/entry/entry.component';
 
-const machineDetailChildren: Routes = [
-  {
-    path: '',
-    component: ConfigurationsComponent
-  }
-]
+const machineDetailChildren: Routes = []
 
 const routes: Routes = [
   {
@@ -35,7 +32,22 @@ const routes: Routes = [
   ]
 })
 export class SlottrakMachinesMainRoutingModule {
-  static addMachineDetailRoutes(routes: Routes) {
-    machineDetailChildren.push(...routes)
+  constructor(@Inject(MACHINE_DETAIL_ROUTES) machineDetailRoutes: DetailRouteConfig[]) {
+    const defaultRoutes = this.getDefaultRoutes()
+    machineDetailRoutes.splice(0, 0, ...defaultRoutes)
+    const detailRoutes = machineDetailRoutes.map(d => d.route)
+    machineDetailChildren.push(...detailRoutes)
+  }
+
+  private getDefaultRoutes(): DetailRouteConfig[] {
+    return [
+      {
+        displayText: 'Configurations',
+        route: {
+          path: '',
+          component: ConfigurationsComponent
+        }
+      }
+    ]
   }
 }
