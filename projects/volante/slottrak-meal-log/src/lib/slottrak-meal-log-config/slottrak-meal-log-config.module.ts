@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { MACHINE_DETAIL_ROUTES } from '@volante/slottrak-machines';
+import { SlottrakMealLogConfigRoutingModule } from './slottrak-meal-log-config-routing.module';
 
 @NgModule({
   declarations: [],
+  imports: [
+    SlottrakMealLogConfigRoutingModule
+  ],
   providers: [
     {
       provide: MACHINE_DETAIL_ROUTES,
