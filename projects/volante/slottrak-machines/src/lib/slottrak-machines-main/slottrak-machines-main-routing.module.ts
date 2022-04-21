@@ -1,23 +1,24 @@
 import { Inject, NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { DetailRouteConfig } from '@volante/slottrak-app';
-import { MACHINE_DETAIL_ROUTES } from '@volante/slottrak-machines/src/lib/slottrak-machines-services';
-import { ConfigurationsComponent } from './components/detail/configurations/configurations.component';
+import { Route, RouterModule, Routes } from '@angular/router';
 import { DetailComponent } from './components/detail/detail.component';
 import { EntryComponent } from './components/entry/entry.component';
+import { ConfigurationsComponent } from './components/detail/configurations/configurations.component'
 
-const machineDetailChildren: Routes = []
+import { MACHINE_DETAIL_ROUTES, MACHINE_DETAIL_ROUTE_SERVICE } from '@volante/slottrak-machines/src/lib/slottrak-machines-services';
+import { DetailRouteConfig, SlotTrakAppDetailRouteService } from '@volante/slottrak-app';
+
+const detailRoute: Route = {
+  path: ':id',
+  component: DetailComponent,
+  children: []
+}
 
 const routes: Routes = [
   {
     path: '',
     component: EntryComponent
   },
-  {
-    path: ':id',
-    component: DetailComponent,
-    children: machineDetailChildren
-  }
+  detailRoute
 ]
 
 @NgModule({
@@ -27,25 +28,28 @@ const routes: Routes = [
   ],
   exports: [
     RouterModule
+  ],
+  providers: [
+    {
+      provide: MACHINE_DETAIL_ROUTE_SERVICE,
+      useValue: new SlotTrakAppDetailRouteService(detailRoute)
+    }
   ]
 })
 export class SlottrakMachinesMainRoutingModule {
-  constructor(@Inject(MACHINE_DETAIL_ROUTES) machineDetailRoutes: DetailRouteConfig[]) {
-    const defaultRoutes = this.getDefaultRoutes()
-    machineDetailRoutes.splice(0, 0, ...defaultRoutes)
-    const detailRoutes = machineDetailRoutes.map(d => d.route)
-    machineDetailChildren.push(...detailRoutes)
-  }
-
-  private getDefaultRoutes(): DetailRouteConfig[] {
-    return [
+  constructor(
+    @Inject(MACHINE_DETAIL_ROUTE_SERVICE) machineDetailRouteService: SlotTrakAppDetailRouteService,
+    @Inject(MACHINE_DETAIL_ROUTES) machineDetailRoutes: DetailRouteConfig[]
+  ) {
+    machineDetailRouteService.configureRoutes([
       {
         displayText: 'Configurations',
         route: {
           path: '',
           component: ConfigurationsComponent
         }
-      }
-    ]
+      },
+      ...machineDetailRoutes
+    ])
   }
 }
