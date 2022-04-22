@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'slottrak-san-manuel-root',
+  selector: 'slottrak-cache-creek-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })

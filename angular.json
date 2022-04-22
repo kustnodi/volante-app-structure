@@ -120,7 +120,7 @@
       },
       "root": "projects/volante-app/cache-creek",
       "sourceRoot": "projects/volante-app/cache-creek/src",
-      "prefix": "slottrak-san-manuel",
+      "prefix": "slottrak-cache-creek",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
