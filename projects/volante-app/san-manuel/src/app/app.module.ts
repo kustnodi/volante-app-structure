@@ -7,6 +7,7 @@ import { SlottrakMachinesConfigModule } from '@volante/slottrak-machines';
 import { RouterModule } from '@angular/router';
 import { SlottrakMealLogConfigModule } from '@volante/slottrak-meal-log';
 import { SlottrakAppUiModule } from '@volante/slottrak-app';
+import { SlottrakProgressivesConfigModule } from '@volante/slottrak-progressives';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SlottrakAppUiModule } from '@volante/slottrak-app';
     BrowserAnimationsModule,
     SlottrakMachinesConfigModule,
     SlottrakMealLogConfigModule,
+    SlottrakProgressivesConfigModule,
     SlottrakAppUiModule
   ],
   bootstrap: [AppComponent]
