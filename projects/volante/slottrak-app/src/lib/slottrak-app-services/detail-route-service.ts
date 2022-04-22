@@ -1,5 +1,5 @@
 import { Route } from "@angular/router";
-import { DetailRouteConfig } from "./detail-route-config";
+import { DetailRouteConfig } from "@volante/slottrak-app/src/lib/slottrak-app-config";
 
 export class SlotTrakAppDetailRouteService {
   readonly detailRoutes: DetailRouteConfig[] = []

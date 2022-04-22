@@ -1,0 +1,5 @@
+<ng-container *ngFor="let menuItem of this.menuItems">
+  <a [routerLink]="menuItem.url" mat-button>
+    {{menuItem.displayText}}
+  </a>
+</ng-container>
