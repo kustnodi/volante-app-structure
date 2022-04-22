@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SlotTrakAppComponent, SlottrakAppModule } from '@volante/slottrak-app';
+import { RouterModule } from '@angular/router';
+import { SlottrakMachinesConfigModule } from '@volante/slottrak-machines';
+import { SlottrakMealLogConfigModule } from '@volante/slottrak-meal-log';
+import { SlottrakProgressivesConfigModule } from '@volante/slottrak-progressives';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule
+    RouterModule.forRoot([]),
+    SlottrakAppModule,
+    SlottrakMachinesConfigModule,
+    SlottrakProgressivesConfigModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [SlotTrakAppComponent]
 })
 export class AppModule { }
