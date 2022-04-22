@@ -334,6 +334,109 @@
           }
         }
       }
+    },
+    "@volante-app/rt66": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "sass"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/volante-app/rt66",
+      "sourceRoot": "projects/volante-app/rt66/src",
+      "prefix": "slottrak-rt66",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/volante-app/rt66",
+            "index": "projects/volante-app/rt66/src/index.html",
+            "main": "projects/volante-app/rt66/src/main.ts",
+            "polyfills": "projects/volante-app/rt66/src/polyfills.ts",
+            "tsConfig": "projects/volante-app/rt66/tsconfig.app.json",
+            "inlineStyleLanguage": "sass",
+            "assets": [
+              "projects/volante-app/rt66/src/favicon.ico",
+              "projects/volante-app/rt66/src/assets"
+            ],
+            "styles": [
+              "projects/volante-app/rt66/src/styles.sass"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/volante-app/rt66/src/environments/environment.ts",
+                  "with": "projects/volante-app/rt66/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "@volante-app/rt66:build:production"
+            },
+            "development": {
+              "browserTarget": "@volante-app/rt66:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "@volante-app/rt66:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/volante-app/rt66/src/test.ts",
+            "polyfills": "projects/volante-app/rt66/src/polyfills.ts",
+            "tsConfig": "projects/volante-app/rt66/tsconfig.spec.json",
+            "karmaConfig": "projects/volante-app/rt66/karma.conf.js",
+            "inlineStyleLanguage": "sass",
+            "assets": [
+              "projects/volante-app/rt66/src/favicon.ico",
+              "projects/volante-app/rt66/src/assets"
+            ],
+            "styles": [
+              "projects/volante-app/rt66/src/styles.sass"
+            ],
+            "scripts": []
+          }
+        }
+      }
     }
   },
   "defaultProject": "@volante-app/san-manuel"
