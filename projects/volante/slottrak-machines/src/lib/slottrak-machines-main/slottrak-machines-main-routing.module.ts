@@ -1,4 +1,4 @@
-import { Inject, NgModule } from '@angular/core';
+import { Inject, NgModule, Optional } from '@angular/core';
 import { Route, RouterModule, Routes } from '@angular/router';
 import { DetailComponent } from './components/detail/detail.component';
 import { EntryComponent } from './components/entry/entry.component';
@@ -39,9 +39,10 @@ const routes: Routes = [
 export class SlottrakMachinesMainRoutingModule {
   constructor(
     @Inject(MACHINE_DETAIL_ROUTE_SERVICE) machineDetailRouteService: SlotTrakAppDetailRouteService,
-    @Inject(MACHINE_DETAIL_ROUTES) machineDetailRoutes: DetailRouteConfig[]
+    @Optional() @Inject(MACHINE_DETAIL_ROUTES) machineDetailRoutes: DetailRouteConfig[] | undefined
   ) {
 
+    machineDetailRoutes ??= []
     //configure the routes as soon as module is loaded so router sees all routes
     machineDetailRouteService.configureRoutes([
       {
