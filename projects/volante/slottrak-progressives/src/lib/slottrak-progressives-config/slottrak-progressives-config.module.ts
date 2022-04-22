@@ -12,6 +12,7 @@ import { SlottrakProgressivesConfigRoutingModule } from './slottrak-progressives
   providers: [
     {
       provide: APP_MENU_ITEMS,
+      multi: true,
       useValue: {
         url: '/progressives',
         displayText: 'Progressives'
