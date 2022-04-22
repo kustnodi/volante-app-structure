@@ -41,6 +41,8 @@ export class SlottrakMachinesMainRoutingModule {
     @Inject(MACHINE_DETAIL_ROUTE_SERVICE) machineDetailRouteService: SlotTrakAppDetailRouteService,
     @Inject(MACHINE_DETAIL_ROUTES) machineDetailRoutes: DetailRouteConfig[]
   ) {
+
+    //configure the routes as soon as module is loaded so router sees all routes
     machineDetailRouteService.configureRoutes([
       {
         displayText: 'Configurations',
