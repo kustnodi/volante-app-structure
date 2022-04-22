@@ -4,6 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start-cc": "ng serve @volante-app/cache-creek",
+    "start-rt66": "ng serve @volante-app/rt66",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
