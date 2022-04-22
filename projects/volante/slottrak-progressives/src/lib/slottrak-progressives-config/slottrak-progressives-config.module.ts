@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { APP_MENU_ITEMS } from '@volante/slottrak-app';
 
 import { SlottrakProgressivesConfigRoutingModule } from './slottrak-progressives-config-routing.module';
 
@@ -7,6 +8,15 @@ import { SlottrakProgressivesConfigRoutingModule } from './slottrak-progressives
   declarations: [],
   imports: [
     SlottrakProgressivesConfigRoutingModule
+  ],
+  providers: [
+    {
+      provide: APP_MENU_ITEMS,
+      useValue: {
+        url: '/progressives',
+        displayText: 'Progressives'
+      }
+    }
   ]
 })
 export class SlottrakProgressivesConfigModule { }
