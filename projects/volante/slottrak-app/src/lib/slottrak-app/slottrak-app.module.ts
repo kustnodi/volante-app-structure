@@ -4,13 +4,15 @@ import { MenuComponent } from './components/menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { AppComponent } from './components/app/app.component';
 
 @NgModule({
   declarations: [
-    MenuComponent
+    MenuComponent,
+    AppComponent
   ],
   exports: [
-    MenuComponent
+    AppComponent
   ],
   imports: [
     CommonModule,
@@ -19,4 +21,4 @@ import { MatButtonModule } from '@angular/material/button';
     RouterModule.forChild([])
   ]
 })
-export class SlottrakAppUiModule { }
+export class SlottrakAppModule { }
