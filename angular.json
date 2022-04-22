@@ -303,6 +303,37 @@
           }
         }
       }
+    },
+    "@volante/slottrak-progressives": {
+      "projectType": "library",
+      "root": "projects/volante/slottrak-progressives",
+      "sourceRoot": "projects/volante/slottrak-progressives/src",
+      "prefix": "slottrak-progressives",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/volante/slottrak-progressives/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/volante/slottrak-progressives/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/volante/slottrak-progressives/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/volante/slottrak-progressives/src/test.ts",
+            "tsConfig": "projects/volante/slottrak-progressives/tsconfig.spec.json",
+            "karmaConfig": "projects/volante/slottrak-progressives/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "@volante-app/san-manuel"

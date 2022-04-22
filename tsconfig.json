@@ -26,6 +26,10 @@
       "@volante/slottrak-meal-log/*": [
         "dist/volante/slottrak-meal-log/volante-slottrak-meal-log/*",
         "dist/volante/slottrak-meal-log/*"
+      ],
+      "@volante/slottrak-progressives": [
+        "dist/volante/slottrak-progressives/volante-slottrak-progressives",
+        "dist/volante/slottrak-progressives"
       ]
     },
     "baseUrl": "./",
