@@ -30,6 +30,10 @@
       "@volante/slottrak-progressives": [
         "dist/volante/slottrak-progressives/volante-slottrak-progressives",
         "dist/volante/slottrak-progressives"
+      ],
+      "@volante/slottrak-progressives/*": [
+        "dist/volante/slottrak-progressives/volante-slottrak-progressives/*",
+        "dist/volante/slottrak-progressives/*"
       ]
     },
     "baseUrl": "./",
