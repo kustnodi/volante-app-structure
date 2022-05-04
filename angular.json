@@ -473,37 +473,6 @@
         }
       }
     },
-    "@volante/machine-add": {
-      "projectType": "library",
-      "root": "projects/volante/machine-add",
-      "sourceRoot": "projects/volante/machine-add/src",
-      "prefix": "volante-machineAdd",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/volante/machine-add/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/volante/machine-add/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/volante/machine-add/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/volante/machine-add/src/test.ts",
-            "tsConfig": "projects/volante/machine-add/tsconfig.spec.json",
-            "karmaConfig": "projects/volante/machine-add/karma.conf.js"
-          }
-        }
-      }
-    },
     "@volante/slottrak-ui": {
       "projectType": "library",
       "root": "projects/volante/slottrak-ui",
