@@ -7,7 +7,7 @@ import { ConfigurationsComponent } from './components/detail/configurations/conf
 import { CommonModule } from '@angular/common';
 import { MachinesAddComponent } from './components/machines-add/machines-add.component';
 import { MachineAddModule } from '@volante/machine-add';
-import { GridlistModule } from '@volante/gridlist';
+import { SlotTrakUiGridlistModule } from '@volante/slottrak-ui';
 @NgModule({
   declarations: [
     EntryComponent,
@@ -20,7 +20,7 @@ import { GridlistModule } from '@volante/gridlist';
     MatTabsModule,
     CommonModule,
     MachineAddModule,
-    GridlistModule,
+    SlotTrakUiGridlistModule,
   ],
 })
 export class SlottrakMachinesMainModule { }
