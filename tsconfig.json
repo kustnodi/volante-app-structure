@@ -3,14 +3,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@volante/machine-add": [
-        "dist/volante/machine-add/volante-machine-add",
-        "dist/volante/machine-add"
-      ],
-      "@volante/machine-add/*": [
-        "dist/volante/machine-add/volante-machine-add/*",
-        "dist/volante/machine-add/*"
-      ],
       "@volante/slottrak-app": [
         "dist/volante/slottrak-app/volante-slottrak-app",
         "dist/volante/slottrak-app"

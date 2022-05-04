@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'volante-machine-add-machine-add',
+  selector: 'slottrak-machines-ui-button-add',
   template: ` <button>Add Machine</button> `,
   styles: [],
 })
