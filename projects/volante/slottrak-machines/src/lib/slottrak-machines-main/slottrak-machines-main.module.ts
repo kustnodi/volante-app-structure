@@ -6,7 +6,7 @@ import { DetailComponent } from './components/detail/detail.component';
 import { ConfigurationsComponent } from './components/detail/configurations/configurations.component';
 import { CommonModule } from '@angular/common';
 import { MachinesAddComponent } from './components/machines-add/machines-add.component';
-import { MachineAddModule } from '@volante/machineAdd';
+import { MachineAddModule } from '@volante/machine-add';
 import { GridlistModule } from '@volante/gridlist';
 @NgModule({
   declarations: [
@@ -23,4 +23,4 @@ import { GridlistModule } from '@volante/gridlist';
     GridlistModule,
   ],
 })
-export class SlottrakMachinesMainModule {}
+export class SlottrakMachinesMainModule { }

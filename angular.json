@@ -473,7 +473,7 @@
         }
       }
     },
-    "@volante/machineAdd": {
+    "@volante/machine-add": {
       "projectType": "library",
       "root": "projects/volante/machine-add",
       "sourceRoot": "projects/volante/machine-add/src",

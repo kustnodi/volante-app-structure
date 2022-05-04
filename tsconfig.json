@@ -11,11 +11,11 @@
         "dist/volante/gridlist/volante-gridlist/*",
         "dist/volante/gridlist/*"
       ],
-      "@volante/machineAdd": [
+      "@volante/machine-add": [
         "dist/volante/machine-add/volante-machine-add",
         "dist/volante/machine-add"
       ],
-      "@volante/machineAdd/*": [
+      "@volante/machine-add/*": [
         "dist/volante/machine-add/volante-machine-add/*",
         "dist/volante/machine-add/*"
       ],

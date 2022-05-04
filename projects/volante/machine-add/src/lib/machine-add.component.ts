@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'volante-machineAdd-machineAdd',
+  selector: 'volante-machine-add-machine-add',
   template: ` <button>Add Machine</button> `,
   styles: [],
 })
 export class MachineAddComponent implements OnInit {
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
