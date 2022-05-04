@@ -51,6 +51,10 @@
         "dist/volante/slottrak-progressives/volante-slottrak-progressives/*",
         "dist/volante/slottrak-progressives/*"
       ],
+      "@volante/slottrak-ui": [
+        "dist/volante/slottrak-ui/volante-slottrak-ui",
+        "dist/volante/slottrak-ui"
+      ],
       "@volante/slottrak-users": [
         "dist/volante/slottrak-users/volante-slottrak-users",
         "dist/volante/slottrak-users"
