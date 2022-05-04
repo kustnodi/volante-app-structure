@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { SlottrakMealLogConfigModule } from '@volante/slottrak-meal-log';
 import { SlottrakAppModule, SlotTrakAppComponent } from '@volante/slottrak-app';
 import { SlottrakProgressivesConfigModule } from '@volante/slottrak-progressives';
+import { SlottrakUsersConfigModule } from '@volante/slottrak-users';
 
 @NgModule({
   imports: [
@@ -13,9 +14,9 @@ import { SlottrakProgressivesConfigModule } from '@volante/slottrak-progressives
     SlottrakAppModule,
     SlottrakMachinesConfigModule,
     SlottrakMealLogConfigModule,
-    SlottrakProgressivesConfigModule
+    SlottrakProgressivesConfigModule,
+    SlottrakUsersConfigModule,
   ],
-  bootstrap: [SlotTrakAppComponent]
+  bootstrap: [SlotTrakAppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

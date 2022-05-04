@@ -2,57 +2,66 @@ import { Inject, NgModule, Optional } from '@angular/core';
 import { Route, RouterModule, Routes } from '@angular/router';
 import { DetailComponent } from './components/detail/detail.component';
 import { EntryComponent } from './components/entry/entry.component';
-import { ConfigurationsComponent } from './components/detail/configurations/configurations.component'
+import { ConfigurationsComponent } from './components/detail/configurations/configurations.component';
 
-import { MACHINE_DETAIL_ROUTES, MACHINE_DETAIL_ROUTE_SERVICE } from '@volante/slottrak-machines/src/lib/slottrak-machines-services';
-import { DetailRouteConfig, SlotTrakAppDetailRouteService } from '@volante/slottrak-app';
+import {
+  MACHINE_DETAIL_ROUTES,
+  MACHINE_DETAIL_ROUTE_SERVICE,
+} from '@volante/slottrak-machines/src/lib/slottrak-machines-services';
+import {
+  DetailRouteConfig,
+  SlotTrakAppDetailRouteService,
+} from '@volante/slottrak-app';
+import { MachinesAddComponent } from './components/machines-add/machines-add.component';
 
 const detailRoute: Route = {
   path: ':id',
   component: DetailComponent,
-  children: []
-}
+  children: [],
+};
 
 const routes: Routes = [
   {
     path: '',
-    component: EntryComponent
+    component: EntryComponent,
   },
-  detailRoute
-]
+  {
+    path: 'add',
+    component: MachinesAddComponent,
+  },
+  detailRoute,
+];
 
 @NgModule({
   declarations: [],
-  imports: [
-    RouterModule.forChild(routes)
-  ],
-  exports: [
-    RouterModule
-  ],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
   providers: [
     {
       provide: MACHINE_DETAIL_ROUTE_SERVICE,
-      useValue: new SlotTrakAppDetailRouteService(detailRoute)
-    }
-  ]
+      useValue: new SlotTrakAppDetailRouteService(detailRoute),
+    },
+  ],
 })
 export class SlottrakMachinesMainRoutingModule {
   constructor(
-    @Inject(MACHINE_DETAIL_ROUTE_SERVICE) machineDetailRouteService: SlotTrakAppDetailRouteService,
-    @Optional() @Inject(MACHINE_DETAIL_ROUTES) machineDetailRoutes: DetailRouteConfig[] | undefined
+    @Inject(MACHINE_DETAIL_ROUTE_SERVICE)
+    machineDetailRouteService: SlotTrakAppDetailRouteService,
+    @Optional()
+    @Inject(MACHINE_DETAIL_ROUTES)
+    machineDetailRoutes: DetailRouteConfig[] | undefined
   ) {
-
-    machineDetailRoutes ??= []
+    machineDetailRoutes ??= [];
     //configure the routes as soon as module is loaded so router sees all routes
     machineDetailRouteService.configureRoutes([
       {
         displayText: 'Configurations',
         route: {
           path: '',
-          component: ConfigurationsComponent
-        }
+          component: ConfigurationsComponent,
+        },
       },
-      ...machineDetailRoutes
-    ])
+      ...machineDetailRoutes,
+    ]);
   }
 }
