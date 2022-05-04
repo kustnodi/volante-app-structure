@@ -7,9 +7,17 @@
         "dist/volante/gridlist/volante-gridlist",
         "dist/volante/gridlist"
       ],
+      "@volante/gridlist/*": [
+        "dist/volante/gridlist/volante-gridlist/*",
+        "dist/volante/gridlist/*"
+      ],
       "@volante/machineAdd": [
         "dist/volante/machine-add/volante-machine-add",
         "dist/volante/machine-add"
+      ],
+      "@volante/machineAdd/*": [
+        "dist/volante/machine-add/volante-machine-add/*",
+        "dist/volante/machine-add/*"
       ],
       "@volante/slottrak-app": [
         "dist/volante/slottrak-app/volante-slottrak-app",
@@ -46,6 +54,10 @@
       "@volante/slottrak-users": [
         "dist/volante/slottrak-users/volante-slottrak-users",
         "dist/volante/slottrak-users"
+      ],
+      "@volante/slottrak-users/*": [
+        "dist/volante/slottrak-users/volante-slottrak-users/*",
+        "dist/volante/slottrak-users/*"
       ]
     },
     "baseUrl": "./",
