@@ -14,7 +14,8 @@ import { SlottrakAppServicesModule } from '@volante/slottrak-app/src/lib/slottra
     SlotTrakAppComponent
   ],
   exports: [
-    SlotTrakAppComponent
+    SlotTrakAppComponent,
+    SlottrakAppServicesModule
   ],
   imports: [
     BrowserAnimationsModule,
