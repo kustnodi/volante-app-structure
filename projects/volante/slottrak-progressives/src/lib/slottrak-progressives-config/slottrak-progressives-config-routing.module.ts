@@ -21,7 +21,8 @@ const routes: Routes = [
         route: {
           path: 'progressives',
           loadChildren: () => import('@volante/slottrak-progressives/src/lib/slottrak-progressives-machine-detail').then(m => m.SlottrakProgressivesMachineDetailModule)
-        }
+        },
+        requiresPermission: 'progressivesView'
       }
     }
   ]
