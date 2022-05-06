@@ -1,0 +1,14 @@
+<h1>Login Form</h1>
+<form (ngSubmit)="this.onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Username</mat-label>
+    <input name="username" matInput [(ngModel)]="this.formModel.username">
+  </mat-form-field>
+  <section name="permissions" class="example-section">
+    <mat-checkbox class="example-margin" name="permissions[{{i}}]" [(ngModel)]="permission.checked"
+      *ngFor="let permission of this.formModel.permissions; let i = index;">
+      {{permission.name}}
+    </mat-checkbox>
+  </section>
+  <button mat-raised-button type="submit" color="primary">Login</button>
+</form>
