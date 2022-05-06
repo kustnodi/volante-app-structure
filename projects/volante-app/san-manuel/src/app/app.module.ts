@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { SlottrakMachinesConfigModule } from '@volante/slottrak-machines';
 import { RouterModule } from '@angular/router';
@@ -19,4 +18,4 @@ import { SlottrakUsersConfigModule } from '@volante/slottrak-users';
   ],
   bootstrap: [SlotTrakAppComponent],
 })
-export class AppModule {}
+export class AppModule { }
