@@ -1,6 +1,6 @@
 <div class="test">
   <ng-container *ngFor="let menuItem of this.menuItems">
-    <a [routerLink]="menuItem.url" mat-button>
+    <a [routerLink]="menuItem.url" mat-button *ngIf="this.userProfile?.hasPermission(menuItem.requiresPermission)">
       {{menuItem.displayText}}
     </a>
   </ng-container>

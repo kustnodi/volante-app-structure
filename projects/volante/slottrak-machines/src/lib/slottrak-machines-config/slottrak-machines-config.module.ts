@@ -17,7 +17,8 @@ import { APP_MENU_ITEMS } from '@volante/slottrak-app';
       multi: true,
       useValue: {
         displayText: 'Machines',
-        url: '/machines'
+        url: '/machines',
+        requiresPermission: 'machineView'
       }
     }
   ]

@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
       { name: 'machineView', checked: false },
       { name: 'partView', checked: false },
       { name: 'progressiveView', checked: false },
-      { name: 'mealLogView', checked: false }
+      { name: 'mealLogView', checked: false },
+      { name: 'userView', checked: false }
     ]
   }
 
@@ -28,10 +29,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     const formModel = this.formModel
-    const userProfile: UserProfile = {
-      userName: formModel.username,
-      roles: formModel.permissions.filter(p => p.checked).map(p => p.name)
-    }
+    const userProfile: UserProfile = new UserProfile({
+      username: formModel.username,
+      permissions: formModel.permissions.filter(p => p.checked).map(p => p.name)
+    })
     this.userProfileService.setUserProfile(userProfile)
     this.router.navigate([''])
   }
