@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { SlottrakAppServicesModule } from '../slottrak-app-services.module';
 import { UserProfile } from './user-profile';
 
@@ -7,10 +8,13 @@ import { UserProfile } from './user-profile';
 })
 export class UserProfileService {
   private userProfile: UserProfile | undefined
+  public userProfile$: Subject<UserProfile> = new Subject<UserProfile>()
+
   constructor() { }
 
   setUserProfile(userProfile: UserProfile) {
     this.userProfile = userProfile
+    this.userProfile$.next(userProfile)
   }
 
   clearUserProfile() {
