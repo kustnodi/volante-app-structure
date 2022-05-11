@@ -1,0 +1,35 @@
+@mixin label {
+  font-family: Nunito Sans;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 130%;
+  color: $Grey_60;
+  margin-bottom: 3px;
+}
+
+@mixin label-required {
+  color: $secondary_02;
+  content: "*";
+  position: relative;
+  top: 2px;
+  margin-right: 5px;
+}
+
+@mixin Heading {
+  font-family: Nunito Sans;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 170%;
+}
+
+@mixin Heading-5 {
+  @include Heading;
+  font-weight: normal;
+}
+
+@mixin Heading-5-bold {
+  @include Heading;
+  font-weight: 900;
+}
+
