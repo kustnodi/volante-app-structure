@@ -22,7 +22,6 @@ export class MenuComponent implements OnInit {
   userProfile: UserProfile | undefined;
 
   get menuItems(): MenuItem[] {
-    // console.log('', this.menuService.menuItems);
     return this.menuService.menuItems;
   }
 

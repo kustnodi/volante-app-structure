@@ -6,6 +6,7 @@ import {
   UserProfile,
   AuthService,
 } from '@volante/slottrak-app/src/lib/slottrak-app-services';
+
 import { LoginFormModel } from './login-form-model';
 
 @Component({
@@ -68,7 +69,7 @@ export class LoginComponent implements OnInit {
           this.auth.profile().subscribe(
             (res: any) => {
               // this.auth.isLoggedIn.next({ status: '1' });
-              localStorage.setItem('User', JSON.stringify(response));
+              localStorage.setItem('User', JSON.stringify(res));
               const userProfile: UserProfile = new UserProfile(res);
               this.userProfileService.setUserProfile(userProfile);
               this.router.navigate(['']);

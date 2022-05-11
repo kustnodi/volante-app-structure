@@ -78,4 +78,12 @@ export class AuthService {
     };
     return this.httpClient.get(environment.apiUrl + '/openapi', options);
   }
+  getLoggedInUser() {
+    const user = localStorage.getItem('User');
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
