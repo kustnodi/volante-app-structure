@@ -70,6 +70,10 @@ export class LoginComponent implements OnInit {
             (res: any) => {
               // this.auth.isLoggedIn.next({ status: '1' });
               localStorage.setItem('User', JSON.stringify(res));
+              localStorage.setItem(
+                'SessionId',
+                JSON.stringify(response.SessionId)
+              );
               const userProfile: UserProfile = new UserProfile(res);
               this.userProfileService.setUserProfile(userProfile);
               this.router.navigate(['']);

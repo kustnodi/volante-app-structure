@@ -78,9 +78,9 @@ export class AuthService {
     };
     return this.httpClient.get(environment.apiUrl + '/openapi', options);
   }
-  getLoggedInUser() {
-    const user = localStorage.getItem('User');
-    if (user) {
+  getSessionId() {
+    const userSession = localStorage.getItem('SessionId');
+    if (userSession) {
       return true;
     } else {
       return false;

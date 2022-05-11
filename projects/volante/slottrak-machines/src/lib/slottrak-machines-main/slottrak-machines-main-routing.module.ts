@@ -40,7 +40,11 @@ const routes: Routes = [
   providers: [
     {
       provide: MACHINE_DETAIL_ROUTE_SERVICE,
-      useFactory: () => new SlotTrakAppDetailRouteService(detailRoute, inject(UserProfileService)),
+      useFactory: () =>
+        new SlotTrakAppDetailRouteService(
+          detailRoute,
+          inject(UserProfileService)
+        ),
     },
   ],
 })
