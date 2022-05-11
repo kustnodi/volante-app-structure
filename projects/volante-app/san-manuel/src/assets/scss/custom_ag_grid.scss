@@ -1,0 +1,59 @@
+/* Styles which override custom ag-grid-angular */
+.ag-cell-focus,
+.ag-cell-no-focus {
+  border: none !important;
+}
+
+.no-border.ag-cell:focus {
+  border: none !important;
+  outline: none;
+}
+
+.ag-icon {
+  margin-left: 8px !important;
+
+  &-asc::before,
+  &-desc::before {
+    content: unset !important;
+  }
+
+  &-asc::after,
+  &-desc::after {
+    position: absolute;
+    display: inline-block;
+    content: url("~/assets/icons/dropdown.svg");
+  }
+
+  &-asc::after {
+    top: 25%;
+  }
+
+  &-desc::after {
+    bottom: 25%;
+    transform: rotate(180deg);
+  }
+}
+
+.ag-theme-alpine [class^="ag-"] {
+  border-radius: 4px;
+}
+
+.ag-root-wrapper {
+  border: unset !important;
+}
+
+.ag-header {
+  border-bottom: unset !important;
+}
+
+.ag-theme-alpine {
+  .ag-row {
+    &:not(.ag-row-first) {
+      border-top-style: unset !important;
+    }
+
+    &.ag-row-last {
+      border-bottom-style: unset !important;
+    }
+  }
+}
