@@ -15,7 +15,9 @@ export class SlotTrakAppComponent implements OnInit {
     this.auth.getappenvironment().subscribe(
       (res: any) => {
         this.auth.getappopenapi().subscribe(
-          (res: any) => {},
+          (res: any) => {
+            this.router.navigate(['login']);
+          },
           (err: any) => {}
         );
       },

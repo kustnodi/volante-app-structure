@@ -11,11 +11,11 @@ export class UserProfile {
       UserAuthId: Number;
     }
   ) {
-    this.userProfile.Permissions = this.userProfile.Permissions.map(
-      (p: any) => p.PermissionName
+    this.userProfile.Permissions = this.userProfile.Permissions.map((p: any) =>
+      p.PermissionName.toLowerCase()
     );
     this.isAdmin = Boolean(
-      userProfile.Permissions.find((p: any) => p.PermissionName === 'Admin')
+      userProfile.Permissions.find((p: any) => p.PermissionName === 'admin')
     );
   }
 
@@ -24,17 +24,10 @@ export class UserProfile {
       this.userProfile.Roles.find(
         (r: any) => r.RoleName.toLowerCase() === 'admin'
       ) !== undefined;
-    console.log(
-      isAdmin ||
-        this.userProfile.Permissions.find(
-          (p: any) => p.PermissionName === permission
-        ) !== undefined
-    );
-
     return (
       isAdmin ||
       this.userProfile.Permissions.find(
-        (p: any) => p.PermissionName === permission
+        (p: any) => p === permission?.toLowerCase()
       ) !== undefined
     );
   }
