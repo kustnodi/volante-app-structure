@@ -27,7 +27,7 @@ export class SlotTrakAppComponent implements OnInit {
           (res: any) => {
             const user: any = localStorage.getItem('User');
             const userData = JSON.parse(user);
-            if (!user) {
+            if (!user || user === null) {
               this.loggedIn = false;
               this.router.navigate(['login']);
             } else {
@@ -38,6 +38,8 @@ export class SlotTrakAppComponent implements OnInit {
             this.userProfileService.userProfile$.subscribe((res: any) => {
               if (res) {
                 this.loggedIn = true;
+              } else {
+                this.loggedIn = false;
               }
             });
           },
