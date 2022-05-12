@@ -9,6 +9,7 @@ import {
   MACHINE_DETAIL_ROUTE_SERVICE,
 } from '@volante/slottrak-machines/src/lib/slottrak-machines-services';
 import {
+  AuthGuardService,
   DetailRouteConfig,
   SlotTrakAppDetailRouteService,
   UserProfileService,
@@ -25,6 +26,7 @@ const routes: Routes = [
   {
     path: '',
     component: EntryComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'add',

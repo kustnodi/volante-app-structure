@@ -3,12 +3,16 @@ import { Router, CanActivate } from '@angular/router';
 import { AuthService } from './auth.service';
 @Injectable()
 export class AuthGuardService implements CanActivate {
+  loggedin: any;
   constructor(public auth: AuthService, public router: Router) {}
   canActivate(): boolean {
-    if (!this.auth.getSessionId()) {
-      this.router.navigate(['login']);
-      return false;
-    }
-    return true;
+    this.auth.profile().subscribe((res) => {
+      if (res.status === 401) {
+        this.router.navigate(['login']);
+        this.loggedin = false;
+      }
+      this.loggedin = true;
+    });
+    return this.loggedin;
   }
 }

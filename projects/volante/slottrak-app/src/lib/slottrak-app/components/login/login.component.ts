@@ -83,7 +83,8 @@ export class LoginComponent implements OnInit {
               );
               const userProfile: UserProfile = new UserProfile(res);
               this.userProfileService.setUserProfile(userProfile);
-              this.router.navigate(['']);
+
+              // this.router.navigate(['']);
             },
             (err: any) => {
               console.log(err);

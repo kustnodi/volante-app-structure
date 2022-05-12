@@ -5,9 +5,11 @@ import { EntryComponent } from './components/entry/entry.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { ConfigurationsComponent } from './components/detail/configurations/configurations.component';
 import { CommonModule } from '@angular/common';
-import { MachinesAddComponent } from './components/machines-add/machines-add.component';
+
 import { SlotTrakUiGridlistModule } from '@volante/slottrak-ui';
 import { MachineAddComponent } from './components/entry/buttons/add/machine-add.component';
+import { AuthGuardService } from '@volante/slottrak-app';
+import { MachinesAddComponent } from './components/machines-add/machines-add.component';
 @NgModule({
   declarations: [
     EntryComponent,
@@ -22,5 +24,6 @@ import { MachineAddComponent } from './components/entry/buttons/add/machine-add.
     CommonModule,
     SlotTrakUiGridlistModule,
   ],
+  providers: [AuthGuardService],
 })
-export class SlottrakMachinesMainModule { }
+export class SlottrakMachinesMainModule {}
