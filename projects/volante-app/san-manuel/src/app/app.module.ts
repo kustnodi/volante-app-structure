@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { SlottrakMachinesConfigModule } from '@volante/slottrak-machines';
 import { RouterModule } from '@angular/router';
 import { SlottrakMealLogConfigModule } from '@volante/slottrak-meal-log';
 import { SlottrakAppModule, SlotTrakAppComponent } from '@volante/slottrak-app';
 import { SlottrakProgressivesConfigModule } from '@volante/slottrak-progressives';
+import { SlottrakUsersConfigModule } from '@volante/slottrak-users';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -13,9 +14,10 @@ import { SlottrakProgressivesConfigModule } from '@volante/slottrak-progressives
     SlottrakAppModule,
     SlottrakMachinesConfigModule,
     SlottrakMealLogConfigModule,
-    SlottrakProgressivesConfigModule
+    SlottrakProgressivesConfigModule,
+    SlottrakUsersConfigModule,
+    NgbModule,
   ],
-  bootstrap: [SlotTrakAppComponent]
+  bootstrap: [SlotTrakAppComponent],
 })
-export class AppModule {
-}
+export class AppModule { }
