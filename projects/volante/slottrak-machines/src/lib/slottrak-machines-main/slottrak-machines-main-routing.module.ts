@@ -1,4 +1,4 @@
-import { Inject, NgModule, Optional } from '@angular/core';
+import { inject, Inject, NgModule, Optional } from '@angular/core';
 import { Route, RouterModule, Routes } from '@angular/router';
 import { DetailComponent } from './components/detail/detail.component';
 import { EntryComponent } from './components/entry/entry.component';
@@ -9,8 +9,10 @@ import {
   MACHINE_DETAIL_ROUTE_SERVICE,
 } from '@volante/slottrak-machines/src/lib/slottrak-machines-services';
 import {
+  AuthGuardService,
   DetailRouteConfig,
   SlotTrakAppDetailRouteService,
+  UserProfileService,
 } from '@volante/slottrak-app';
 import { MachinesAddComponent } from './components/machines-add/machines-add.component';
 
@@ -24,6 +26,7 @@ const routes: Routes = [
   {
     path: '',
     component: EntryComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'add',
@@ -39,7 +42,11 @@ const routes: Routes = [
   providers: [
     {
       provide: MACHINE_DETAIL_ROUTE_SERVICE,
-      useValue: new SlotTrakAppDetailRouteService(detailRoute),
+      useFactory: () =>
+        new SlotTrakAppDetailRouteService(
+          detailRoute,
+          inject(UserProfileService)
+        ),
     },
   ],
 })
@@ -60,6 +67,7 @@ export class SlottrakMachinesMainRoutingModule {
           path: '',
           component: ConfigurationsComponent,
         },
+        requiresPermission: 'machineView',
       },
       ...machineDetailRoutes,
     ]);

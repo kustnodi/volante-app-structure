@@ -3,14 +3,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@volante/gridlist": [
-        "dist/volante/gridlist/volante-gridlist",
-        "dist/volante/gridlist"
-      ],
-      "@volante/machineAdd": [
-        "dist/volante/machine-add/volante-machine-add",
-        "dist/volante/machine-add"
-      ],
       "@volante/slottrak-app": [
         "dist/volante/slottrak-app/volante-slottrak-app",
         "dist/volante/slottrak-app"
@@ -43,9 +35,21 @@
         "dist/volante/slottrak-progressives/volante-slottrak-progressives/*",
         "dist/volante/slottrak-progressives/*"
       ],
+      "@volante/slottrak-ui": [
+        "dist/volante/slottrak-ui/volante-slottrak-ui",
+        "dist/volante/slottrak-ui"
+      ],
+      "@volante/slottrak-ui/*": [
+        "dist/volante/slottrak-ui/volante-slottrak-ui/*",
+        "dist/volante/slottrak-ui/*"
+      ],
       "@volante/slottrak-users": [
         "dist/volante/slottrak-users/volante-slottrak-users",
         "dist/volante/slottrak-users"
+      ],
+      "@volante/slottrak-users/*": [
+        "dist/volante/slottrak-users/volante-slottrak-users/*",
+        "dist/volante/slottrak-users/*"
       ]
     },
     "baseUrl": "./",
@@ -53,7 +57,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
+    "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,

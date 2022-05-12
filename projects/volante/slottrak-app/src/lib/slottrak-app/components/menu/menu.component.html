@@ -1,7 +1,83 @@
-<div class="test">
+<!-- <div class="test">
   <ng-container *ngFor="let menuItem of this.menuItems">
-    <a [routerLink]="menuItem.url" mat-button>
+    <a [routerLink]="menuItem.url" mat-button *ngIf="this.userProfile?.hasPermission(menuItem.requiresPermission)">
       {{menuItem.displayText}}
     </a>
   </ng-container>
-</div>
+   <a [routerLink]="['login']" mat-button>Login</a> 
+</div> -->
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-blue">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img class="" src="assets/images/Logo_Dark.png"
+          style="max-width: 100%;width: 100px;" /></a>
+      <div class="collapse navbar-collapse ml-3" id="navbarSupportedContent">
+        <button type="button" class="close-menu closeCustomModal"><em class="fa fa-close text-blue"></em></button>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <div *ngFor="let menuItem of this.menuItems">
+            <li class="nav-item">
+              <a class="nav-link  text-blue-light" aria-current="page" [routerLink]="menuItem.url"
+                routerLinkActive="active" *ngIf="this.userProfile?.hasPermission(menuItem.requiresPermission)">
+                <svg *ngIf="menuItem.url === '/meal-log'" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M7 2H2L2 18H7V2ZM2 0C0.895431 0 0 0.895431 0 2V18C0 19.1046 0.89543 20 2 20H7C8.10457 20 9 19.1046 9 18V2C9 0.895431 8.10457 0 7 0H2ZM18 13H13V18H18V13ZM13 11C11.8954 11 11 11.8954 11 13V18C11 19.1046 11.8954 20 13 20H18C19.1046 20 20 19.1046 20 18V13C20 11.8954 19.1046 11 18 11H13ZM13 2H18V7H13V2ZM11 2C11 0.89543 11.8954 0 13 0H18C19.1046 0 20 0.895431 20 2V7C20 8.10457 19.1046 9 18 9H13C11.8954 9 11 8.10457 11 7V2Z"
+                    fill="#4B83B0" />
+                </svg>
+
+                <svg *ngIf="menuItem.url === '/machines'" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M2.53372 0.399994H17.4671C18.6404 0.399994 19.6004 1.35999 19.6004 2.53333V17.4667C19.6004 18.64 18.6404 19.6 17.4671 19.6H2.53372C1.34972 19.6 0.400391 18.64 0.400391 17.4667V2.53333C0.400391 1.35999 1.34972 0.399994 2.53372 0.399994ZM17.4671 17.4667V2.53333H2.53372V17.4667H17.4671ZM10.0004 9.99999C8.24039 9.99999 6.80039 8.55999 6.80039 6.79999C6.80039 5.03999 8.24039 3.59999 10.0004 3.59999C11.7604 3.59999 13.2004 5.03999 13.2004 6.79999C13.2004 8.55999 11.7604 9.99999 10.0004 9.99999ZM8.93372 6.79999C8.93372 6.21333 9.41372 5.73333 10.0004 5.73333C10.5871 5.73333 11.0671 6.21333 11.0671 6.79999C11.0671 7.38666 10.5871 7.86666 10.0004 7.86666C9.41372 7.86666 8.93372 7.38666 8.93372 6.79999ZM3.60039 16.4001V14.7681C3.60039 12.1015 7.83506 10.9495 10.0004 10.9495C12.1657 10.9495 16.4004 12.1015 16.4004 14.7681V16.4001H3.60039ZM13.9365 14.2665H6.06445C6.78979 13.6692 8.60312 13.0719 10.0005 13.0719C11.3978 13.0719 13.2005 13.6692 13.9365 14.2665Z"
+                    fill="#4B83B0" />
+                </svg>
+
+                <svg *ngIf="menuItem.url === '/users'" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                  style="fill: #4B83B0;transform: msFilter">
+                  <path
+                    d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z">
+                  </path>
+                </svg>
+
+                <svg *ngIf="menuItem.url === '/parts'" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M6.42899 2.85714C6.0345 2.85714 5.7147 2.53735 5.7147 2.14286V0.714287C5.7147 0.319798 6.0345 0 6.42899 0C6.82348 0 7.14328 0.319797 7.14328 0.714287V2.14286C7.14328 2.53735 6.82348 2.85714 6.42899 2.85714ZM6.42941 20C6.03492 20 5.71512 19.6802 5.71512 19.2857V17.8571C5.71512 17.4627 6.03492 17.1429 6.42941 17.1429C6.82389 17.1429 7.14369 17.4627 7.14369 17.8571V19.2857C7.14369 19.6802 6.82389 20 6.42941 20ZM9.28613 19.2857C9.28613 19.6802 9.60593 20 10.0004 20C10.3949 20 10.7147 19.6802 10.7147 19.2857V17.8571C10.7147 17.4627 10.3949 17.1429 10.0004 17.1429C9.60593 17.1429 9.28613 17.4627 9.28613 17.8571V19.2857ZM10.0004 2.85714C9.60593 2.85714 9.28613 2.53735 9.28613 2.14286V0.714287C9.28613 0.319797 9.60593 0 10.0004 0C10.3949 0 10.7147 0.319797 10.7147 0.714287V2.14286C10.7147 2.53735 10.3949 2.85714 10.0004 2.85714ZM12.8576 19.2857C12.8576 19.6802 13.1774 20 13.5718 20C13.9663 20 14.2861 19.6802 14.2861 19.2857V17.8571C14.2861 17.4627 13.9663 17.1429 13.5718 17.1429C13.1774 17.1429 12.8576 17.4627 12.8576 17.8571V19.2857ZM13.5718 2.85714C13.1774 2.85714 12.8576 2.53735 12.8576 2.14286V0.714287C12.8576 0.319797 13.1774 0 13.5718 0C13.9663 0 14.2861 0.319797 14.2861 0.714286V2.14286C14.2861 2.53735 13.9663 2.85714 13.5718 2.85714ZM14.2857 5.71429H5.71429V14.2857H14.2857V5.71429ZM5 4.28571C4.60551 4.28571 4.28571 4.60551 4.28571 5V15C4.28571 15.3945 4.60551 15.7143 5 15.7143H15C15.3945 15.7143 15.7143 15.3945 15.7143 15V5C15.7143 4.60551 15.3945 4.28571 15 4.28571H5ZM10.7143 9.28571H9.28571V10.7143H10.7143V9.28571ZM8.57143 7.85714C8.17694 7.85714 7.85714 8.17694 7.85714 8.57143V11.4286C7.85714 11.8231 8.17694 12.1429 8.57143 12.1429H11.4286C11.8231 12.1429 12.1429 11.8231 12.1429 11.4286V8.57143C12.1429 8.17694 11.8231 7.85714 11.4286 7.85714H8.57143ZM0.714285 5.71429C0.319796 5.71429 0 6.03408 0 6.42857C0 6.82306 0.319797 7.14286 0.714286 7.14286H2.14286C2.53735 7.14286 2.85714 6.82306 2.85714 6.42857C2.85714 6.03408 2.53735 5.71429 2.14286 5.71429H0.714285ZM17.1429 6.42857C17.1429 6.03408 17.4627 5.71429 17.8571 5.71429H19.2857C19.6802 5.71429 20 6.03408 20 6.42857C20 6.82306 19.6802 7.14286 19.2857 7.14286H17.8571C17.4627 7.14286 17.1429 6.82306 17.1429 6.42857ZM0.714285 9.28571C0.319796 9.28571 0 9.60551 0 10C0 10.3945 0.319797 10.7143 0.714286 10.7143H2.14286C2.53735 10.7143 2.85714 10.3945 2.85714 10C2.85714 9.60551 2.53735 9.28571 2.14286 9.28571H0.714285ZM17.1429 10C17.1429 9.60551 17.4627 9.28571 17.8571 9.28571H19.2857C19.6802 9.28571 20 9.60551 20 10C20 10.3945 19.6802 10.7143 19.2857 10.7143H17.8571C17.4627 10.7143 17.1429 10.3945 17.1429 10ZM0.714285 12.8571C0.319796 12.8571 0 13.1769 0 13.5714C0 13.9659 0.319797 14.2857 0.714286 14.2857H2.14286C2.53735 14.2857 2.85714 13.9659 2.85714 13.5714C2.85714 13.1769 2.53735 12.8571 2.14286 12.8571H0.714285ZM17.1429 13.5714C17.1429 13.1769 17.4627 12.8571 17.8571 12.8571H19.2857C19.6802 12.8571 20 13.1769 20 13.5714C20 13.9659 19.6802 14.2857 19.2857 14.2857H17.8571C17.4627 14.2857 17.1429 13.9659 17.1429 13.5714Z"
+                    fill="#4B83B0" />
+                </svg>
+
+                <svg *ngIf="menuItem.url === '/progressives'" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                  style="fill: #4B83B0;transform: msFilter">
+                  <path
+                    d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z">
+                  </path>
+                </svg>
+                {{menuItem.displayText}}
+              </a>
+            </li>
+          </div>
+
+        </ul>
+
+      </div>
+      <div class="d-flex align-items-center ">
+        <div class="justify-content-end">
+          <div ngbDropdown class="d-inline-block profile-div">
+            <button class="btn d-flex align-items-center text-capitalize color-white" id="dropdownBasic1"
+              ngbDropdownToggle><img src="assets/images/face.png" /> <span class="ps-3">{{user?.UserName}}</span><em
+                class="fa fa-lg ms-2 fa-angle-down" aria-hidden="true"></em></button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem (click)="logout()">Sign Out</button>
+            </div>
+          </div>
+        </div>
+        <button class="navbar-toggler openCustomModal border-white" (click)="sidemenu()" type="button"
+          data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <i class='bx bx-menu-alt-right text-white'></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>

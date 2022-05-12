@@ -15,7 +15,8 @@ import { SlottrakProgressivesConfigRoutingModule } from './slottrak-progressives
       multi: true,
       useValue: {
         url: '/progressives',
-        displayText: 'Progressives'
+        displayText: 'Progressives',
+        requiresPermission: 'progressiveView'
       }
     }
   ]

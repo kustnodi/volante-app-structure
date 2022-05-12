@@ -1,15 +1,39 @@
-import { Route } from "@angular/router";
-import { DetailRouteConfig } from "@volante/slottrak-app/src/lib/slottrak-app-config";
+import { Route } from '@angular/router';
+import { DetailRouteConfig } from '@volante/slottrak-app/src/lib/slottrak-app-config';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { UserProfileService, UserProfile } from './user-profile';
 
 export class SlotTrakAppDetailRouteService {
-  readonly detailRoutes: DetailRouteConfig[] = []
+  detailRoutes: DetailRouteConfig[] = [];
+  private userProfile: UserProfile | undefined;
+  private detailRoutesRaw: DetailRouteConfig[] = [];
 
-  constructor(private readonly baseRoute: Route) {
+  constructor(
+    private readonly baseRoute: Route,
+    userProfileService: UserProfileService
+  ) {
+    this.userProfile = userProfileService.getUserProfile();
+    console.log(this.userProfile, 'userprofiles');
+
+    userProfileService.userProfile$.subscribe((userProfile) => {
+      this.userProfile = userProfile;
+      this.setUserRoutes();
+    });
+  }
+
+  private setUserRoutes() {
+    console.log(this.detailRoutesRaw, 'detailRoute');
+    this.detailRoutes = this.detailRoutesRaw.filter((ur) =>
+      this.userProfile?.hasPermission(ur.requiresPermission)
+    );
+    console.log(this.detailRoutes, 'detailRoutessssss');
   }
 
   configureRoutes(detailRoutes: DetailRouteConfig[]) {
-    const children = this.baseRoute.children ??= []
-    children.push(...detailRoutes.map(r => r.route))
-    this.detailRoutes.splice(0, this.detailRoutes.length, ...detailRoutes)
+    this.detailRoutesRaw = detailRoutes;
+    console.log(this.detailRoutesRaw, 'configureroutes');
+    const children = this.baseRoute.children ?? [];
+    const allRoutes = this.detailRoutesRaw.map((r) => r.route);
+    children.splice(0, children.length, ...allRoutes);
   }
 }

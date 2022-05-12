@@ -13,7 +13,8 @@ import { SlottrakMealLogConfigRoutingModule } from './slottrak-meal-log-config-r
       multi: true,
       useValue: {
         displayText: 'MEAL Log',
-        url: '/meal-log'
+        url: '/meal-log',
+        requiresPermission: 'mealLogView'
       }
     }
   ]

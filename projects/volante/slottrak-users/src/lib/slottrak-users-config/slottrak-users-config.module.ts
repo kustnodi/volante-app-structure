@@ -13,8 +13,9 @@ import { SlottrakUsersConfigRoutingModule } from './slottrak-users-config-routin
       useValue: {
         url: '/users',
         displayText: 'Users',
+        requiresPermission: 'userView'
       },
     },
   ],
 })
-export class SlottrakUsersConfigModule {}
+export class SlottrakUsersConfigModule { }

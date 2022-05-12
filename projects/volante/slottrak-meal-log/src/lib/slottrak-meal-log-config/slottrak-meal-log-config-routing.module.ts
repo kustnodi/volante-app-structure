@@ -25,7 +25,8 @@ const routes: Routes = [
         route: {
           path: 'meal-log',
           loadChildren: () => import('@volante/slottrak-meal-log/src/lib/slottrak-meal-log-machine-detail').then(m => m.SlottrakMealLogMachineDetailModule)
-        }
+        },
+        requiresPermission: 'mealLogView'
       }
     }
   ]

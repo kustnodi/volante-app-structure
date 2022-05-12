@@ -32,9 +32,12 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/volante-app/san-manuel/src/styles.sass"
+              "projects/volante-app/san-manuel/src/styles.sass",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -137,9 +140,12 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/volante-app/cache-creek/src/styles.sass"
+              "projects/volante-app/cache-creek/src/styles.sass",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -366,9 +372,12 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/volante-app/rt66/src/styles.sass"
+              "projects/volante-app/rt66/src/styles.sass",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -473,23 +482,23 @@
         }
       }
     },
-    "@volante/machineAdd": {
+    "@volante/slottrak-ui": {
       "projectType": "library",
-      "root": "projects/volante/machine-add",
-      "sourceRoot": "projects/volante/machine-add/src",
-      "prefix": "volante-machineAdd",
+      "root": "projects/volante/slottrak-ui",
+      "sourceRoot": "projects/volante/slottrak-ui/src",
+      "prefix": "volante-slottrak-ui",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/volante/machine-add/ng-package.json"
+            "project": "projects/volante/slottrak-ui/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/volante/machine-add/tsconfig.lib.prod.json"
+              "tsConfig": "projects/volante/slottrak-ui/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/volante/machine-add/tsconfig.lib.json"
+              "tsConfig": "projects/volante/slottrak-ui/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -497,40 +506,9 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/volante/machine-add/src/test.ts",
-            "tsConfig": "projects/volante/machine-add/tsconfig.spec.json",
-            "karmaConfig": "projects/volante/machine-add/karma.conf.js"
-          }
-        }
-      }
-    },
-    "@volante/gridlist": {
-      "projectType": "library",
-      "root": "projects/volante/gridlist",
-      "sourceRoot": "projects/volante/gridlist/src",
-      "prefix": "volante-gridlist",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/volante/gridlist/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/volante/gridlist/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/volante/gridlist/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/volante/gridlist/src/test.ts",
-            "tsConfig": "projects/volante/gridlist/tsconfig.spec.json",
-            "karmaConfig": "projects/volante/gridlist/karma.conf.js"
+            "main": "projects/volante/slottrak-ui/src/test.ts",
+            "tsConfig": "projects/volante/slottrak-ui/tsconfig.spec.json",
+            "karmaConfig": "projects/volante/slottrak-ui/karma.conf.js"
           }
         }
       }
