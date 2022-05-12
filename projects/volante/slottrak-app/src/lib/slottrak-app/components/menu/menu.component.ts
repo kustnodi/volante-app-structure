@@ -38,4 +38,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  logout() {}
+  sidemenu() {}
 }

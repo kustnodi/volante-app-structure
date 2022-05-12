@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SlottrakAppRoutingModule } from './slottrak-app-routing.module';
 import { SlottrakAppServicesModule } from '@volante/slottrak-app/src/lib/slottrak-app-services';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [MenuComponent, SlotTrakAppComponent, LoginComponent],
@@ -29,6 +30,7 @@ import { SlottrakAppServicesModule } from '@volante/slottrak-app/src/lib/slottra
     MatButtonModule,
     SlottrakAppRoutingModule,
     SlottrakAppServicesModule,
+    NgbModule,
   ],
   bootstrap: [SlotTrakAppComponent],
 })
