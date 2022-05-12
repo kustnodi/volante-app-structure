@@ -43,6 +43,13 @@ export class LoginComponent implements OnInit {
       Username: ['', Validators.required],
       Password: ['', [Validators.required]],
     });
+    this.userProfileService.userProfile$.subscribe((res: any) => {
+      if (res) {
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
+    });
   }
   get loginFormControl() {
     return this.loginForm.controls;

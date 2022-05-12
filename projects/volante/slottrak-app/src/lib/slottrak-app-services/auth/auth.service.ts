@@ -32,8 +32,8 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    //return this.httpClient.post(environment.apiUrl + '/auth/logout', {});
-    return this.httpClient.get(environment.apiUrl + '/app');
+    return this.httpClient.post(environment.apiUrl + '/auth/logout', {});
+    // return this.httpClient.get(environment.apiUrl + '/app');
   }
 
   profile(): Observable<any> {
