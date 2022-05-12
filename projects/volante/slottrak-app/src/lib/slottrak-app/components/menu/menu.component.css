@@ -1,7 +1,9 @@
 .test{
     background: #78c0ff;
 }
-
+.navbar{
+    padding: 0.5rem 1rem !important;
+}
 .navbar .nav-item {
     padding: 0 10px;
 }
@@ -31,6 +33,7 @@
     box-shadow: 0 4px 20px #001d6b1f, 0 2px #e9ecf9;
     border: 0;
     top: 50px;
+    min-width: 8rem !important
 }
 .dropdown-item {
     font-family: 'Nunito Sans';
