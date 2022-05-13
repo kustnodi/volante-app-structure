@@ -29,7 +29,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
-    path: 'add',
+    path: 'add-machine',
     component: MachinesAddComponent,
   },
   detailRoute,

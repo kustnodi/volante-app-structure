@@ -1,0 +1,176 @@
+button {
+    background: none;
+    border: 0;
+    font-weight: 900;
+    font-size: 10px;
+    line-height: 170%;
+    display: flex;
+    align-items: center;
+    color: #1f659d;
+    text-transform: uppercase;
+}
+.back-button em {
+    font-size: 24px;
+}
+h3.heading-text {
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    color: #1f659d;
+}
+.machine-name {
+    display: flex;
+    align-items: flex-end;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 124%;
+    color: #1f659d;
+    border-bottom: 2px solid #f7f8fb;
+    padding-bottom: 10px;
+}
+.machine-detail-id {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 150%;
+    color: #6b6e7a;
+}
+.grid-inner-container {
+    max-width: 100%;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 4px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+input:checked + .slider {
+    background-color: #1f659d;
+}
+input:focus + .slider {
+    box-shadow: 0 0 1px #1f659d;
+}
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+.edit-page p {
+    margin-bottom: 0;
+}
+hr {
+    border-top: 2px solid #f7f8fb;
+}
+.eprom-div p {
+    width: 100%;
+    background: #000;
+    color: #e42526;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 170%;
+    margin-right: 10px;
+}
+.eprom-div button {
+    background: #79b667;
+    border-radius: 4px;
+    margin-left: auto;
+    white-space: nowrap;
+    height: 40px;
+    width: 154px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 14px;
+}
+.plus-btn {
+    background: #000;
+    color: #fff;
+    border-radius: 4px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    margin-left: 10px;
+}
+.plus-btn:disabled, .plus-btn[disabled] {
+    background-color: #000;
+    cursor: no-drop;
+}
+.content-bottom {
+    border: 2px solid #f4f5f9;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 10px;
+}
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+.example-full-width {
+    width: 100%;
+}
+.file-choose {
+    display: block;
+    background: #fff;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+}
+.file-btn {
+    position: relative;
+}
+.error-message {
+    font-family: Nunito Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    color: #f00;
+}
+.black {
+    color: #6b6e7a;
+}
+.file-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.file-display i {
+    font-size: 25px;
+    color: #f00;
+}
