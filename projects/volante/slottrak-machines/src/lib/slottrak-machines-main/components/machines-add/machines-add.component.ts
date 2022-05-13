@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -154,9 +154,9 @@ export class MachinesAddComponent implements OnInit {
   PurchaseDate: any;
   constructor(
     private router: Router,
-    private machineService: MachinesService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private machineService: MachinesService
   ) {
     this.SlotTypeCtrl = new FormControl('', Validators.required);
     this.ManufacturerId = new FormControl('', Validators.required);
