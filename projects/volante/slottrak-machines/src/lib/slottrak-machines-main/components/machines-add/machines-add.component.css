@@ -1,3 +1,15 @@
+.page-container {
+    background: #F4F5F9;
+    padding: 40px;
+}
+.grid-inner-container {
+    max-width: 100%;
+    background: #fff;
+    box-shadow: 0 2px #e9ecf9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+}
 button {
     background: none;
     border: 0;
@@ -35,9 +47,7 @@ h3.heading-text {
     line-height: 150%;
     color: #6b6e7a;
 }
-.grid-inner-container {
-    max-width: 100%;
-}
+
 .switch {
     position: relative;
     display: inline-block;
@@ -91,7 +101,7 @@ hr {
 }
 .eprom-div p {
     width: 100%;
-    background: #000;
+    background: rgba(228,37,38,.1);
     color: #e42526;
     height: 40px;
     display: flex;
@@ -116,7 +126,7 @@ hr {
     font-size: 14px;
 }
 .plus-btn {
-    background: #000;
+    background: #79b667;
     color: #fff;
     border-radius: 4px;
     width: 48px;
@@ -128,7 +138,7 @@ hr {
     margin-left: 10px;
 }
 .plus-btn:disabled, .plus-btn[disabled] {
-    background-color: #000;
+    background-color: #79b66733;
     cursor: no-drop;
 }
 .content-bottom {
@@ -174,3 +184,30 @@ hr {
     font-size: 25px;
     color: #f00;
 }
+
+
+/* new css */
+ button.accordion-button[aria-expanded=true] {
+    border-bottom: 0!important;
+}
+ button.accordion-button{
+width: 100%;
+    background: none!important;
+    border: 0;
+    color: #4b83b0!important;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: capitalize;
+    text-decoration: none;
+    border-bottom: 2px solid #f7f8fb!important;
+    border-radius: 0;
+    padding: 0.375rem 0!important;
+    white-space: nowrap;
+}
+.mat-form-field-infix {
+    background: #f4f5f9;
+    padding: 12.5px !important;
+    border-radius: 4px;
+    margin: 0;
+  }

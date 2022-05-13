@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "sass"
+          "style": "css"
         },
         "@schematics/angular:application": {
           "strict": true
@@ -25,14 +25,14 @@
             "main": "projects/volante-app/san-manuel/src/main.ts",
             "polyfills": "projects/volante-app/san-manuel/src/polyfills.ts",
             "tsConfig": "projects/volante-app/san-manuel/tsconfig.app.json",
-            "inlineStyleLanguage": "sass",
+            "inlineStyleLanguage": "css",
             "assets": [
               "projects/volante-app/san-manuel/src/favicon.ico",
               "projects/volante-app/san-manuel/src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/volante-app/san-manuel/src/styles.sass",
+              "projects/volante-app/san-manuel/src/styles.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
@@ -97,14 +97,14 @@
             "polyfills": "projects/volante-app/san-manuel/src/polyfills.ts",
             "tsConfig": "projects/volante-app/san-manuel/tsconfig.spec.json",
             "karmaConfig": "projects/volante-app/san-manuel/karma.conf.js",
-            "inlineStyleLanguage": "sass",
+            "inlineStyleLanguage": "css",
             "assets": [
               "projects/volante-app/san-manuel/src/favicon.ico",
               "projects/volante-app/san-manuel/src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/volante-app/san-manuel/src/styles.sass"
+              "projects/volante-app/san-manuel/src/styles.css"
             ],
             "scripts": []
           }
@@ -115,7 +115,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "sass"
+          "style": "css"
         },
         "@schematics/angular:application": {
           "strict": true
@@ -133,14 +133,14 @@
             "main": "projects/volante-app/cache-creek/src/main.ts",
             "polyfills": "projects/volante-app/cache-creek/src/polyfills.ts",
             "tsConfig": "projects/volante-app/cache-creek/tsconfig.app.json",
-            "inlineStyleLanguage": "sass",
+            "inlineStyleLanguage": "css",
             "assets": [
               "projects/volante-app/cache-creek/src/favicon.ico",
               "projects/volante-app/cache-creek/src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/volante-app/cache-creek/src/styles.sass",
+              "projects/volante-app/cache-creek/src/styles.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
@@ -205,14 +205,14 @@
             "polyfills": "projects/volante-app/cache-creek/src/polyfills.ts",
             "tsConfig": "projects/volante-app/cache-creek/tsconfig.spec.json",
             "karmaConfig": "projects/volante-app/cache-creek/karma.conf.js",
-            "inlineStyleLanguage": "sass",
+            "inlineStyleLanguage": "css",
             "assets": [
               "projects/volante-app/cache-creek/src/favicon.ico",
               "projects/volante-app/cache-creek/src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/volante-app/cache-creek/src/styles.sass"
+              "projects/volante-app/cache-creek/src/styles.css"
             ],
             "scripts": []
           }
@@ -347,7 +347,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "sass"
+          "style": "css"
         },
         "@schematics/angular:application": {
           "strict": true
@@ -365,14 +365,14 @@
             "main": "projects/volante-app/rt66/src/main.ts",
             "polyfills": "projects/volante-app/rt66/src/polyfills.ts",
             "tsConfig": "projects/volante-app/rt66/tsconfig.app.json",
-            "inlineStyleLanguage": "sass",
+            "inlineStyleLanguage": "css",
             "assets": [
               "projects/volante-app/rt66/src/favicon.ico",
               "projects/volante-app/rt66/src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/volante-app/rt66/src/styles.sass",
+              "projects/volante-app/rt66/src/styles.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
@@ -437,14 +437,14 @@
             "polyfills": "projects/volante-app/rt66/src/polyfills.ts",
             "tsConfig": "projects/volante-app/rt66/tsconfig.spec.json",
             "karmaConfig": "projects/volante-app/rt66/karma.conf.js",
-            "inlineStyleLanguage": "sass",
+            "inlineStyleLanguage": "css",
             "assets": [
               "projects/volante-app/rt66/src/favicon.ico",
               "projects/volante-app/rt66/src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/volante-app/rt66/src/styles.sass"
+              "projects/volante-app/rt66/src/styles.css"
             ],
             "scripts": []
           }
