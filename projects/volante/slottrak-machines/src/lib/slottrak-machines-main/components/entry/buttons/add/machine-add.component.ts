@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'slottrak-machines-machine-add',
-  template: ` <button>Add Machine</button> `,
-  styles: [],
+  templateUrl: './machine-add.component.html',
+  styleUrls: ['./machine-add.component.css'],
 })
 export class MachineAddComponent implements OnInit {
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

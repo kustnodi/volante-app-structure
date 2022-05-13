@@ -1,0 +1,17 @@
+.btn-add-meallog {
+    background-color: #79b667 !important;
+    border-color: #79b667 !important;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 170%;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    padding: 0.375rem 0.75rem;
+    text-transform: uppercase;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+}
+.pr_10 {
+    padding-right: 10px;
+}

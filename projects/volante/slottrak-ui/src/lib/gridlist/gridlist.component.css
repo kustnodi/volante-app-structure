@@ -1,0 +1,304 @@
+table.table {
+    white-space: nowrap;
+    border: 0;
+}
+table.table thead {
+    background: #e4ebf1;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+table.table thead .button-row th {
+    padding: 0.25rem;
+}
+table.table thead th {
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 170%;
+    color: #1f659d;
+    border: 0;
+    height: 48.8px;
+}
+.table>:not(:first-child){
+    border: 0 !important;
+}
+.table>:not(caption)>*>*{
+    border-bottom: 0 !important;
+}
+table.table tbody tr:nth-of-type(even) {
+    background-color: #f4f5f9 !important;
+}
+table.table tbody td {
+    border-top: 0;
+    font-size: 14px;
+    line-height: 170%;
+    color: #6b6e7a;
+    height: 48.8px;
+}
+table.table tbody td p.user-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 148px;
+    margin-bottom: 0;
+}
+.mat-table-sticky-border-elem-right {
+    border-left: 1px solid #a81a1a;
+}
+.mat-table-sticky-border-elem-left {
+    border-right: 1px solid #cf1212;
+}
+.table thead tr:first-child th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: white;
+}
+.table thead tr:first-child th:nth-child(2) {
+    position: sticky;
+    left: 95px;
+    z-index: 2;
+    background-color: white;
+}
+.table thead tr:nth-child(2) th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: #e4ebf1;
+}
+.table thead tr:nth-child(2) th:nth-child(2) {
+    position: sticky;
+    left: 35px;
+    z-index: 2;
+    background-color: #e4ebf1;
+}
+.table thead tr:nth-child(2) th:nth-child(3) {
+    position: sticky;
+    left: 100px;
+    z-index: 2;
+    background-color: #e4ebf1;
+}
+tbody tr:nth-of-type(even) td:first-child {
+    background-color: #f4f5f9;
+}
+tbody tr:nth-of-type(even) td:nth-child(2) {
+    background-color: #f4f5f9;
+}
+tbody tr:nth-of-type(even) td:nth-child(3) {
+    background-color: #f4f5f9;
+}
+tbody tr:nth-of-type(odd) td:first-child {
+    background-color: white;
+}
+tbody tr:nth-of-type(odd) td:nth-child(2) {
+    background-color: white;
+}
+tbody tr:nth-of-type(odd) td:nth-child(3) {
+    background-color: white;
+}
+.table tbody tr td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+.table tbody tr td:nth-child(2) {
+    position: sticky;
+    left: 35px;
+    z-index: 2;
+}
+.table tbody tr td:nth-child(3) {
+    position: sticky;
+    left: 100px;
+    z-index: 2;
+}
+.table thead tr:nth-child(2) th:nth-child(3)::after, .table tbody tr td:nth-child(3)::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 0;
+    width: 16px;
+    height: 50px;
+    background: linear-gradient(90deg, rgba(0, 29, 107, 0.1) 14.58%, rgba(0, 29, 107, 0) 70.83%);
+}
+.list-wrapper {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background-color: #ebebeb;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #cedce7;
+}
+.reset-filters-btn {
+    background: #1F659D;
+    border-radius: 4px;
+    height: 40px;
+    border-width: 0px;
+    margin-bottom: 5px;
+    margin-right: 0;
+    width: 100px;
+    max-width: 100%;
+    color: #fff;
+    font-family: Nunito Sans;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.filter {
+    background: #F4F5F9;
+    border-radius: 4px;
+    border-width: 0px;
+    height: 40px;
+    margin-right: 0;
+    padding: 8px 0;
+    font-family: Nunito Sans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 170%;
+    color: #6b6e7a;
+    margin-bottom: 5px;
+    text-align: center;
+}
+.filter:focus-visible{
+    outline-color: #1f659d;
+}
+.reset-set-btn {
+    font-size: 12px;
+    margin-right: 10px;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+.lock-btn {
+    background: green !important;
+}
+.unlock-btn {
+    background: red !important;
+}
+.btn-padding-section {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 4px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+input:checked + .slider {
+    background-color: #1f659d;
+}
+input:focus + .slider {
+    box-shadow: 0 0 1px #1f659d;
+}
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+.size-20 {
+    font-size: 20px;
+}
+.filter-Requistion {
+    line-height: 148%;
+    color: #6b6e7a;
+    margin-bottom: 5px;
+}
+.setting-dropdown .btn-setting {
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+}
+.setting-dropdown .dropdown-menu-setting {
+    background: #fff;
+    box-shadow: 0px 4px 20px rgba(0, 29, 107, 0.12), 0px 2px 0px #e9ecf9;
+    border: 0;
+    padding: 20px;
+    min-width: 13rem !important;
+}
+.setting-dropdown .dropdown-menu-setting .form-check {
+    margin-bottom: 10px;
+}
+.setting-dropdown .dropdown-menu-setting input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+span.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background: #f4f5f9;
+    border: 2px solid #1f659d;
+    border-radius: 4px;
+}
+.setting-dropdown .dropdown-menu-setting input:checked ~ .checkmark {
+    background-color: #1f659d;
+}
+.setting-dropdown .dropdown-menu-setting .form-check-label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 170%;
+    color: #0c1024;
+    padding-left: 20px;
+}
+.setting-dropdown .dropdown-menu-setting .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.setting-dropdown .dropdown-menu-setting .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.setting-dropdown .dropdown-menu-setting input:checked ~ .checkmark:after {
+    display: block;
+}
