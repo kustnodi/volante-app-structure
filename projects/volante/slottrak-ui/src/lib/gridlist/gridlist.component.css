@@ -302,3 +302,10 @@ span.checkmark {
 .setting-dropdown .dropdown-menu-setting input:checked ~ .checkmark:after {
     display: block;
 }
+.grid-inner-container{
+    max-width: fit-content !important;
+}
+.table-responsive {
+    overflow: scroll !important;
+    display: block !important;
+}
