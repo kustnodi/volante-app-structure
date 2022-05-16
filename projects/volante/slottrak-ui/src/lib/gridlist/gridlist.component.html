@@ -1,10 +1,115 @@
 <div class="search-results main-div">
   <div class="list-table">
     <div class="d-flex justify-content-end"></div>
-    <table class="table table-responsive table-style" id="machineTable">
+    <table class="table table-responsive table-style" id="{{displayid}}"
+      (scrolled)="onScroll(data?.Total, data?.Results.length, serviceName)" infiniteScroll [infiniteScrollDistance]="1"
+      [infiniteScrollContainer]="displayValue" [fromRoot]="true">
       <thead>
-        <tr class="cdk-drop-list button-row" style="background-color: #fff">
+        <tr class="cdk-drop-list button-row" style="background-color: #fff" cdkDropList
+          cdkDropListOrientation="horizontal" [cdkDropListData]="fields" (cdkDragReleased)="release=true"
+          (cdkDropListDropped)="dropCol($event)">
           <th scope="col" colspan="2">
+            <button class="reset-filters-btn m-r-10 w-100" id="resetFiltersMealLog"
+              (click)="clearFilters(serviceName)"><span class="reset-filters-text">Reset
+                All</span></button>
+          </th>
+          <ng-container *ngFor="let c of fields ">
+            <th cdkDrag (mousedown)="mouseDown($event)" cdkDragLockAxis="x">
+              <input type="text" *ngIf="c.type==='input'" id="{{c.id}}" class="{{c.class}}"
+                placeholder="{{c.placeholder}} " [(ngModel)]="filter[c.ngModel]"
+                (ngModelChange)="onChange($event,c.onkeyup,serviceName)" style="width: 100%;" />
+
+              <div class="input-group" *ngIf="c.type==='inputPart'">
+                <input class="form-control" id="{{c.id}}" class="{{c.class}}" placeholder="{{c.placeholder}} "
+                  [(ngModel)]="partName" type="search" id="example-search-input" disabled>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" style="height: 47px;" (click)="open(content)">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- <custom-datepicker *ngIf="c.type==='date'" [placeholder]="c.placeholder" [ngClass]="c.class"
+                [(model)]="filter[c.ngModel]" (modelOutput)="onChange($event,c.onkeyup,serviceName)">
+              </custom-datepicker> -->
+              <input type="text" *ngIf="c.type==='UnitPrice'" id="{{c.id}}" class="{{c.class}}"
+                placeholder="Minimum Unit Price" [(ngModel)]="filter['UnitPriceGreaterThan']"
+                (ngModelChange)="onChange($event,'UnitPriceGreaterThan',serviceName)">
+
+              <input type="text"
+                *ngIf="c.type==='Quantity' && showAddbutton === false && !showbutton && serviceName == 'partsCheckService' "
+                id="{{c.id}}" class="{{c.class}}" placeholder="Bin" [(ngModel)]="filter['BinContains']"
+                (ngModelChange)="onChange($event,'BinContains',serviceName)">
+              <input type="text" *ngIf="c.type==='linkedParts'" id="{{c.id}}" class="{{c.class}}" placeholder="Shelf"
+                [(ngModel)]="filter['Shelf']" (ngModelChange)="onChange($event,'ShelfContains',serviceName)" />
+
+              <select *ngIf="c.type==='select'" id="{{c.id}}" class="{{c.class}}" [(ngModel)]="filter[c.ngModel]"
+                (change)="onChange($any($event.target).value,c.onkeyup,serviceName)">
+                <option value="Floor">Floor</option>
+                <option value="Decommissioned">Decommissioned</option>
+                <option value="Warehoused">Warehoused</option>
+                <option value="">Display All</option>
+              </select>
+              <select *ngIf="c.type==='OrderSelect'" id="{{c.id}}" class="{{c.class}}" [(ngModel)]="filter[c.ngModel]"
+                (change)="onChange($any($event.target).value,c.onkeyup,serviceName)" style="width: 100%;">
+                <option value="Partial">Partial</option>
+                <option value="Open">Open</option>
+                <option value="Complete">Complete</option>
+                <option value="">Display All</option>
+              </select>
+              <select *ngIf="c.type==='selectParts'" id="{{c.id}}" class="{{c.class}}"
+                [(ngModel)]="filter['PartPropertyId']"
+                (change)="onChange($any($event.target).value,'PartPropertyId',serviceName)" style="width: 100%;">
+                <option value="">Display All</option>
+                <option [value]="p.Id" *ngFor="let p of properties">{{p.Name}}</option>
+              </select>
+              <!-- <mat-form-field class="example-full-width checoutBy" appearance="fill"
+                *ngIf="c.type==='selectCheckedOutBy'">
+                <input type="text" placeholder="Checked Out By" matInput [formControl]="myControl"
+                  [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedCheckoutBy($event)">
+                  <mat-option *ngFor="let option of filteredUsers | async" [value]="option.DisplayName"
+                    [id]="option.UserAuthId">
+                    {{option.DisplayName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field> -->
+
+              <!-- <mat-form-field class="example-full-width filter-Requistion checoutBy" appearance="fill"
+                *ngIf="c.type==='RequisitionerUserAuthId'">
+                <input type="text" placeholder="Requisitioner" matInput [formControl]="myControl"
+                  [matAutocomplete]="autor">
+                <mat-autocomplete #autor="matAutocomplete" (optionSelected)="selectedRequisitioner($event)">
+                  <mat-option *ngFor="let option of filteredUsers | async" [value]="option.DisplayName"
+                    [id]="option.UserAuthId">
+                    {{option.DisplayName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field> -->
+              <!-- <select *ngIf="c.type==='selectCheckedOutBy'" id="{{c.id}}" class="{{c.class}}"
+                  placeholder="{{c.placeholder}}" [(ngModel)]="filter['CheckedOutBy']"
+                  (change)="onChange($event.target.value,'CheckedOutBy',serviceName)"
+                  style="width: 100%;">
+                  <option [value]="u.Id" *ngFor="let u of users">{{u.DisplayName}}</option>
+              </select> -->
+              <select *ngIf="c.type==='selectStatus'" id="{{c.id}}" class="{{c.class}}" [(ngModel)]="filter[c.ngModel]"
+                (change)="onChange($any($event.target).value,c.onkeyup,serviceName)" style="width: 100%;">
+                <option value="">Display All</option>
+                <option value="active">Active</option>
+                <option value="obsolete">Obsolete</option>
+              </select>
+              <select *ngIf="c.type==='selectTrackedItem'" id="{{c.id}}" class="{{c.class}}"
+                [(ngModel)]="filter[c.ngModel]" (change)="onChange($any($event.target).value,c.onkeyup,serviceName)">
+                <option value="">--Tracked Item--</option>
+                <option value="true">Tracked </option>
+                <option value="false">Untracked</option>
+              </select>
+              <input type="text" *ngIf="c.type==='linkedParts'" id="{{c.id}}" class="{{c.class}}"
+                placeholder="Maximum Unit Price" [(ngModel)]="filter['UnitPriceLessThan']"
+                (ngModelChange)="onChange($event,'UnitPriceLessThan',serviceName)" style="margin-left: 3px;" />
+            </th>
+
+          </ng-container>
+          <!-- <th scope="col" colspan="2">
             <button
               id="resetFiltersMealLog"
               class="reset-filters-btn m-r-10 w-100"
@@ -65,9 +170,26 @@
               <option value="">Display All</option>
             </select>
           </th>
-          <th></th>
+          <th></th> -->
         </tr>
-        <tr class="cdk-drop-list cdtr" id="cdk-drop-list-1">
+
+        <tr cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="fields" class="cdtr"
+          (cdkDragReleased)="release=true" (cdkDropListDropped)="dropCol($event)">
+          <th scope="col" *ngIf="showAddbutton === false && !showbutton && hideButtonOnProgressives == false">
+            <div class="first-th"><img src="assets/icons/layer-table.svg" />
+            </div>
+          </th>
+          <th scope="col"><input type="checkbox"
+              *ngIf="showAddbutton === false && !showbutton && hideButtonOnProgressives == false" /></th>
+
+          <ng-container *ngFor="let f of fields, let i = index">
+            <th cdkDrag (mousedown)="mouseDown($event)" cdkDragLockAxis="x" (cdkDragReleased)="release=true"
+              (click)="sort(f.field,serviceName)">
+              {{f.text}} <img class="ml-1" src="assets/icons/dropdown.svg" />
+            </th>
+          </ng-container>
+        </tr>
+        <!-- <tr class="cdk-drop-list cdtr" id="cdk-drop-list-1">
           <th scope="col">
             <div class="first-th">
               <img src="assets/icons/layer-table.svg" />
@@ -104,138 +226,321 @@
             Notes
             <img src="assets/icons/dropdown.svg" class="ms-1" />
           </th>
-        </tr>
+        </tr> -->
       </thead>
-      <tbody class="cdk-drop-list" id="cdk-drop-list-2">
-        <tr>
-          <td scope="row">
-            <img src="assets/icons/edit.svg" />
+      <tbody cdkDropList [cdkDropListData]="data?.Results" (cdkDropListDropped)="dropRow($event)">
+
+        <tr *ngFor="let d of data?.Results, let i=index;">
+
+          <td scope="row" *ngIf="showAddbutton === false && !showbutton && hideButtonOnProgressives == false">
+            <img src="assets/icons/edit.svg" (click)="editFunction(d,serviceName)"
+              *ngIf="(machineEditBtn === true || mealLogEditBtn === true || userEditBtn === true || partEditBtn == true || partOrderEditBtn === true || progressiveEditBtn === true) && showAddbutton === false" />
           </td>
-          <td scope="row">
+
+          <td>
             <div class="d-flex align-items-center">
-              <input type="checkbox" />
-              <img src="assets/icons/info.svg" class="ms-3" />
+              <i class='bx bxs-plus-circle size-20' *ngIf="showAddbutton === true"
+                (click)="addPartToBlock(d,serviceName)"></i>
+              <i class='bx bxs-plus-circle size-20' *ngIf="showbutton === true "
+                (click)="addPartToBlock(d,serviceName)"></i>
+              <input type="checkbox" (change)="onCheckboxChange($event, d,serviceName,i)"
+                *ngIf="showAddbutton === false && !showbutton && hideButtonOnProgressives == false" />
+              <img class="ml-3" src="assets/icons/info.svg" (click)="infoButtonClick(d,serviceName)"
+                *ngIf="(machineViewBtn === true || mealLogViewBtn === true || partViewBtn === true || partOrderViewBtn === true || progressiveViewBtn === true ) && showAddbutton === false" />
             </div>
           </td>
-          <td>
-            <p class="user-name">1253-26</p>
-          </td>
-          <td>
-            <p class="user-name">MultiMedia</p>
-          </td>
-          <td>
-            <p class="user-name"></p>
-          </td>
-          <td>
-            <p class="user-name">Teest1245</p>
-          </td>
-          <td>
-            <p class="user-name">czx</p>
-          </td>
-          <td>
-            <p class="user-name">Floor</p>
-          </td>
-          <td>
-            <p class="user-name"></p>
-          </td>
-        </tr>
-        <tr>
-          <td scope="row">
-            <img src="assets/icons/edit.svg" />
-          </td>
-          <td scope="row">
-            <div class="d-flex align-items-center">
-              <input type="checkbox" />
-              <img src="assets/icons/info.svg" class="ms-3" />
-            </div>
-          </td>
-          <td>
-            <p class="user-name">1253-26</p>
-          </td>
-          <td>
-            <p class="user-name">MultiMedia</p>
-          </td>
-          <td>
-            <p class="user-name"></p>
-          </td>
-          <td>
-            <p class="user-name">Teest1245</p>
-          </td>
-          <td>
-            <p class="user-name">czx</p>
-          </td>
-          <td>
-            <p class="user-name">Floor</p>
-          </td>
-          <td>
-            <p class="user-name"></p>
-          </td>
-        </tr>
-        <tr>
-          <td scope="row">
-            <img src="assets/icons/edit.svg" />
-          </td>
-          <td scope="row">
-            <div class="d-flex align-items-center">
-              <input type="checkbox" />
-              <img src="assets/icons/info.svg" class="ms-3" />
-            </div>
-          </td>
-          <td>
-            <p class="user-name">1253-26</p>
-          </td>
-          <td>
-            <p class="user-name">MultiMedia</p>
-          </td>
-          <td>
-            <p class="user-name"></p>
-          </td>
-          <td>
-            <p class="user-name">Teest1245</p>
-          </td>
-          <td>
-            <p class="user-name">czx</p>
-          </td>
-          <td>
-            <p class="user-name">Floor</p>
-          </td>
-          <td>
-            <p class="user-name"></p>
-          </td>
-        </tr>
-        <tr>
-          <td scope="row">
-            <img src="assets/icons/edit.svg" />
-          </td>
-          <td scope="row">
-            <div class="d-flex align-items-center">
-              <input type="checkbox" />
-              <img src="assets/icons/info.svg" class="ms-3" />
-            </div>
-          </td>
-          <td>
-            <p class="user-name">1253-26</p>
-          </td>
-          <td>
-            <p class="user-name">MultiMedia</p>
-          </td>
-          <td>
-            <p class="user-name"></p>
-          </td>
-          <td>
-            <p class="user-name">Teest1245</p>
-          </td>
-          <td>
-            <p class="user-name">czx</p>
-          </td>
-          <td>
-            <p class="user-name">Floor</p>
-          </td>
-          <td>
-            <p class="user-name"></p>
-          </td>
+          <ng-container *ngFor="let c of fields">
+
+            <ng-container>
+              <td
+                *ngIf="c.field === 'OpenedDate' ||c.field === 'ClosedDate' || c.field === 'CreatedDate' || c.field === 'OrderDate' || c.field === 'ReceivedDate' || c.field === 'ProgressiveMeterReadingDate' ">
+                {{d[c.field] | date:'MM/dd/YYYY'}}
+              </td>
+              <td *ngIf="c.field === 'ProgressiveMeterReadingTime'">
+                {{d[c.field] | date:'short'}}
+              </td>
+              <td *ngIf=" c.field=== 'MeterReading' || c.field==='ProgressiveDefinitionGameLevelResetBase'">
+                <p class="user-name">$ {{d[c.field]}}</p>
+              </td>
+              <td
+                *ngIf="c.field === 'SerialNumber' ||c.field === 'SlotNumber' || c.field === 'MealLogReasonName'  || c.field === 'UserName' || c.field === 'Notes' || c.field === 'ManufacturerName' || c.field==='GameName' || c.field === 'Status' || c.field === 'EmployeeId' || c.field === 'FirstName' || c.field === 'LastName' || c.field === 'IsExternallyAuthenticated' || c.field === 'InvalidLoginAttempts' || c.field === 'LastLoginAttempt' ||  c.field === 'LockedDate' || c.field === 'RoleName' || c.field === 'Description' || c.field === 'PartNumber' || c.field === 'CabinetType' || c.field == 'PartDescription' || c.field === 'Location' || c.field === 'UnitPrice' || c.field === 'InvoiceNumber' || c.field =='PoNumber' || c.field === 'RqNumber' || c.field === 'Id' || c.field ==='Name' || c.field ==='Version'  || c.field ==='TotalPercentage' || c.field ==='Notes' || c.field === 'MaximumWarningPercentage' || c.field === 'MinimumWarningPercentage' || c.field === 'ReadingBelowThresholdAction' || c.field === 'ProgressiveDefinitionName' || c.field === 'ProgressiveDefinitionGameDescription' || c.field === 'ProgressiveDefinitionGameLevelName' || c.field==='MachineId' || c.field === 'ProgressiveDailyMachineLocation'">
+                <p class="user-name">{{d[c.field]}}</p>
+              </td>
+              <td *ngIf="c.field === 'QuantityReceived' || c.field === 'QuantityOrdered'">
+                <div *ngIf="partIdMatch">
+                  <div *ngFor="let f of d['Items']">
+                    <p class="user-name" *ngIf="f.PartId === partIdMatch && c.field === 'QuantityOrdered'">
+                      {{f.QuantityOrdered}}</p>
+                    <p class="user-name" *ngIf="f.PartId === partIdMatch && c.field === 'QuantityReceived'"
+                      [innerHtml]="getVal(f)"></p>
+                  </div>
+                </div>
+                <p class="user-name" *ngIf="c.field === 'QuantityOrdered' && !partIdMatch">
+                  {{d['QuantityOrdered']}}
+                </p>
+                <p class="user-name" *ngIf="c.field === 'QuantityReceived' && !partIdMatch" [innerHtml]="getVal(d)"></p>
+              </td>
+              <td *ngIf="c.field === 'ItemsforUnitCost'">
+                <div *ngFor="let f of d['Items']">
+                  <p class="user-name" *ngIf="f.PartId === partIdMatch">${{f.UnitCost}}
+                  </p>
+
+                </div>
+
+              </td>
+              <td *ngIf="c.field==='Manufacturer'">
+                <p class="user-name">{{d[c.field].Name}}</p>
+              </td>
+              <td *ngIf="c.field==='ProgressiveMeterReadingSetting'">
+                <p class="user-name">{{d[c.field].Name}}</p>
+              </td>
+              <td *ngIf="c.field==='MeterReadingRequired'">
+                <p class="user-name" *ngIf="!d['ProgressiveMeterReadingSetting']">{{d[c.field]}}</p>
+                <p class="user-name" *ngIf="d['ProgressiveMeterReadingSetting']">
+                  {{d['ProgressiveMeterReadingSetting'].MeterReadingRequired}}</p>
+              </td>
+              <td *ngIf="c.field==='ComparisonField'">
+                <p class="user-name" *ngIf="!d['ProgressiveMeterReadingSetting']">{{d[c.field]}}</p>
+                <p class="user-name" *ngIf="d['ProgressiveMeterReadingSetting']">
+                  {{d['ProgressiveMeterReadingSetting'].ComparisonField}}</p>
+              </td>
+              <td *ngIf="c.field==='ComparisonValue'">
+                <p class="user-name" *ngIf="!d['ProgressiveMeterReadingSetting']">{{d[c.field]}}</p>
+                <p class="user-name" *ngIf="d['ProgressiveMeterReadingSetting']">
+                  {{d['ProgressiveMeterReadingSetting'].ComparisonValue}}</p>
+              </td>
+              <td *ngIf="c.field==='EveryXDays'">
+                <p class="user-name" *ngIf="!d['ProgressiveMeterReadingSetting']">{{d[c.field]}}</p>
+                <p class="user-name" *ngIf="d['ProgressiveMeterReadingSetting']">
+                  {{d['ProgressiveMeterReadingSetting'].EveryXDays}}</p>
+              </td>
+              <td *ngIf="c.field==='AllReadingsRequiredDayOfMonth'">
+                <p class="user-name" *ngIf="!d['ProgressiveMeterReadingSetting']">{{d[c.field]}}</p>
+                <p class="user-name" *ngIf="d['ProgressiveMeterReadingSetting']">
+                  {{d['ProgressiveMeterReadingSetting'].AllReadingsRequiredDayOfMonth}}</p>
+              </td>
+              <td *ngIf="c.field==='ProgressiveControllerType'">
+                <p class="user-name">{{d['ProgressiveControllerType'].Name}}</p>
+              </td>
+              <td *ngIf="c.field==='CheckedOutBy'">
+                <p class="user-name">{{d[c.field].DisplayName}}</p>
+              </td>
+              <td *ngIf="c.field==='Part'">
+                <p class="user-name">{{d[c.field].PartNumber}}</p>
+              </td>
+              <td *ngIf="c.field==='PartManufacturerCheckout'">
+                <p class="user-name">{{d['Part'].PartManufacturer.Name}}</p>
+              </td>
+              <td *ngIf="c.field==='PartKeywordCheckout'">
+                <p class="user-name">{{d['Part'].PartKeyword.Name}}</p>
+              </td>
+              <td *ngIf="c.field==='PartDescriptionCheckout'">
+                <p class="user-name">{{d['Part'].PartDescription}}</p>
+              </td>
+
+              <td *ngIf="c.field === 'Quantity'">
+                <span>{{sumQuantity(d['Locations'])}}</span>
+              </td>
+              <td *ngIf="c.field === 'PartKeyword' || c.field==='Vendor'">
+                <p class="user-name">{{d[c.field]?.Name}}</p>
+              </td>
+              <td *ngIf="c.field === 'TrackedItem'" style="padding: 7px;">
+                <label class="switch">
+                  <input type="checkbox" [checked]="d[c.field]" (change)="changeTrackedItem(d, $event)">
+                  <span class="slider"></span>
+                </label>
+              </td>
+              <!-- <td *ngIf="c.field === 'Locations'" style="padding: 0px;">
+                <div *ngFor="let l of d[c.field] | slice:0:2">
+                  <span>{{l.PartProperty.Name}}({{l.Shelf}} - {{l.Bin}})</span>
+                </div>
+              </td> -->
+              <td *ngIf="c.field === 'PartManufacturer'">
+                <p class="user-name">{{d[c.field].Name}}</p>
+              </td>
+              <td *ngIf="c.field === 'QuantityCheckout'">
+                <p class="user-name">{{d['Quantity']}}</p>
+              </td>
+              <td *ngIf="c.field === 'AuthorityGroupId'">
+                <ng-container *ngFor="let a of authories">
+                  <p class="user-name" *ngIf="a.Id === d[c.field]">{{a.Name}}</p>
+                </ng-container>
+              </td>
+              <td *ngIf="c.field === 'ResetPassword'" class="btn-padding-section">
+                <div>
+                  <button type="button" class="btn btn-primary reset-set-btn"
+                    [disabled]="d.IsExternallyAuthenticated === true || d.Email === undefined"
+                    (click)="ResetPassword(d)">Reset</button>
+                  <button type="button" class="btn btn-primary reset-set-btn"
+                    [disabled]="d.IsExternallyAuthenticated === true" (click)="setPassword(d)">Set</button>
+                </div>
+
+              </td>
+              <td *ngIf="c.field === 'Lock'" class="btn-padding-section">
+                <button type="button" class="btn btn-success reset-set-btn lock-btn"
+                  [disabled]="d.IsExternallyAuthenticated === true" *ngIf="!d.LockedDate"
+                  (click)="lockUser(d.UserAuthId)">Lock</button>
+                <button type="button" class="btn btn-danger reset-set-btn unlock-btn"
+                  [disabled]="d.IsExternallyAuthenticated === true" *ngIf="d.LockedDate"
+                  (click)="unlockUser(d.UserAuthId)">Unlock</button>
+              </td>
+              <td *ngIf="c.field === 'Action'" class="btn-padding-section">
+                <button type="button" class="btn btn-danger reset-set-btn unlock-btn"
+                  (click)="deleteRole(d)">Delete</button>
+
+              </td>
+              <td *ngIf="c.field === 'LinkedParts'" class="btn-padding-section">
+                <button type="button" class="btn btn-success reset-set-btn lock-btn" (click)="linkedParts(d)">Linked
+                  Parts</button>
+
+              </td>
+            </ng-container>
+          </ng-container>
         </tr>
       </tbody>
+      <!-- <tbody class="cdk-drop-list" id="cdk-drop-list-2">
+        <tr>
+          <td scope="row">
+            <img src="assets/icons/edit.svg" />
+          </td>
+          <td scope="row">
+            <div class="d-flex align-items-center">
+              <input type="checkbox" />
+              <img src="assets/icons/info.svg" class="ms-3" />
+            </div>
+          </td>
+          <td>
+            <p class="user-name">1253-26</p>
+          </td>
+          <td>
+            <p class="user-name">MultiMedia</p>
+          </td>
+          <td>
+            <p class="user-name"></p>
+          </td>
+          <td>
+            <p class="user-name">Teest1245</p>
+          </td>
+          <td>
+            <p class="user-name">czx</p>
+          </td>
+          <td>
+            <p class="user-name">Floor</p>
+          </td>
+          <td>
+            <p class="user-name"></p>
+          </td>
+        </tr>
+        <tr>
+          <td scope="row">
+            <img src="assets/icons/edit.svg" />
+          </td>
+          <td scope="row">
+            <div class="d-flex align-items-center">
+              <input type="checkbox" />
+              <img src="assets/icons/info.svg" class="ms-3" />
+            </div>
+          </td>
+          <td>
+            <p class="user-name">1253-26</p>
+          </td>
+          <td>
+            <p class="user-name">MultiMedia</p>
+          </td>
+          <td>
+            <p class="user-name"></p>
+          </td>
+          <td>
+            <p class="user-name">Teest1245</p>
+          </td>
+          <td>
+            <p class="user-name">czx</p>
+          </td>
+          <td>
+            <p class="user-name">Floor</p>
+          </td>
+          <td>
+            <p class="user-name"></p>
+          </td>
+        </tr>
+        <tr>
+          <td scope="row">
+            <img src="assets/icons/edit.svg" />
+          </td>
+          <td scope="row">
+            <div class="d-flex align-items-center">
+              <input type="checkbox" />
+              <img src="assets/icons/info.svg" class="ms-3" />
+            </div>
+          </td>
+          <td>
+            <p class="user-name">1253-26</p>
+          </td>
+          <td>
+            <p class="user-name">MultiMedia</p>
+          </td>
+          <td>
+            <p class="user-name"></p>
+          </td>
+          <td>
+            <p class="user-name">Teest1245</p>
+          </td>
+          <td>
+            <p class="user-name">czx</p>
+          </td>
+          <td>
+            <p class="user-name">Floor</p>
+          </td>
+          <td>
+            <p class="user-name"></p>
+          </td>
+        </tr>
+        <tr>
+          <td scope="row">
+            <img src="assets/icons/edit.svg" />
+          </td>
+          <td scope="row">
+            <div class="d-flex align-items-center">
+              <input type="checkbox" />
+              <img src="assets/icons/info.svg" class="ms-3" />
+            </div>
+          </td>
+          <td>
+            <p class="user-name">1253-26</p>
+          </td>
+          <td>
+            <p class="user-name">MultiMedia</p>
+          </td>
+          <td>
+            <p class="user-name"></p>
+          </td>
+          <td>
+            <p class="user-name">Teest1245</p>
+          </td>
+          <td>
+            <p class="user-name">czx</p>
+          </td>
+          <td>
+            <p class="user-name">Floor</p>
+          </td>
+          <td>
+            <p class="user-name"></p>
+          </td>
+        </tr>
+      </tbody> -->
     </table>
   </div>
 </div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <span>Select a Part</span>
+    <i class='bx bx-x close-icon' (click)="modal.dismiss('Cross click')"></i>
+  </div>
+  <div class="modal-body">
+    <!-- <app-grid-list [data]="parts" [fields]="columns" [serviceName]="'partsCheckService'" [displayid]="'partTable'"
+          (onaddParts)="selectedPartToAdd($event)" [showbutton]=true>
+      </app-grid-list> -->
+
+  </div>
+
+</ng-template>

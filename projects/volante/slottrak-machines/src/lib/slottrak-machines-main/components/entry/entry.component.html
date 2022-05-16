@@ -1,7 +1,5 @@
 <div class="page-container">
-  <div
-    class="top-grid-panel d-flex justify-content-between flex-wrap align-items-center"
-  >
+  <div class="top-grid-panel d-flex justify-content-between flex-wrap align-items-center">
     <span class="grid-label">Machines</span>
     <div class="d-flex justify-content-between flex-wrap align-items-center">
       <div>
@@ -16,102 +14,55 @@
           REPORTS
         </button>
       </div>
-      <slottrak-machines-machine-add
-        [routerLink]="['add-machine']"
-      ></slottrak-machines-machine-add>
+      <slottrak-machines-machine-add [routerLink]="['add-machine']"></slottrak-machines-machine-add>
     </div>
   </div>
 
   <div class="grid-inner-container">
     <div class="row">
       <div class="col-md-3">
-        <div
-          class="d-flex justify-content-between align-items-center flex-wrap text-center"
-        >
+        <div class="d-flex justify-content-between align-items-center flex-wrap text-center">
           <div>
             <div class="content">
-              <svg
-                width="13"
-                height="16"
-                viewBox="0 0 13 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+              <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M9.16377 0.799988H1.30911C0.5891 0.799988 0 1.38909 0 2.1091V11.2729H1.30911V2.1091H9.16377V0.799988ZM11.1271 3.41788H3.927C3.20699 3.41788 2.61789 4.00698 2.61789 4.72699V13.8908C2.61789 14.6108 3.20699 15.1999 3.927 15.1999H11.1271C11.8471 15.1999 12.4362 14.6108 12.4362 13.8908V4.72699C12.4362 4.00698 11.8471 3.41788 11.1271 3.41788ZM3.92768 13.8914H11.1278V4.72767H3.92768V13.8914Z"
-                  class="removecolor"
-                />
+                  class="removecolor" />
               </svg>
               <p class="removetextcolor">Clone</p>
             </div>
           </div>
           <div>
             <div class="content">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M2.40078 0.799988H13.6008C14.4808 0.799988 15.2008 1.51999 15.2008 2.39999V13.6C15.2008 14.48 14.4808 15.2 13.6008 15.2H2.40078C1.51278 15.2 0.800781 14.48 0.800781 13.6V2.39999C0.800781 1.51999 1.51278 0.799988 2.40078 0.799988ZM13.6008 13.6V2.39999H2.40078V13.6H13.6008ZM8.00078 7.99999C6.68078 7.99999 5.60078 6.91999 5.60078 5.59999C5.60078 4.27999 6.68078 3.19999 8.00078 3.19999C9.32078 3.19999 10.4008 4.27999 10.4008 5.59999C10.4008 6.91999 9.32078 7.99999 8.00078 7.99999ZM7.20078 5.59999C7.20078 5.15999 7.56078 4.79999 8.00078 4.79999C8.44078 4.79999 8.80078 5.15999 8.80078 5.59999C8.80078 6.03999 8.44078 6.39999 8.00078 6.39999C7.56078 6.39999 7.20078 6.03999 7.20078 5.59999ZM12.8008 12.8001H3.20078V11.5761C3.20078 9.5761 6.37678 8.7121 8.00078 8.7121C9.62478 8.7121 12.8008 9.5761 12.8008 11.5761V12.8001ZM10.9528 11.1999H5.04883C5.59283 10.7519 6.95283 10.3039 8.00083 10.3039C9.04883 10.3039 10.4008 10.7519 10.9528 11.1999Z"
-                  class="removecolor"
-                />
+                  class="removecolor" />
               </svg>
               <p class="removetextcolor">Convert</p>
             </div>
           </div>
           <div class="content">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M13.829 6.58744L11.7668 4.52509C11.539 4.2973 11.1696 4.2973 10.9418 4.52509C10.7141 4.75288 10.7141 5.12227 10.9418 5.35006L12.0085 6.41667H7.58334V1.9917L8.64981 3.05817C8.8776 3.28596 9.24699 3.28596 9.47478 3.05817C9.70257 2.83038 9.70257 2.46098 9.47478 2.2332L7.41242 0.170842C7.18463 -0.0569473 6.81524 -0.0569473 6.58745 0.170842L4.52509 2.23334C4.2973 2.46113 4.2973 2.83052 4.52509 3.05831C4.75288 3.2861 5.12228 3.2861 5.35007 3.05831L6.41668 1.9917V6.41667H1.9917L3.05817 5.3502C3.28596 5.12242 3.28596 4.75302 3.05817 4.52523C2.83038 4.29744 2.46099 4.29744 2.2332 4.52523L0.170842 6.58744C-0.0569474 6.81523 -0.0569474 7.18462 0.170842 7.41241L2.23334 9.47491C2.46113 9.7027 2.83053 9.7027 3.05832 9.47491C3.28611 9.24712 3.28611 8.87773 3.05832 8.64994L1.9917 7.58333H6.41668V12.0084L5.35021 10.9418C5.12242 10.714 4.75303 10.714 4.52524 10.9418C4.29745 11.1696 4.29745 11.539 4.52524 11.7668L6.5876 13.8292C6.81539 14.0569 7.18478 14.0569 7.41257 13.8292L9.47507 11.7668C9.70286 11.539 9.70286 11.1696 9.47507 10.9418C9.24728 10.714 8.87789 10.714 8.6501 10.9418L7.58334 12.0083V7.58333H12.0083L10.9418 8.6498C10.7141 8.87758 10.7141 9.24698 10.9418 9.47477C11.1696 9.70255 11.539 9.70255 11.7668 9.47477L13.8292 7.41227C14.057 7.18477 14.057 6.81523 13.829 6.58744Z"
-                class="removecolor"
-              />
+                class="removecolor" />
             </svg>
             <p class="removetextcolor">move</p>
           </div>
           <div class="content">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
                 d="M2.40078 0.799988H13.6008C14.4808 0.799988 15.2008 1.51999 15.2008 2.39999V13.6C15.2008 14.48 14.4808 15.2 13.6008 15.2H2.40078C1.51278 15.2 0.800781 14.48 0.800781 13.6V2.39999C0.800781 1.51999 1.51278 0.799988 2.40078 0.799988ZM13.6008 13.6V2.39999H2.40078V13.6H13.6008ZM8.00078 7.99999C6.68078 7.99999 5.60078 6.91999 5.60078 5.59999C5.60078 4.27999 6.68078 3.19999 8.00078 3.19999C9.32078 3.19999 10.4008 4.27999 10.4008 5.59999C10.4008 6.91999 9.32078 7.99999 8.00078 7.99999ZM7.20078 5.59999C7.20078 5.15999 7.56078 4.79999 8.00078 4.79999C8.44078 4.79999 8.80078 5.15999 8.80078 5.59999C8.80078 6.03999 8.44078 6.39999 8.00078 6.39999C7.56078 6.39999 7.20078 6.03999 7.20078 5.59999ZM12.8008 12.8001H3.20078V11.5761C3.20078 9.5761 6.37678 8.7121 8.00078 8.7121C9.62478 8.7121 12.8008 9.5761 12.8008 11.5761V12.8001ZM10.9528 11.1999H5.04883C5.59283 10.7519 6.95283 10.3039 8.00083 10.3039C9.04883 10.3039 10.4008 10.7519 10.9528 11.1999Z"
-                class="removecolor"
-              />
+                class="removecolor" />
             </svg>
             <p class="removetextcolor">Warehouse</p>
           </div>
           <div class="content">
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 15 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
                 d="M6.965 0.0409452C7.11164 -0.0149166 7.27392 -0.0135755 7.41962 0.0447021L13.6696 2.5447C13.9069 2.63962 14.0625 2.86943 14.0625 3.125V11.25C14.0625 11.4867 13.9287 11.7031 13.717 11.809L7.46701 14.934C7.29483 15.0201 7.09259 15.022 6.91879 14.9393L0.356292 11.8143C0.138641 11.7106 0 11.4911 0 11.25V3.125C0 2.86566 0.160156 2.63327 0.402503 2.54095L6.965 0.0409452ZM1.25 4.03191V10.8554L6.5625 13.3851V6.05572L1.25 4.03191ZM7.8125 6.04815V13.3637L12.8125 10.8637V4.04815L7.8125 6.04815ZM11.7546 3.125L7.18196 4.95407L2.38064 3.125L7.18196 1.29593L11.7546 3.125Z"
-                class="removecolor"
-              />
+                class="removecolor" />
             </svg>
             <p class="removetextcolor">Decommission</p>
           </div>
@@ -119,7 +70,8 @@
       </div>
     </div>
 
-    <volante-slottrak-ui-gridlist></volante-slottrak-ui-gridlist>
+    <volante-slottrak-ui-gridlist [data]="machinelogs" [fields]="columns" [serviceName]="'machineService'"
+      (checkBoxDataFetched)="downloadEpromReport($event)" [displayid]="'machineTable'"></volante-slottrak-ui-gridlist>
   </div>
 
   <!-- <p>
