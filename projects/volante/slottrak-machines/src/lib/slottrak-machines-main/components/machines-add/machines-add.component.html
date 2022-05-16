@@ -1,1311 +1,2013 @@
 <div class="page-container">
-    <form [formGroup]="myform" (ngSubmit)="saveMachine()">
-        <div class="row align-items-center">
-            <div class="col-6">
-                <div class="d-flex justify-content-between">
-                    <button class="back-button" (click)="goBack()">
-                        <em class='bx bx-chevron-left'></em>
-                    </button>
-                    <h3 class="heading-text mb-0"> {{currentPage}}</h3>
-                </div>
-
-            </div>
-            <div class="col-6 ">
-                <div class="d-flex justify-content-end">
-                    <button type="button" (click)="goBack()"><img src="assets/icons/cloud.svg" alt="icon"
-                            class="mr-2" />cancel</button>
-                    <button type="submit"><img src="assets/icons/cloud.svg" alt="icon" class="mr-2" />save</button>
-                </div>
-            </div>
+  <form [formGroup]="myform" (ngSubmit)="saveMachine()">
+    <div class="row align-items-center">
+      <div class="col-6">
+        <div class="d-flex justify-content-between">
+          <button class="back-button" (click)="goBack()">
+            <em class="bx bx-chevron-left"></em>
+          </button>
+          <h3 class="heading-text mb-0">{{ currentPage }}</h3>
         </div>
-        <div class="grid-inner-container">
-
-            <ngb-accordion #acc="ngbAccordion" [closeOthers]="false"
-                activeIds="static-1,static-2,static-3,static-4,static-5,static-6,static-7,static-8,static-9,static-10"
-                class="edit-page" (panelChange)='panelShadow($event,acc)'>
-                <ngb-panel id="static-1">
-                    <ng-template ngbPanelTitle>
-                        <div class="row btn-row align-items-center">
-                            <div class="col-8">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p>EGM Information</p>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="d-flex align-items-center justify-content-end flex-wrap margin-t">
-
-                                    <em
-                                        [ngClass]='activePanelId === "static-1" && nextState===false ? "bx bx-minus text-blue" : "bx bx-plus text-blue"'></em>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group "
-                                        [ngClass]="(formSubmitted && SlotTypeCtrl.errors?.required) ? 'error':'black'">
-                                        <label for="exampleFormControlSelect1">Slot Type *</label>
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="auto"
-                                                    [formControl]="SlotTypeCtrl" (keyup.enter)="addOption()" required>
-                                                <mat-autocomplete #auto="matAutocomplete"
-                                                    (optionSelected)="optionSelected($event.option)">
-                                                    <mat-option *ngFor="let item of filteredItems | async"
-                                                        [value]="item.Name" [id]="item.Id">
-                                                        <span>{{ item.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && SlotTypeCtrl.value" matSuffix
-                                                    mat-button mat-icon-button (click)="removeOption()">
-                                                    <mat-icon matTooltip='Close "{{SlotTypeCtrl.value}}"'>close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button" (click)="addSlot(SlotTypeCtrl)"
-                                                [disabled]="slotAddButtonStatus"><em class='bx bx-plus'></em></button>
-                                        </div>
-                                        <!-- <app-errors [control]="SlotTypeCtrl" [field]="'Slot Type'"
+      </div>
+      <div class="col-6">
+        <div class="d-flex justify-content-end">
+          <button type="button" (click)="goBack()">
+            <img src="assets/icons/cloud.svg" alt="icon" class="me-2" />cancel
+          </button>
+          <button type="submit">
+            <img src="assets/icons/cloud.svg" alt="icon" class="me-2" />save
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="grid-inner-container">
+      <ngb-accordion
+        #acc="ngbAccordion"
+        [closeOthers]="false"
+        activeIds="static-1,static-2,static-3,static-4,static-5,static-6,static-7,static-8,static-9,static-10"
+        class="edit-page"
+        (panelChange)="panelShadow($event, acc)"
+      >
+        <ngb-panel id="static-1">
+          <ng-template ngbPanelTitle>
+            <div class="row btn-row align-items-center">
+              <div class="col-8">
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>EGM Information</p>
+                </div>
+              </div>
+              <div class="col">
+                <div
+                  class="d-flex align-items-center justify-content-end flex-wrap margin-t"
+                >
+                  <em
+                    [ngClass]="
+                      activePanelId === 'static-1' && nextState === false
+                        ? 'bx bx-minus text-blue'
+                        : 'bx bx-plus text-blue'
+                    "
+                  ></em>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      formSubmitted && SlotTypeCtrl.errors?.required
+                        ? 'error'
+                        : 'black'
+                    "
+                  >
+                    <label for="exampleFormControlSelect1">Slot Type *</label>
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="auto"
+                          [formControl]="SlotTypeCtrl"
+                          (keyup.enter)="addOption()"
+                          required
+                        />
+                        <mat-autocomplete
+                          #auto="matAutocomplete"
+                          (optionSelected)="optionSelected($event.option)"
+                        >
+                          <mat-option
+                            *ngFor="let item of filteredItems | async"
+                            [value]="item.Name"
+                            [id]="item.Id"
+                          >
+                            <span>{{ item.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="showCloseButton && SlotTypeCtrl.value"
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removeOption()"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{
+                              SlotTypeCtrl.value
+                            }}&quot;"
+                            >close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="addSlot(SlotTypeCtrl)"
+                        [disabled]="slotAddButtonStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                    <!-- <app-errors [control]="SlotTypeCtrl" [field]="'Slot Type'"
                                             [submitted]="formSubmitted"></app-errors> -->
-
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && SerialNumber.errors?.required) ? 'error':'black'">
-                                        <label for="text">Serial Number *</label>
-                                        <input type="text" [formControl]="SerialNumber" class="form-control"
-                                            placeholder="0000-005" required>
-
-                                    </div>
-                                    <!-- <app-errors [control]="SerialNumber" [field]="'Serial Number'"
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      formSubmitted && SerialNumber.errors?.required
+                        ? 'error'
+                        : 'black'
+                    "
+                  >
+                    <label for="text">Serial Number *</label>
+                    <input
+                      type="text"
+                      [formControl]="SerialNumber"
+                      class="form-control"
+                      placeholder="0000-005"
+                      required
+                    />
+                  </div>
+                  <!-- <app-errors [control]="SerialNumber" [field]="'Serial Number'"
                                         [submitted]="formSubmitted"></app-errors> -->
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && ManufacturerId.errors?.required) ? 'error':'black'">
-                                        <label for="exampleFormControlSelect2">Manufacturer *</label>
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="manu"
-                                                    [formControl]="ManufacturerId" (keyup.enter)="addMFOption()"
-                                                    required>
-                                                <mat-autocomplete #manu="matAutocomplete"
-                                                    (optionSelected)="manufacturerSelected($event.option)">
-                                                    <mat-option *ngFor="let m of manufacturerFilteredItems | async"
-                                                        [value]="m.Name" [id]="m.Id">
-                                                        <span>{{ m.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && ManufacturerId.value" matSuffix
-                                                    mat-button mat-icon-button (click)="removeMFOption()">
-                                                    <mat-icon matTooltip='Close "{{ManufacturerId.value}}"'>close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button"
-                                                (click)="addManuFacturer(ManufacturerId)"
-                                                [disabled]="manufacturerStatus"><em class='bx bx-plus'></em></button>
-                                        </div>
-                                        <!-- <app-errors [control]="ManufacturerId" [field]="'Manufacturer'"
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      formSubmitted && ManufacturerId.errors?.required
+                        ? 'error'
+                        : 'black'
+                    "
+                  >
+                    <label for="exampleFormControlSelect2"
+                      >Manufacturer *</label
+                    >
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="manu"
+                          [formControl]="ManufacturerId"
+                          (keyup.enter)="addMFOption()"
+                          required
+                        />
+                        <mat-autocomplete
+                          #manu="matAutocomplete"
+                          (optionSelected)="manufacturerSelected($event.option)"
+                        >
+                          <mat-option
+                            *ngFor="let m of manufacturerFilteredItems | async"
+                            [value]="m.Name"
+                            [id]="m.Id"
+                          >
+                            <span>{{ m.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="showCloseButton && ManufacturerId.value"
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removeMFOption()"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{
+                              ManufacturerId.value
+                            }}&quot;"
+                            >close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="addManuFacturer(ManufacturerId)"
+                        [disabled]="manufacturerStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                    <!-- <app-errors [control]="ManufacturerId" [field]="'Manufacturer'"
                                             [submitted]="formSubmitted"></app-errors> -->
-
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && Status.errors?.required) ? 'error':'black'">
-                                        <label for="exampleFormControlSelect3">Status *</label>
-                                        <select [formControl]="Status" class="form-control"
-                                            id="exampleFormControlSelect3">
-                                            <option value="Decommissioned"> Decommissioned</option>
-                                            <option value="Floor">Floor</option>
-                                            <option value="Warehoused">Warehoused</option>
-                                        </select>
-                                        <!-- <app-errors [control]="Status" [field]="'Status'" [submitted]="formSubmitted">
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      formSubmitted && Status.errors?.required
+                        ? 'error'
+                        : 'black'
+                    "
+                  >
+                    <label for="exampleFormControlSelect3">Status *</label>
+                    <select
+                      [formControl]="Status"
+                      class="form-control"
+                      id="exampleFormControlSelect3"
+                    >
+                      <option value="Decommissioned">Decommissioned</option>
+                      <option value="Floor">Floor</option>
+                      <option value="Warehoused">Warehoused</option>
+                    </select>
+                    <!-- <app-errors [control]="Status" [field]="'Status'" [submitted]="formSubmitted">
                                         </app-errors> -->
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect4">Cabinet Type</label>
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="cabinet"
-                                                    [formControl]="cabinetCtrl" (keyup.enter)="addCabinetOption()">
-                                                <mat-autocomplete #cabinet="matAutocomplete"
-                                                    (optionSelected)="cabinetSelected($event.option)">
-                                                    <mat-option *ngFor="let cab of cabinetFilteredItems | async"
-                                                        [value]="cab.Name" [id]="cab.Id">
-                                                        <span>{{ cab.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && cabinetCtrl.value" matSuffix
-                                                    mat-button mat-icon-button (click)="removeCabinetOption()">
-                                                    <mat-icon matTooltip='Close "{{cabinetCtrl.value}}"'>close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button" (click)="addCabinetType(cabinetCtrl)"
-                                                [disabled]="cabinetStatus"><em class='bx bx-plus'></em></button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && modelnumberCtrl.errors?.required) ? 'error':'black'">
-                                        <label for="exampleFormControlSelect5">Model Number *</label>
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="modelnumber"
-                                                    [formControl]="modelnumberCtrl"
-                                                    (keyup.enter)="addmodelnumberOption()" required>
-                                                <mat-autocomplete #modelnumber="matAutocomplete"
-                                                    (optionSelected)="modelnumberSelected($event.option)">
-                                                    <mat-option *ngFor="let model of modelnumberFilteredItems | async"
-                                                        [value]="model.Name" [id]="model.Id">
-                                                        <span>{{ model.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && modelnumberCtrl.value" matSuffix
-                                                    mat-button mat-icon-button (click)="removemodelnumberOption()">
-                                                    <mat-icon matTooltip='Close "{{modelnumberCtrl.value}}"'>close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button"
-                                                (click)="addmodelnumberType(modelnumberCtrl)"
-                                                [disabled]="modelnumberStatus"><em class='bx bx-plus'></em></button>
-                                        </div>
-                                        <!-- <app-errors [control]="modelnumberCtrl" [field]="'Model Number'"
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect4">Cabinet Type</label>
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="cabinet"
+                          [formControl]="cabinetCtrl"
+                          (keyup.enter)="addCabinetOption()"
+                        />
+                        <mat-autocomplete
+                          #cabinet="matAutocomplete"
+                          (optionSelected)="cabinetSelected($event.option)"
+                        >
+                          <mat-option
+                            *ngFor="let cab of cabinetFilteredItems | async"
+                            [value]="cab.Name"
+                            [id]="cab.Id"
+                          >
+                            <span>{{ cab.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="showCloseButton && cabinetCtrl.value"
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removeCabinetOption()"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{
+                              cabinetCtrl.value
+                            }}&quot;"
+                            >close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="addCabinetType(cabinetCtrl)"
+                        [disabled]="cabinetStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      formSubmitted && modelnumberCtrl.errors?.required
+                        ? 'error'
+                        : 'black'
+                    "
+                  >
+                    <label for="exampleFormControlSelect5"
+                      >Model Number *</label
+                    >
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="modelnumber"
+                          [formControl]="modelnumberCtrl"
+                          (keyup.enter)="addmodelnumberOption()"
+                          required
+                        />
+                        <mat-autocomplete
+                          #modelnumber="matAutocomplete"
+                          (optionSelected)="modelnumberSelected($event.option)"
+                        >
+                          <mat-option
+                            *ngFor="
+                              let model of modelnumberFilteredItems | async
+                            "
+                            [value]="model.Name"
+                            [id]="model.Id"
+                          >
+                            <span>{{ model.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="showCloseButton && modelnumberCtrl.value"
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removemodelnumberOption()"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{
+                              modelnumberCtrl.value
+                            }}&quot;"
+                            >close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="addmodelnumberType(modelnumberCtrl)"
+                        [disabled]="modelnumberStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                    <!-- <app-errors [control]="modelnumberCtrl" [field]="'Model Number'"
                                             [submitted]="formSubmitted"></app-errors> -->
-
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && displayTypeCtrl.errors?.required) ? 'error':'black'">
-                                        <label for="exampleFormControlSelect6">Display Type *</label>
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="displayType"
-                                                    [formControl]="displayTypeCtrl"
-                                                    (keyup.enter)="adddisplayTypeOption()">
-                                                <mat-autocomplete #displayType="matAutocomplete"
-                                                    (optionSelected)="displayTypeSelected($event.option)">
-                                                    <mat-option *ngFor="let d of displayTypeFilteredItems | async"
-                                                        [value]="d.Name" [id]="d.Id">
-                                                        <span>{{ d.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && displayTypeCtrl.value" matSuffix
-                                                    mat-button mat-icon-button (click)="removedisplayTypeOption()">
-                                                    <mat-icon matTooltip='Close "{{displayTypeCtrl.value}}"'>close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button"
-                                                (click)="adddisplayTypeType(displayTypeCtrl)"
-                                                [disabled]="displayTypeStatus"><em class='bx bx-plus'></em></button>
-                                        </div>
-                                        <!-- <app-errors [control]="displayTypeCtrl" [field]="'Display Type'"
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      formSubmitted && displayTypeCtrl.errors?.required
+                        ? 'error'
+                        : 'black'
+                    "
+                  >
+                    <label for="exampleFormControlSelect6"
+                      >Display Type *</label
+                    >
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="displayType"
+                          [formControl]="displayTypeCtrl"
+                          (keyup.enter)="adddisplayTypeOption()"
+                        />
+                        <mat-autocomplete
+                          #displayType="matAutocomplete"
+                          (optionSelected)="displayTypeSelected($event.option)"
+                        >
+                          <mat-option
+                            *ngFor="let d of displayTypeFilteredItems | async"
+                            [value]="d.Name"
+                            [id]="d.Id"
+                          >
+                            <span>{{ d.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="showCloseButton && displayTypeCtrl.value"
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removedisplayTypeOption()"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{
+                              displayTypeCtrl.value
+                            }}&quot;"
+                            >close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="adddisplayTypeType(displayTypeCtrl)"
+                        [disabled]="displayTypeStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                    <!-- <app-errors [control]="displayTypeCtrl" [field]="'Display Type'"
                                             [submitted]="formSubmitted"></app-errors> -->
-
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Number of Reels</label>
-                                        <input type="number" [formControl]="NumberOfReels" class="form-control"
-                                            placeholder="-">
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Slot Number</label>
-                                        <input type="text" [formControl]="SlotNumber" class="form-control"
-                                            placeholder="-">
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && GameType.errors?.required) ? 'error':'black'">
-                                        <label for="text">Game Type *</label>
-                                        <input type="text" [formControl]="GameType" class="form-control"
-                                            placeholder="New Game">
-                                    </div>
-                                    <!-- <app-errors [control]="GameType" [field]="'Game Type'" [submitted]="formSubmitted">
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Number of Reels</label>
+                    <input
+                      type="number"
+                      [formControl]="NumberOfReels"
+                      class="form-control"
+                      placeholder="-"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Slot Number</label>
+                    <input
+                      type="text"
+                      [formControl]="SlotNumber"
+                      class="form-control"
+                      placeholder="-"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      formSubmitted && GameType.errors?.required
+                        ? 'error'
+                        : 'black'
+                    "
+                  >
+                    <label for="text">Game Type *</label>
+                    <input
+                      type="text"
+                      [formControl]="GameType"
+                      class="form-control"
+                      placeholder="New Game"
+                    />
+                  </div>
+                  <!-- <app-errors [control]="GameType" [field]="'Game Type'" [submitted]="formSubmitted">
                                     </app-errors> -->
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && GameName.errors?.required) ? 'error':'black'">
-                                        <label for="text">Game Name * </label>
-                                        <input type="text" [formControl]="GameName" class="form-control"
-                                            placeholder="Game Class 1">
-                                    </div>
-                                    <!-- <app-errors [control]="GameName" [field]="'Game Name'" [submitted]="formSubmitted">
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      formSubmitted && GameName.errors?.required
+                        ? 'error'
+                        : 'black'
+                    "
+                  >
+                    <label for="text">Game Name * </label>
+                    <input
+                      type="text"
+                      [formControl]="GameName"
+                      class="form-control"
+                      placeholder="Game Class 1"
+                    />
+                  </div>
+                  <!-- <app-errors [control]="GameName" [field]="'Game Name'" [submitted]="formSubmitted">
                                     </app-errors> -->
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect6">Screen Type</label>
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="screenType"
+                          [formControl]="screenTypeCtrl"
+                          (keyup.enter)="addscreenTypeOption()"
+                        />
+                        <mat-autocomplete
+                          #screenType="matAutocomplete"
+                          (optionSelected)="screenTypeSelected($event.option)"
+                        >
+                          <mat-option
+                            *ngFor="let sc of screenTypeFilteredItems | async"
+                            [value]="sc.Name"
+                            [id]="sc.Id"
+                          >
+                            <span>{{ sc.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="showCloseButton && screenTypeCtrl.value"
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removescreenTypeOption($event)"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{
+                              screenTypeCtrl.value
+                            }}&quot;"
+                            >close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="addscreenType(screenTypeCtrl)"
+                        [disabled]="screenTypeStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="static-2">
+          <ng-template ngbPanelTitle>
+            <div class="row btn-row align-items-center">
+              <div class="col-8">
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>Game Math</p>
+                </div>
+              </div>
 
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect6">Screen Type</label>
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="screenType"
-                                                    [formControl]="screenTypeCtrl"
-                                                    (keyup.enter)="addscreenTypeOption()">
-                                                <mat-autocomplete #screenType="matAutocomplete"
-                                                    (optionSelected)="screenTypeSelected($event.option)">
-                                                    <mat-option *ngFor="let sc of screenTypeFilteredItems | async"
-                                                        [value]="sc.Name" [id]="sc.Id">
-                                                        <span>{{ sc.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && screenTypeCtrl.value" matSuffix
-                                                    mat-button mat-icon-button (click)="removescreenTypeOption($event)">
-                                                    <mat-icon matTooltip='Close "{{screenTypeCtrl.value}}"'>close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button"
-                                                (click)="addscreenType(screenTypeCtrl)"
-                                                [disabled]="screenTypeStatus"><em class='bx bx-plus'></em></button>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <hr />
-                    </ng-template>
-                </ngb-panel>
-                <ngb-panel id="static-2">
-                    <ng-template ngbPanelTitle>
-                        <div class="row btn-row align-items-center">
-                            <div class="col-8">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p>Game Math</p>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="d-flex align-items-center justify-content-end flex-wrap margin-t">
-                                    <em
-                                        [ngClass]='activePanelId === "static-2" && nextState===false ? "bx bx-minus text-blue" : "bx bx-plus text-blue"'></em>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect7">Type Id</label>
-                                        <input type="number" [formControl]="TypeId" class="form-control"
-                                            placeholder="Type Id">
-                                    </div>
-                                    <!-- <app-errors [control]="TypeId" [field]="'Type Id'" [submitted]="formSubmitted">
+              <div class="col">
+                <div
+                  class="d-flex align-items-center justify-content-end flex-wrap margin-t"
+                >
+                  <em
+                    [ngClass]="
+                      activePanelId === 'static-2' && nextState === false
+                        ? 'bx bx-minus text-blue'
+                        : 'bx bx-plus text-blue'
+                    "
+                  ></em>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect7">Type Id</label>
+                    <input
+                      type="number"
+                      [formControl]="TypeId"
+                      class="form-control"
+                      placeholder="Type Id"
+                    />
+                  </div>
+                  <!-- <app-errors [control]="TypeId" [field]="'Type Id'" [submitted]="formSubmitted">
                                     </app-errors> -->
-
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Paylines</label>
-                                        <input type="text" [formControl]="PayLines" class="form-control"
-                                            placeholder="-">
-                                    </div>
-                                    <!-- <app-errors [control]="PayLines" [field]="'PayLines'" [submitted]="formSubmitted">
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Paylines</label>
+                    <input
+                      type="text"
+                      [formControl]="PayLines"
+                      class="form-control"
+                      placeholder="-"
+                    />
+                  </div>
+                  <!-- <app-errors [control]="PayLines" [field]="'PayLines'" [submitted]="formSubmitted">
                                     </app-errors> -->
-
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text"> First Coin Percentage</label>
-                                        <input type="number" class="form-control" placeholder="0"
-                                            [formControl]="FirstCoinPercentage">
-                                        <span class="icon">%</span>
-                                    </div>
-                                    <!-- <app-errors [control]="FirstCoinPercentage" [field]="'FirstCoinPercentage'"
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text"> First Coin Percentage</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="0"
+                      [formControl]="FirstCoinPercentage"
+                    />
+                    <span class="icon">%</span>
+                  </div>
+                  <!-- <app-errors [control]="FirstCoinPercentage" [field]="'FirstCoinPercentage'"
                                         [submitted]="formSubmitted"></app-errors> -->
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text"> Max Coin Percentage</label>
-                                        <input type="number" class="form-control" placeholder="0"
-                                            [formControl]="MaxCoinPercentage">
-                                        <span class="icon">%</span>
-                                    </div>
-                                    <!-- <app-errors [control]="MaxCoinPercentage" [field]="'MaxCoinPercentage'"
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text"> Max Coin Percentage</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="0"
+                      [formControl]="MaxCoinPercentage"
+                    />
+                    <span class="icon">%</span>
+                  </div>
+                  <!-- <app-errors [control]="MaxCoinPercentage" [field]="'MaxCoinPercentage'"
                                         [submitted]="formSubmitted"></app-errors> -->
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text"> Hold Percentage</label>
-                                        <input type="number" class="form-control" placeholder="-"
-                                            [formControl]="HoldPercentage">
-                                        <span class="icon">%</span>
-                                    </div>
-                                    <!-- <app-errors [control]="HoldPercentage" [field]="'HoldPercentage'"
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text"> Hold Percentage</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="-"
+                      [formControl]="HoldPercentage"
+                    />
+                    <span class="icon">%</span>
+                  </div>
+                  <!-- <app-errors [control]="HoldPercentage" [field]="'HoldPercentage'"
                                         [submitted]="formSubmitted"></app-errors> -->
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text"> Max Jackpot</label>
-                                        <input type="number" class="form-control" placeholder="-"
-                                            [formControl]="MaxJackpot">
-                                        <span class="icon">$</span>
-                                    </div>
-                                    <!-- <app-errors [control]="MaxJackpot" [field]="'MaxJackpot'"
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text"> Max Jackpot</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="-"
+                      [formControl]="MaxJackpot"
+                    />
+                    <span class="icon">$</span>
+                  </div>
+                  <!-- <app-errors [control]="MaxJackpot" [field]="'MaxJackpot'"
                                         [submitted]="formSubmitted"></app-errors> -->
-
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect8">Progressive Type</label>
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="progressiveType"
-                                                    [formControl]="progressiveTypeCtrl"
-                                                    (keyup.enter)="addprogressiveTypeOption()">
-                                                <mat-autocomplete #progressiveType="matAutocomplete"
-                                                    (optionSelected)="progressiveTypeSelected($event.option)">
-                                                    <mat-option *ngFor="let pt of progressiveTypeFilteredItems | async"
-                                                        [value]="pt.Name" [id]="pt.Id">
-                                                        <span>{{ pt.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && progressiveTypeCtrl.value" matSuffix
-                                                    mat-button mat-icon-button (click)="removeprogressiveTypeOption()">
-                                                    <mat-icon matTooltip='Close "{{progressiveTypeCtrl.value}}"'>close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button"
-                                                (click)="addprogressiveType(progressiveTypeCtrl)"
-                                                [disabled]="progressiveTypeStatus"><em class='bx bx-plus'></em></button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text"> Subtype</label>
-                                        <input type="text" class="form-control" placeholder="-" [formControl]="SubType">
-
-                                    </div>
-                                    <!-- <app-errors [control]="SubType" [field]="'Sub Type'" [submitted]="formSubmitted">
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect8"
+                      >Progressive Type</label
+                    >
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="progressiveType"
+                          [formControl]="progressiveTypeCtrl"
+                          (keyup.enter)="addprogressiveTypeOption()"
+                        />
+                        <mat-autocomplete
+                          #progressiveType="matAutocomplete"
+                          (optionSelected)="
+                            progressiveTypeSelected($event.option)
+                          "
+                        >
+                          <mat-option
+                            *ngFor="
+                              let pt of progressiveTypeFilteredItems | async
+                            "
+                            [value]="pt.Name"
+                            [id]="pt.Id"
+                          >
+                            <span>{{ pt.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="showCloseButton && progressiveTypeCtrl.value"
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removeprogressiveTypeOption()"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{
+                              progressiveTypeCtrl.value
+                            }}&quot;"
+                            >close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="addprogressiveType(progressiveTypeCtrl)"
+                        [disabled]="progressiveTypeStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text"> Subtype</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="-"
+                      [formControl]="SubType"
+                    />
+                  </div>
+                  <!-- <app-errors [control]="SubType" [field]="'Sub Type'" [submitted]="formSubmitted">
                                     </app-errors> -->
-
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text"> GLI Number</label>
-                                        <input type="text" class="form-control" placeholder="-"
-                                            [formControl]="GliNumber">
-                                    </div>
-                                    <!-- <app-errors [control]="GliNumber" [field]="'GliNumber'" [submitted]="formSubmitted">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text"> GLI Number</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="-"
+                      [formControl]="GliNumber"
+                    />
+                  </div>
+                  <!-- <app-errors [control]="GliNumber" [field]="'GliNumber'" [submitted]="formSubmitted">
                                     </app-errors> -->
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text"> Jackpot Base</label>
-                                        <input type="number" class="form-control" placeholder="-"
-                                            [formControl]="JackpotBase">
-                                        <span class="icon">$</span>
-                                    </div>
-                                    <!-- <app-errors [control]="JackpotBase" [field]="'Jackpot Base'"
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text"> Jackpot Base</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="-"
+                      [formControl]="JackpotBase"
+                    />
+                    <span class="icon">$</span>
+                  </div>
+                  <!-- <app-errors [control]="JackpotBase" [field]="'Jackpot Base'"
                                         [submitted]="formSubmitted"></app-errors> -->
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text"> Coins Per Count</label>
-                                        <input type="number" class="form-control" placeholder="-"
-                                            [formControl]="CoinsPerPoint">
-                                    </div>
-                                    <!-- <app-errors [control]="CoinsPerPoint" [field]="'CoinsPerPoint'"
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text"> Coins Per Count</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="-"
+                      [formControl]="CoinsPerPoint"
+                    />
+                  </div>
+                  <!-- <app-errors [control]="CoinsPerPoint" [field]="'CoinsPerPoint'"
                                         [submitted]="formSubmitted"></app-errors> -->
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text"> Points Awarded</label>
-                                        <input type="number" class="form-control" placeholder="-"
-                                            [formControl]="PointsAwarded">
-                                    </div>
-                                    <!-- <app-errors [control]="PointsAwarded" [field]="'Points Awarded'"
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text"> Points Awarded</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="-"
+                      [formControl]="PointsAwarded"
+                    />
+                  </div>
+                  <!-- <app-errors [control]="PointsAwarded" [field]="'Points Awarded'"
                                         [submitted]="formSubmitted"></app-errors> -->
-
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text"> Adjusted Hold Percentage</label>
-                                        <input type="number" class="form-control" placeholder="-"
-                                            [formControl]="AdjustedHoldPercentage">
-                                        <span class="icon">$</span>
-                                    </div>
-                                    <!-- <app-errors [control]="AdjustedHoldPercentage" [field]="'AdjustedHoldPercentage'"
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text"> Adjusted Hold Percentage</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="-"
+                      [formControl]="AdjustedHoldPercentage"
+                    />
+                    <span class="icon">$</span>
+                  </div>
+                  <!-- <app-errors [control]="AdjustedHoldPercentage" [field]="'AdjustedHoldPercentage'"
                                         [submitted]="formSubmitted"></app-errors> -->
+                </div>
+              </div>
+            </div>
+            <hr />
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="static-3">
+          <ng-template ngbPanelTitle>
+            <div class="row btn-row align-items-center">
+              <div class="col-8">
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>Eprom Configurations</p>
+                </div>
+              </div>
 
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </ng-template>
-                </ngb-panel>
-                <ngb-panel id="static-3">
-                    <ng-template ngbPanelTitle>
-                        <div class="row btn-row align-items-center">
-                            <div class="col-8">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p> Eprom Configurations</p>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="d-flex align-items-center justify-content-end flex-wrap margin-t">
-                                    <em
-                                        [ngClass]='activePanelId === "static-3" && nextState===false ? "bx bx-minus text-blue" : "bx bx-plus text-blue"'></em>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="d-flex justify-content-between align-items-center eprom-div">
-                                        <p *ngIf="getEpromLength(myform) <= 0">There are no EPROM configurations</p>
-                                        <button type="button" (click)="addEpromForm()"><em class='bx bx-plus'></em>Add
-                                            eprom</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <section formArrayName="eprom">
-                            <ng-container *ngFor="let e of getFormControls(myform);  let i = index;">
-                                <div class="row align-items-center" [formGroupName]="i">
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="form-group"
-                                            [ngClass]="(formSubmitted && e['controls'].epromName.errors?.required) ? 'error':'black'">
-                                            <label for="text" class="w-100">EPROM</label>
-                                            <input type="text" class="form-control" placeholder="0" required
-                                                formControlName="epromName" />
-                                        </div>
-                                        <!-- <app-errors [control]="e['controls'].epromName" [field]="'Eprom'"
+              <div class="col">
+                <div
+                  class="d-flex align-items-center justify-content-end flex-wrap margin-t"
+                >
+                  <em
+                    [ngClass]="
+                      activePanelId === 'static-3' && nextState === false
+                        ? 'bx bx-minus text-blue'
+                        : 'bx bx-plus text-blue'
+                    "
+                  ></em>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <div
+                    class="d-flex justify-content-between align-items-center eprom-div"
+                  >
+                    <p *ngIf="getEpromLength(myform) <= 0">
+                      There are no EPROM configurations
+                    </p>
+                    <button type="button" (click)="addEpromForm()">
+                      <em class="bx bx-plus"></em>Add eprom
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <section formArrayName="eprom">
+              <ng-container
+                *ngFor="let e of getFormControls(myform); let i = index"
+              >
+                <div class="row align-items-center" [formGroupName]="i">
+                  <div class="col-md-3 col-sm-6">
+                    <div
+                      class="form-group"
+                      [ngClass]="
+                        formSubmitted &&
+                        e['controls'].epromName.errors?.required
+                          ? 'error'
+                          : 'black'
+                      "
+                    >
+                      <label for="text" class="w-100">EPROM</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="0"
+                        required
+                        formControlName="epromName"
+                      />
+                    </div>
+                    <!-- <app-errors [control]="e['controls'].epromName" [field]="'Eprom'"
                                             [submitted]="formSubmitted"></app-errors> -->
-
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="form-group"
-                                            [ngClass]="(formSubmitted && e['controls'].epromLabel.errors?.required) ? 'error':'black'">
-                                            <label for="text" class="w-100">EPROM Label</label>
-                                            <input type="text" class="form-control" placeholder="-" required
-                                                formControlName="epromLabel" />
-                                        </div>
-                                        <!-- <app-errors [control]="e['controls'].epromLabel" [field]="'Eprom Label'"
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <div
+                      class="form-group"
+                      [ngClass]="
+                        formSubmitted &&
+                        e['controls'].epromLabel.errors?.required
+                          ? 'error'
+                          : 'black'
+                      "
+                    >
+                      <label for="text" class="w-100">EPROM Label</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="-"
+                        required
+                        formControlName="epromLabel"
+                      />
+                    </div>
+                    <!-- <app-errors [control]="e['controls'].epromLabel" [field]="'Eprom Label'"
                                             [submitted]="formSubmitted"></app-errors> -->
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <div class="form-group">
+                      <div class="d-flex align-items-center my-2">
+                        <button (click)="copyEprom(e)">
+                          <img
+                            src="assets/icons/copy-green.svg"
+                            class="me-2"
+                            alt=""
+                          />copy
+                        </button>
+                        <button (click)="removeEprom(i)">
+                          <img
+                            src="assets/icons/trash.svg"
+                            class="me-2"
+                            alt=""
+                          />delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </section>
+            <hr />
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="static-4">
+          <ng-template ngbPanelTitle>
+            <div class="row btn-row align-items-center">
+              <div class="col-8">
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>Location Data</p>
+                </div>
+              </div>
 
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="form-group">
-                                            <div class="d-flex align-items-center my-2">
-                                                <button (click)="copyEprom(e)"><img src="assets/icons/copy-green.svg"
-                                                        class="mr-2" alt="" />copy</button>
-                                                <button (click)="removeEprom(i)"><img src="assets/icons/trash.svg"
-                                                        class="mr-2" alt="" />delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-container>
-
-                        </section>
-                        <hr />
-                    </ng-template>
-                </ngb-panel>
-                <ngb-panel id="static-4">
-                    <ng-template ngbPanelTitle>
-                        <div class="row btn-row align-items-center">
-                            <div class="col-8">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p> Location Data</p>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="d-flex align-items-center justify-content-end flex-wrap margin-t">
-
-                                    <em
-                                        [ngClass]='activePanelId === "static-4" && nextState===false ? "bx bx-minus text-blue" : "bx bx-plus text-blue"'></em>
-
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && Section.errors?.required) ? 'error':'black'">
-                                        <label for="text">Section *</label>
-                                        <input type="text" class="form-control" placeholder="C" [formControl]="Section"
-                                            required>
-
-                                    </div>
-                                    <!-- <app-errors [control]="Section" [field]="'Section'" [submitted]="formSubmitted">
+              <div class="col">
+                <div
+                  class="d-flex align-items-center justify-content-end flex-wrap margin-t"
+                >
+                  <em
+                    [ngClass]="
+                      activePanelId === 'static-4' && nextState === false
+                        ? 'bx bx-minus text-blue'
+                        : 'bx bx-plus text-blue'
+                    "
+                  ></em>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      formSubmitted && Section.errors?.required
+                        ? 'error'
+                        : 'black'
+                    "
+                  >
+                    <label for="text">Section *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="C"
+                      [formControl]="Section"
+                      required
+                    />
+                  </div>
+                  <!-- <app-errors [control]="Section" [field]="'Section'" [submitted]="formSubmitted">
                                     </app-errors> -->
-
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && Bank.errors?.required) ? 'error':'black'">
-                                        <label for="text">Bank *</label>
-                                        <input type="text" class="form-control" placeholder="C" [formControl]="Bank"
-                                            required>
-                                    </div>
-                                    <!-- <app-errors [control]="Bank" [field]="'Bank'" [submitted]="formSubmitted">
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      formSubmitted && Bank.errors?.required ? 'error' : 'black'
+                    "
+                  >
+                    <label for="text">Bank *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="C"
+                      [formControl]="Bank"
+                      required
+                    />
+                  </div>
+                  <!-- <app-errors [control]="Bank" [field]="'Bank'" [submitted]="formSubmitted">
                                     </app-errors> -->
-
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && Slot.errors?.required) ? 'error':'black'">
-                                        <label for="text">Slot *</label>
-                                        <input type="text" class="form-control" placeholder="C" [formControl]="Slot"
-                                            required>
-                                    </div>
-                                    <!-- <app-errors [control]="Slot" [field]="'Slot'" [submitted]="formSubmitted">
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      formSubmitted && Slot.errors?.required ? 'error' : 'black'
+                    "
+                  >
+                    <label for="text">Slot *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="C"
+                      [formControl]="Slot"
+                      required
+                    />
+                  </div>
+                  <!-- <app-errors [control]="Slot" [field]="'Slot'" [submitted]="formSubmitted">
                                     </app-errors> -->
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Index Zone</label>
-                                        <input type="text" class="form-control" placeholder="C"
-                                            [formControl]="IndexZone">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && BankSize.errors?.required) || errorMessage ? 'error':'black'">
-                                        <label for="text">Bank Size</label>
-                                        <input type="text" class="form-control" placeholder="-"
-                                            [formControl]="BankSize">
-                                        <!-- <app-errors [control]="BankSize" [field]="'BankSize'"
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Index Zone</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="C"
+                      [formControl]="IndexZone"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      (formSubmitted && BankSize.errors?.required) ||
+                      errorMessage
+                        ? 'error'
+                        : 'black'
+                    "
+                  >
+                    <label for="text">Bank Size</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="-"
+                      [formControl]="BankSize"
+                    />
+                    <!-- <app-errors [control]="BankSize" [field]="'BankSize'"
                                             [submitted]="formSubmitted">
                                         </app-errors> -->
-
-                                    </div>
-
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && SeatPosition.errors?.required) || errorMessage ? 'error':'black'">
-                                        <label for="text">Seat position</label>
-                                        <input type="text" class="form-control" placeholder="C"
-                                            [formControl]="SeatPosition">
-                                        <!-- <app-errors [control]="SeatPosition" [field]="'Seat Position'"
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      (formSubmitted && SeatPosition.errors?.required) ||
+                      errorMessage
+                        ? 'error'
+                        : 'black'
+                    "
+                  >
+                    <label for="text">Seat position</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="C"
+                      [formControl]="SeatPosition"
+                    />
+                    <!-- <app-errors [control]="SeatPosition" [field]="'Seat Position'"
                                             [submitted]="formSubmitted">
                                         </app-errors> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="static-5">
+          <ng-template ngbPanelTitle>
+            <div class="row btn-row align-items-center">
+              <div class="col-8">
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>Lease Information</p>
+                </div>
+              </div>
 
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </ng-template>
-                </ngb-panel>
-                <ngb-panel id="static-5">
-                    <ng-template ngbPanelTitle>
-                        <div class="row btn-row align-items-center">
-                            <div class="col-8">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p> Lease Information</p>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="d-flex align-items-center justify-content-end flex-wrap margin-t">
-
-                                    <em
-                                        [ngClass]='activePanelId === "static-5" && nextState===false ? "bx bx-minus text-blue" : "bx bx-plus text-blue"'></em>
-
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect9">Leased</label>
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="leasedType"
-                                                    [formControl]="leasedTypeCtrl"
-                                                    (keyup.enter)="addleasedTypeOption()">
-                                                <mat-autocomplete #leasedType="matAutocomplete"
-                                                    (optionSelected)="leasedTypeSelected($event.option)">
-                                                    <mat-option *ngFor="let l of leasedTypeFilteredItems | async"
-                                                        [value]="l.Name" [id]="l.Id">
-                                                        <span>{{ l.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && leasedTypeCtrl.value" matSuffix
-                                                    mat-button mat-icon-button (click)="removeleasedTypeOption($event)">
-                                                    <mat-icon matTooltip='Close "{{leasedTypeCtrl.value}}"'>close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button"
-                                                (click)="addleasedType(leasedTypeCtrl)"
-                                                [disabled]="leasedTypeStatus"><em class='bx bx-plus'></em></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect10">Leased Category</label>
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="leasedCategoryType"
-                                                    [formControl]="leasedCategoryTypeCtrl"
-                                                    (keyup.enter)="addleasedCategoryTypeOption()">
-                                                <mat-autocomplete #leasedCategoryType="matAutocomplete"
-                                                    (optionSelected)="leasedCategoryTypeSelected($event.option)">
-                                                    <mat-option
-                                                        *ngFor="let lc of leasedCategoryTypeFilteredItems | async"
-                                                        [value]="lc.Name" [id]="lc.Id">
-                                                        <span>{{ lc.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && leasedCategoryTypeCtrl.value"
-                                                    matSuffix mat-button mat-icon-button
-                                                    (click)="removeleasedCategoryTypeOption($event)">
-                                                    <mat-icon matTooltip='Close "{{leasedCategoryTypeCtrl.value}}"'>
-                                                        close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button"
-                                                (click)="addleasedCategoryType(leasedCategoryTypeCtrl)"
-                                                [disabled]="leasedCategoryTypeStatus"><em
-                                                    class='bx bx-plus'></em></button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group ">
-                                        <label for="exampleFormControlSelect10">Fee Flat</label>
-                                        <input type="text" class="form-control" placeholder="C" [formControl]="FeeFlat">
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Fee Percentage</label>
-                                        <input type="number" class="form-control" placeholder="0"
-                                            [formControl]="FeePercentage">
-                                        <span class="icon">%</span>
-                                    </div>
-                                    <!-- <app-errors [control]="FeePercentage" [field]="'Fee Percentage'"
+              <div class="col">
+                <div
+                  class="d-flex align-items-center justify-content-end flex-wrap margin-t"
+                >
+                  <em
+                    [ngClass]="
+                      activePanelId === 'static-5' && nextState === false
+                        ? 'bx bx-minus text-blue'
+                        : 'bx bx-plus text-blue'
+                    "
+                  ></em>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect9">Leased</label>
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="leasedType"
+                          [formControl]="leasedTypeCtrl"
+                          (keyup.enter)="addleasedTypeOption()"
+                        />
+                        <mat-autocomplete
+                          #leasedType="matAutocomplete"
+                          (optionSelected)="leasedTypeSelected($event.option)"
+                        >
+                          <mat-option
+                            *ngFor="let l of leasedTypeFilteredItems | async"
+                            [value]="l.Name"
+                            [id]="l.Id"
+                          >
+                            <span>{{ l.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="showCloseButton && leasedTypeCtrl.value"
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removeleasedTypeOption($event)"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{
+                              leasedTypeCtrl.value
+                            }}&quot;"
+                            >close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="addleasedType(leasedTypeCtrl)"
+                        [disabled]="leasedTypeStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect10"
+                      >Leased Category</label
+                    >
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="leasedCategoryType"
+                          [formControl]="leasedCategoryTypeCtrl"
+                          (keyup.enter)="addleasedCategoryTypeOption()"
+                        />
+                        <mat-autocomplete
+                          #leasedCategoryType="matAutocomplete"
+                          (optionSelected)="
+                            leasedCategoryTypeSelected($event.option)
+                          "
+                        >
+                          <mat-option
+                            *ngFor="
+                              let lc of leasedCategoryTypeFilteredItems | async
+                            "
+                            [value]="lc.Name"
+                            [id]="lc.Id"
+                          >
+                            <span>{{ lc.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="
+                            showCloseButton && leasedCategoryTypeCtrl.value
+                          "
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removeleasedCategoryTypeOption($event)"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{
+                              leasedCategoryTypeCtrl.value
+                            }}&quot;"
+                          >
+                            close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="addleasedCategoryType(leasedCategoryTypeCtrl)"
+                        [disabled]="leasedCategoryTypeStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect10">Fee Flat</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="C"
+                      [formControl]="FeeFlat"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Fee Percentage</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="0"
+                      [formControl]="FeePercentage"
+                    />
+                    <span class="icon">%</span>
+                  </div>
+                  <!-- <app-errors [control]="FeePercentage" [field]="'Fee Percentage'"
                                         [submitted]="formSubmitted">
                                     </app-errors> -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Fee Structure</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="-"
+                      [formControl]="FeeStructure"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Contract ID</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="C"
+                      [formControl]="ContractId"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="static-6">
+          <ng-template ngbPanelTitle>
+            <div class="row btn-row align-items-center">
+              <div class="col-8">
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>Player Tracking & Limit</p>
+                </div>
+              </div>
 
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Fee Structure</label>
-                                        <input type="text" class="form-control" placeholder="-"
-                                            [formControl]="FeeStructure">
-                                    </div>
+              <div class="col">
+                <div
+                  class="d-flex align-items-center justify-content-end flex-wrap margin-t"
+                >
+                  <em
+                    [ngClass]="
+                      activePanelId === 'static-6' && nextState === false
+                        ? 'bx bx-minus text-blue'
+                        : 'bx bx-plus text-blue'
+                    "
+                  ></em>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect9">SB EGM</label>
 
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Contract ID</label>
-                                        <input type="text" class="form-control" placeholder="C"
-                                            [formControl]="ContractId">
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </ng-template>
-                </ngb-panel>
-                <ngb-panel id="static-6">
-                    <ng-template ngbPanelTitle>
-                        <div class="row btn-row align-items-center">
-                            <div class="col-8">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p> Player Tracking & Limit</p>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="d-flex align-items-center justify-content-end flex-wrap margin-t">
-
-                                    <em
-                                        [ngClass]='activePanelId === "static-6" && nextState===false ? "bx bx-minus text-blue" : "bx bx-plus text-blue"'></em>
-
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect9">SB EGM</label>
-
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="sbegm"
-                                                    [formControl]="sbegmCtrl" (keyup.enter)="addsbegmOption()">
-                                                <mat-autocomplete #sbegm="matAutocomplete"
-                                                    (optionSelected)="sbegmSelected($event.option)">
-                                                    <mat-option *ngFor="let s of sbegmFilteredItems | async"
-                                                        [value]="s.Name" [id]="s.Id">
-                                                        <span>{{ s.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && sbegmCtrl.value" matSuffix mat-button
-                                                    mat-icon-button (click)="removesbegmOption($event)">
-                                                    <mat-icon matTooltip='Close "{{sbegmCtrl.value}}"'>close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button" (click)="addSbEgm(sbegmCtrl)"
-                                                [disabled]="sbegmStatus"><em class='bx bx-plus'></em></button>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Protocol</label>
-                                        <input type="text" class="form-control" placeholder="C"
-                                            [formControl]="Protocol">
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Protocol Version</label>
-                                        <input type="text" class="form-control" placeholder="C"
-                                            [formControl]="ProtocolVersion">
-
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect9">Player Tracking Type</label>
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="playerTrack"
-                                                    [formControl]="playerTrackCtrl"
-                                                    (keyup.enter)="addplayerTrackOption()">
-                                                <mat-autocomplete #playerTrack="matAutocomplete"
-                                                    (optionSelected)="playerTrackSelected($event.option)">
-                                                    <mat-option *ngFor="let pl of playerTrackFilteredItems | async"
-                                                        [value]="pl.Name" [id]="pl.Id">
-                                                        <span>{{ pl.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && playerTrackCtrl.value" matSuffix
-                                                    mat-button mat-icon-button
-                                                    (click)="removeplayerTrackOption($event)">
-                                                    <mat-icon matTooltip='Close "{{playerTrackCtrl.value}}"'>close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button"
-                                                (click)="addplayerTrack(playerTrackCtrl)"
-                                                [disabled]="playerTrackStatus"><em class='bx bx-plus'></em></button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Jackpot Limit</label>
-                                        <input type="number" class="form-control" placeholder="0"
-                                            [formControl]="JackpotLimit">
-                                        <span class="icon">$</span>
-                                    </div>
-                                    <!-- <app-errors [control]="JackpotLimit" [field]="'Jackpot Limit'"
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="sbegm"
+                          [formControl]="sbegmCtrl"
+                          (keyup.enter)="addsbegmOption()"
+                        />
+                        <mat-autocomplete
+                          #sbegm="matAutocomplete"
+                          (optionSelected)="sbegmSelected($event.option)"
+                        >
+                          <mat-option
+                            *ngFor="let s of sbegmFilteredItems | async"
+                            [value]="s.Name"
+                            [id]="s.Id"
+                          >
+                            <span>{{ s.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="showCloseButton && sbegmCtrl.value"
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removesbegmOption($event)"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{ sbegmCtrl.value }}&quot;"
+                            >close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="addSbEgm(sbegmCtrl)"
+                        [disabled]="sbegmStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Protocol</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="C"
+                      [formControl]="Protocol"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Protocol Version</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="C"
+                      [formControl]="ProtocolVersion"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect9"
+                      >Player Tracking Type</label
+                    >
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="playerTrack"
+                          [formControl]="playerTrackCtrl"
+                          (keyup.enter)="addplayerTrackOption()"
+                        />
+                        <mat-autocomplete
+                          #playerTrack="matAutocomplete"
+                          (optionSelected)="playerTrackSelected($event.option)"
+                        >
+                          <mat-option
+                            *ngFor="let pl of playerTrackFilteredItems | async"
+                            [value]="pl.Name"
+                            [id]="pl.Id"
+                          >
+                            <span>{{ pl.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="showCloseButton && playerTrackCtrl.value"
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removeplayerTrackOption($event)"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{
+                              playerTrackCtrl.value
+                            }}&quot;"
+                            >close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="addplayerTrack(playerTrackCtrl)"
+                        [disabled]="playerTrackStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Jackpot Limit</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="0"
+                      [formControl]="JackpotLimit"
+                    />
+                    <span class="icon">$</span>
+                  </div>
+                  <!-- <app-errors [control]="JackpotLimit" [field]="'Jackpot Limit'"
                                         [submitted]="formSubmitted">
                                     </app-errors> -->
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Printer Limit Option</label>
-                                        <input type="number" class="form-control" placeholder="0"
-                                            [formControl]="PrinterLimitOption">
-                                        <span class="icon">$</span>
-                                    </div>
-                                    <!-- <app-errors [control]="PrinterLimitOption" [field]="'Print Limit Option'"
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Printer Limit Option</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="0"
+                      [formControl]="PrinterLimitOption"
+                    />
+                    <span class="icon">$</span>
+                  </div>
+                  <!-- <app-errors [control]="PrinterLimitOption" [field]="'Print Limit Option'"
                                         [submitted]="formSubmitted">
                                     </app-errors> -->
-
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Credit Limit Option</label>
-                                        <input type="number" class="form-control" placeholder="0"
-                                            [formControl]="CreditLimitOption">
-                                        <span class="icon">$</span>
-                                    </div>
-                                    <!-- <app-errors [control]="CreditLimitOption" [field]="'CreditLimitOption'"
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Credit Limit Option</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="0"
+                      [formControl]="CreditLimitOption"
+                    />
+                    <span class="icon">$</span>
+                  </div>
+                  <!-- <app-errors [control]="CreditLimitOption" [field]="'CreditLimitOption'"
                                         [submitted]="formSubmitted">
                                     </app-errors> -->
-
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Ticket Limit Option</label>
-                                        <input type="number" class="form-control" placeholder="0"
-                                            [formControl]="TicketLimitOption">
-                                        <span class="icon">$</span>
-                                    </div>
-                                    <!-- <app-errors [control]="TicketLimitOption" [field]="'TicketLimitOption'"
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Ticket Limit Option</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="0"
+                      [formControl]="TicketLimitOption"
+                    />
+                    <span class="icon">$</span>
+                  </div>
+                  <!-- <app-errors [control]="TicketLimitOption" [field]="'TicketLimitOption'"
                                         [submitted]="formSubmitted">
                                     </app-errors> -->
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group d-block">
+                    <label for="text" class="w-100">
+                      W2G Jackpot Accrual Enabled?</label
+                    >
+                    <label class="switch">
+                      <input
+                        type="checkbox"
+                        [formControl]="W2GJackpotAccrualEnabled"
+                        checked
+                      />
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group d-block">
+                    <label for="text" class="w-100"> CWA Enabled?</label>
+                    <label class="switch">
+                      <input
+                        type="checkbox"
+                        [formControl]="CWAEnabled"
+                        checked
+                      />
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="text">Ticketing</label>
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="ticket"
+                          [formControl]="ticketingCtrl"
+                          (keyup.enter)="addticketingOption()"
+                        />
+                        <mat-autocomplete
+                          #ticket="matAutocomplete"
+                          (optionSelected)="ticketingSelected($event.option)"
+                        >
+                          <mat-option
+                            *ngFor="let t of ticketingFilteredItems | async"
+                            [value]="t.Name"
+                            [id]="t.Id"
+                          >
+                            <span>{{ t.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="showCloseButton && ticketingCtrl.value"
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removeticketingOption($event)"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{
+                              ticketingCtrl.value
+                            }}&quot;"
+                            >close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="addticketing(ticketingCtrl)"
+                        [disabled]="ticketingStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect9"
+                      >Funds Transfer Method</label
+                    >
+                    <div class="d-flex">
+                      <mat-form-field class="example-full-width">
+                        <input
+                          matInput
+                          aria-label="Item"
+                          [matAutocomplete]="fundtransfer"
+                          [formControl]="fundtransferCtrl"
+                          (keyup.enter)="addfundtransferOption()"
+                        />
+                        <mat-autocomplete
+                          #fundtransfer="matAutocomplete"
+                          (optionSelected)="fundtransferSelected($event.option)"
+                        >
+                          <mat-option
+                            *ngFor="let f of fundtransferFilteredItems | async"
+                            [value]="f.Name"
+                            [id]="f.Id"
+                          >
+                            <span>{{ f.Name }}</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                        <button
+                          *ngIf="showCloseButton && fundtransferCtrl.value"
+                          matSuffix
+                          mat-button
+                          mat-icon-button
+                          (click)="removefundtransferOption($event)"
+                        >
+                          <mat-icon
+                            matTooltip="Close &quot;{{
+                              fundtransferCtrl.value
+                            }}&quot;"
+                            >close
+                          </mat-icon>
+                        </button>
+                      </mat-form-field>
+                      <button
+                        class="plus-btn"
+                        type="button"
+                        (click)="addfundtransfer(fundtransferCtrl)"
+                        [disabled]="fundtransferStatus"
+                      >
+                        <em class="bx bx-plus"></em>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="static-7">
+          <ng-template ngbPanelTitle>
+            <div class="row btn-row align-items-center">
+              <div class="col-8">
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>Date Information</p>
+                </div>
+              </div>
 
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group d-block">
-                                        <label for="text" class="w-100"> W2G Jackpot Accrual Enabled?</label>
-                                        <label class="switch">
-                                            <input type="checkbox" [formControl]="W2GJackpotAccrualEnabled" checked>
-                                            <span class="slider"></span>
-                                        </label>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group d-block">
-                                        <label for="text" class="w-100"> CWA Enabled?</label>
-                                        <label class="switch">
-                                            <input type="checkbox" [formControl]="CWAEnabled" checked>
-                                            <span class="slider"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="text">Ticketing</label>
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="ticket"
-                                                    [formControl]="ticketingCtrl" (keyup.enter)="addticketingOption()">
-                                                <mat-autocomplete #ticket="matAutocomplete"
-                                                    (optionSelected)="ticketingSelected($event.option)">
-                                                    <mat-option *ngFor="let t of ticketingFilteredItems | async"
-                                                        [value]="t.Name" [id]="t.Id">
-                                                        <span>{{ t.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && ticketingCtrl.value" matSuffix
-                                                    mat-button mat-icon-button (click)="removeticketingOption($event)">
-                                                    <mat-icon matTooltip='Close "{{ticketingCtrl.value}}"'>close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button" (click)="addticketing(ticketingCtrl)"
-                                                [disabled]="ticketingStatus"><em class='bx bx-plus'></em></button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect9">Funds Transfer Method</label>
-                                        <div class="d-flex">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput aria-label="Item" [matAutocomplete]="fundtransfer"
-                                                    [formControl]="fundtransferCtrl"
-                                                    (keyup.enter)="addfundtransferOption()">
-                                                <mat-autocomplete #fundtransfer="matAutocomplete"
-                                                    (optionSelected)="fundtransferSelected($event.option)">
-                                                    <mat-option *ngFor="let f of fundtransferFilteredItems | async"
-                                                        [value]="f.Name" [id]="f.Id">
-                                                        <span>{{ f.Name }}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete>
-                                                <button *ngIf="showCloseButton && fundtransferCtrl.value" matSuffix
-                                                    mat-button mat-icon-button
-                                                    (click)="removefundtransferOption($event)">
-                                                    <mat-icon matTooltip='Close "{{fundtransferCtrl.value}}"'>close
-                                                    </mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                            <button class="plus-btn" type="button"
-                                                (click)="addfundtransfer(fundtransferCtrl)"
-                                                [disabled]="fundtransferStatus"><em class='bx bx-plus'></em></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </ng-template>
-                </ngb-panel>
-                <ngb-panel id="static-7">
-                    <ng-template ngbPanelTitle>
-                        <div class="row btn-row align-items-center">
-                            <div class="col-8">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p> Date Information</p>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="d-flex align-items-center justify-content-end flex-wrap margin-t">
-
-                                    <em
-                                        [ngClass]='activePanelId === "static-7" && nextState===false ? "bx bx-minus text-blue" : "bx bx-plus text-blue"'></em>
-
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group"
-                                        [ngClass]="(formSubmitted && date.errors?.required) ? 'error':'black'">
-                                        <label for="date" class="w-100">Date *</label>
-                                        <!-- <custom-datepicker class="adddate" [(model)]="date"
+              <div class="col">
+                <div
+                  class="d-flex align-items-center justify-content-end flex-wrap margin-t"
+                >
+                  <em
+                    [ngClass]="
+                      activePanelId === 'static-7' && nextState === false
+                        ? 'bx bx-minus text-blue'
+                        : 'bx bx-plus text-blue'
+                    "
+                  ></em>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div
+                    class="form-group"
+                    [ngClass]="
+                      formSubmitted && date.errors?.required ? 'error' : 'black'
+                    "
+                  >
+                    <label for="date" class="w-100">Date *</label>
+                    <!-- <custom-datepicker class="adddate" [(model)]="date"
                                             (modelOutput)="onChangeDate($event)" [required]="required">
                                         </custom-datepicker> -->
-                                        <!-- <app-errors [control]="date" [field]="'Date'" [submitted]="formSubmitted">
+                    <!-- <app-errors [control]="date" [field]="'Date'" [submitted]="formSubmitted">
                                         </app-errors> -->
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="date" class="w-100">Purchase Date</label>
 
-
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="date" class="w-100">Purchase Date</label>
-
-                                        <!-- <custom-datepicker [(model)]="PurchaseDate"
+                    <!-- <custom-datepicker [(model)]="PurchaseDate"
                                             (modelOutput)="onChangePurchaseDate($event)"></custom-datepicker> -->
-                                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="form-group">
+                    <label for="date" class="w-100">In Service Date</label>
 
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="date" class="w-100">In Service Date</label>
-
-                                        <!-- <custom-datepicker [(model)]="InServiceDate"
+                    <!-- <custom-datepicker [(model)]="InServiceDate"
                                             (modelOutput)="onChangeInServiceDate($event)"></custom-datepicker> -->
-                                    </div>
-                                </div>
-                            </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="static-8">
+          <ng-template ngbPanelTitle>
+            <div class="row btn-row align-items-center">
+              <div class="col-8">
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>Game Configurations</p>
+                </div>
+              </div>
+
+              <div class="col">
+                <div
+                  class="d-flex align-items-center justify-content-end flex-wrap margin-t"
+                >
+                  <em
+                    [ngClass]="
+                      activePanelId === 'static-8' && nextState === false
+                        ? 'bx bx-minus text-blue'
+                        : 'bx bx-plus text-blue'
+                    "
+                  ></em>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <div class="d-flex mb-2 eprom-div">
+                    <button
+                      type="button"
+                      (click)="addGameConfiguration()"
+                      style="width: 200px"
+                    >
+                      <em class="bx bx-plus"></em>Add Configuration
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div formArrayName="GameConfigurations">
+              <ng-container
+                *ngFor="let g of getGameConfigControls(myform); let i = index"
+              >
+                <div class="content content-bottom mb-2" [formGroupName]="i">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                      <div
+                        class="form-group"
+                        [ngClass]="
+                          formSubmitted &&
+                          g['controls'].themeCtrl.errors?.required
+                            ? 'error'
+                            : 'black'
+                        "
+                      >
+                        <label for="exampleFormControlSelect9">Theme *</label>
+
+                        <div class="d-flex">
+                          <mat-form-field class="example-full-width">
+                            <input
+                              matInput
+                              aria-label="Item"
+                              [matAutocomplete]="theme"
+                              formControlName="themeCtrl"
+                              (keyup.enter)="addthemeOption()"
+                              required
+                            />
+                            <mat-autocomplete
+                              #theme="matAutocomplete"
+                              (optionSelected)="themeSelected($event.option, i)"
+                            >
+                              <mat-option
+                                *ngFor="let th of themeFilteredItems | async"
+                                [value]="th.Name"
+                                [id]="th.Id"
+                              >
+                                <span>{{ th.Name }}</span>
+                              </mat-option>
+                            </mat-autocomplete>
+                            <button
+                              *ngIf="showCloseButton && themeCtrl.value"
+                              matSuffix
+                              mat-button
+                              mat-icon-button
+                              (click)="removethemeOption($event)"
+                            >
+                              <mat-icon
+                                matTooltip="Close &quot;{{
+                                  themeCtrl.value
+                                }}&quot;"
+                                >close
+                              </mat-icon>
+                            </button>
+                          </mat-form-field>
+                          <button
+                            class="plus-btn"
+                            type="button"
+                            (click)="addTheme(g['controls'].themeCtrl)"
+                            [disabled]="themeStatus"
+                          >
+                            <em class="bx bx-plus"></em>
+                          </button>
                         </div>
-                        <hr />
-                    </ng-template>
-                </ngb-panel>
-                <ngb-panel id="static-8">
-                    <ng-template ngbPanelTitle>
-                        <div class="row btn-row align-items-center">
-                            <div class="col-8">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p>Game Configurations</p>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="d-flex align-items-center justify-content-end flex-wrap margin-t">
-                                    <em
-                                        [ngClass]='activePanelId === "static-8" && nextState===false ? "bx bx-minus text-blue" : "bx bx-plus text-blue"'></em>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="d-flex mb-2 eprom-div">
-
-                                        <button type="button" (click)="addGameConfiguration()" style="width: 200px;"><em
-                                                class='bx bx-plus'></em>Add
-                                            Configuration</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div formArrayName="GameConfigurations">
-                            <ng-container *ngFor="let g of getGameConfigControls(myform);  let i = index;">
-                                <div class="content content-bottom mb-2" [formGroupName]="i">
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-6">
-                                            <div class="form-group"
-                                                [ngClass]="(formSubmitted && g['controls'].themeCtrl.errors?.required) ? 'error':'black'">
-                                                <label for="exampleFormControlSelect9">Theme *</label>
-
-                                                <div class="d-flex">
-                                                    <mat-form-field class="example-full-width">
-                                                        <input matInput aria-label="Item" [matAutocomplete]="theme"
-                                                            formControlName="themeCtrl" (keyup.enter)="addthemeOption()"
-                                                            required>
-                                                        <mat-autocomplete #theme="matAutocomplete"
-                                                            (optionSelected)="themeSelected($event.option,i)">
-                                                            <mat-option *ngFor="let th of themeFilteredItems | async"
-                                                                [value]="th.Name" [id]="th.Id">
-                                                                <span>{{ th.Name }}</span>
-                                                            </mat-option>
-                                                        </mat-autocomplete>
-                                                        <button *ngIf="showCloseButton && themeCtrl.value" matSuffix
-                                                            mat-button mat-icon-button
-                                                            (click)="removethemeOption($event)">
-                                                            <mat-icon matTooltip='Close "{{themeCtrl.value}}"'>close
-                                                            </mat-icon>
-                                                        </button>
-                                                    </mat-form-field>
-                                                    <button class="plus-btn" type="button"
-                                                        (click)="addTheme(g['controls'].themeCtrl)"
-                                                        [disabled]="themeStatus"><em class='bx bx-plus'></em></button>
-                                                </div>
-
-                                            </div>
-                                            <!-- <app-errors [control]="g['controls'].themeCtrl" [field]="'Theme'"
+                      </div>
+                      <!-- <app-errors [control]="g['controls'].themeCtrl" [field]="'Theme'"
                                                 [submitted]="formSubmitted">
                                             </app-errors> -->
-
-
-                                        </div>
-                                        <div class="col-md-3 col-sm-6">
-                                            <div class="form-group"
-                                                [ngClass]="(formSubmitted && g['controls'].denominationCtrl.errors?.required) ? 'error':'black'">
-                                                <label for="text" class="w-100">Denomination *</label>
-                                                <div class="d-flex">
-                                                    <mat-form-field class="example-full-width">
-                                                        <input matInput aria-label="Item"
-                                                            [matAutocomplete]="denomination"
-                                                            formControlName="denominationCtrl"
-                                                            (keyup.enter)="adddenominationOption()" required>
-                                                        <mat-autocomplete #denomination="matAutocomplete"
-                                                            (optionSelected)="denominationSelected($event.option,i)">
-                                                            <mat-option
-                                                                *ngFor="let d of denominationFilteredItems | async"
-                                                                [value]="d.Name" [id]="d.Id">
-                                                                <span>{{ d.Name }}</span>
-                                                            </mat-option>
-                                                        </mat-autocomplete>
-                                                        <button *ngIf="showCloseButton && denominationCtrl.value"
-                                                            matSuffix mat-button mat-icon-button
-                                                            (click)="removedenominationOption($event)">
-                                                            <mat-icon matTooltip='Close "{{denominationCtrl.value}}"'>
-                                                                close
-                                                            </mat-icon>
-                                                        </button>
-                                                    </mat-form-field>
-                                                    <button class="plus-btn" type="button"
-                                                        (click)="addDenomination(g['controls'].denominationCtrl)"
-                                                        [disabled]="denominationStatus"><em
-                                                            class='bx bx-plus'></em></button>
-                                                </div>
-
-                                            </div>
-                                            <!-- <app-errors [control]="g['controls'].denominationCtrl"
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div
+                        class="form-group"
+                        [ngClass]="
+                          formSubmitted &&
+                          g['controls'].denominationCtrl.errors?.required
+                            ? 'error'
+                            : 'black'
+                        "
+                      >
+                        <label for="text" class="w-100">Denomination *</label>
+                        <div class="d-flex">
+                          <mat-form-field class="example-full-width">
+                            <input
+                              matInput
+                              aria-label="Item"
+                              [matAutocomplete]="denomination"
+                              formControlName="denominationCtrl"
+                              (keyup.enter)="adddenominationOption()"
+                              required
+                            />
+                            <mat-autocomplete
+                              #denomination="matAutocomplete"
+                              (optionSelected)="
+                                denominationSelected($event.option, i)
+                              "
+                            >
+                              <mat-option
+                                *ngFor="
+                                  let d of denominationFilteredItems | async
+                                "
+                                [value]="d.Name"
+                                [id]="d.Id"
+                              >
+                                <span>{{ d.Name }}</span>
+                              </mat-option>
+                            </mat-autocomplete>
+                            <button
+                              *ngIf="showCloseButton && denominationCtrl.value"
+                              matSuffix
+                              mat-button
+                              mat-icon-button
+                              (click)="removedenominationOption($event)"
+                            >
+                              <mat-icon
+                                matTooltip="Close &quot;{{
+                                  denominationCtrl.value
+                                }}&quot;"
+                              >
+                                close
+                              </mat-icon>
+                            </button>
+                          </mat-form-field>
+                          <button
+                            class="plus-btn"
+                            type="button"
+                            (click)="
+                              addDenomination(g['controls'].denominationCtrl)
+                            "
+                            [disabled]="denominationStatus"
+                          >
+                            <em class="bx bx-plus"></em>
+                          </button>
+                        </div>
+                      </div>
+                      <!-- <app-errors [control]="g['controls'].denominationCtrl"
                                                 [field]="'Denomination'" [submitted]="formSubmitted">
                                             </app-errors> -->
-
-                                        </div>
-                                        <div class="col-md-3 col-sm-6">
-                                            <div class="form-group"
-                                                [ngClass]="(formSubmitted && g['controls'].Par.errors?.required) ? 'error':'black'">
-                                                <label for="text" class="w-100">Par *</label>
-                                                <input type="number" class="form-control" placeholder="0"
-                                                    formControlName="Par" required />
-                                                <span class="icon">%</span>
-                                            </div>
-                                            <!-- <app-errors [control]="g['controls'].Par" [field]="'Par'"
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div
+                        class="form-group"
+                        [ngClass]="
+                          formSubmitted && g['controls'].Par.errors?.required
+                            ? 'error'
+                            : 'black'
+                        "
+                      >
+                        <label for="text" class="w-100">Par *</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="0"
+                          formControlName="Par"
+                          required
+                        />
+                        <span class="icon">%</span>
+                      </div>
+                      <!-- <app-errors [control]="g['controls'].Par" [field]="'Par'"
                                                 [submitted]="formSubmitted">
                                             </app-errors> -->
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="form-group">
+                        <label for="text" class="w-100">Min Bet</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="0"
+                          formControlName="MinBet"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="form-group">
+                        <label for="text" class="w-100">Max Bet</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="-"
+                          formControlName="MaxBet"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                      <div class="form-group d-block">
+                        <label for="text" class="w-100"> Easy Bet</label>
+                        <label class="switch">
+                          <input
+                            type="checkbox"
+                            checked
+                            formControlName="EasyBet"
+                          />
+                          <span class="slider"></span>
+                        </label>
+                        <label class="ml-2">Average 99.63%</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row my-2">
+                    <div class="col-md-12">
+                      <div class="d-flex align-items-center">
+                        <button (click)="copyGameConfiguration(g)">
+                          <img
+                            src="assets/icons/copy-green.svg"
+                            class="me-2"
+                            alt=""
+                          />copy
+                        </button>
+                        <button (click)="removeGameConfiguration(i)">
+                          <img
+                            src="assets/icons/trash.svg"
+                            class="me-2"
+                            alt=""
+                          />delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
 
-                                        </div>
-                                        <div class="col-md-3 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="text" class="w-100">Min Bet</label>
-                                                <input type="number" class="form-control" placeholder="0"
-                                                    formControlName="MinBet" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="text" class="w-100">Max Bet</label>
-                                                <input type="number" class="form-control" placeholder="-"
-                                                    formControlName="MaxBet" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6">
-                                            <div class="form-group d-block">
-                                                <label for="text" class="w-100"> Easy Bet</label>
-                                                <label class="switch">
-                                                    <input type="checkbox" checked formControlName="EasyBet">
-                                                    <span class="slider"></span>
-                                                </label>
-                                                <label class="ml-2">Average 99.63%</label>
-                                            </div>
-                                        </div>
+            <hr />
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="static-9">
+          <ng-template ngbPanelTitle>
+            <div class="row btn-row align-items-center">
+              <div class="col-8">
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>Files</p>
+                </div>
+              </div>
 
-                                    </div>
-                                    <div class="row my-2">
-                                        <div class="col-md-12">
-                                            <div class="d-flex align-items-center">
-                                                <button (click)="copyGameConfiguration(g)"><img
-                                                        src="assets/icons/copy-green.svg" class="mr-2"
-                                                        alt="" />copy</button>
-                                                <button (click)="removeGameConfiguration(i)"><img
-                                                        src="assets/icons/trash.svg" class="mr-2"
-                                                        alt="" />delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-container>
-                        </div>
+              <div class="col">
+                <div
+                  class="d-flex align-items-center justify-content-end flex-wrap margin-t"
+                >
+                  <em
+                    [ngClass]="
+                      activePanelId === 'static-9' && nextState === false
+                        ? 'bx bx-minus text-blue'
+                        : 'bx bx-plus text-blue'
+                    "
+                  ></em>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <div
+                    class="d-flex justify-content-between align-items-center eprom-div"
+                  >
+                    <p *ngIf="filesResponse.length === 0">No Files</p>
 
-                        <hr />
-                    </ng-template>
-                </ngb-panel>
-                <ngb-panel id="static-9">
-                    <ng-template ngbPanelTitle>
-                        <div class="row btn-row align-items-center">
-                            <div class="col-8">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p> Files</p>
-                                </div>
-                            </div>
+                    <div class="file-btn">
+                      <input
+                        type="file"
+                        class="file-choose"
+                        (change)="handleFileInput($any($event.target).files)"
+                      />
+                      <button type="button">
+                        <em class="bx bx-plus"></em> Choose File
+                      </button>
+                    </div>
+                  </div>
+                  <div *ngIf="filesResponse.length > 0" style="padding: 15px">
+                    <p
+                      *ngFor="let file of filesResponse; let i = index"
+                      class="file-display"
+                    >
+                      <span>{{ file.Name }}</span>
+                      <i
+                        class="bx bx-message-square-x"
+                        (click)="removeFile(file, i)"
+                      ></i>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                            <div class="col">
-                                <div class="d-flex align-items-center justify-content-end flex-wrap margin-t">
-                                    <em
-                                        [ngClass]='activePanelId === "static-9" && nextState===false ? "bx bx-minus text-blue" : "bx bx-plus text-blue"'></em>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="d-flex justify-content-between align-items-center eprom-div">
-                                        <p *ngIf="filesResponse.length === 0">No Files</p>
+            <hr />
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="static-10">
+          <ng-template ngbPanelTitle>
+            <div class="row btn-row align-items-center">
+              <div class="col-8">
+                <div class="d-flex justify-content-between align-items-center">
+                  <p>Notes</p>
+                </div>
+              </div>
 
-                                        <div class="file-btn">
-                                            <input type="file" class="file-choose"
-                                                (change)="handleFileInput($any($event.target).files)" />
-                                            <button type="button"><em class='bx bx-plus'></em> Choose
-                                                File</button>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="filesResponse.length > 0" style="padding: 15px;">
-                                        <p *ngFor="let file of filesResponse;let i=index" class="file-display">
-                                            <span>{{file.Name}}</span>
-                                            <i class='bx bx-message-square-x' (click)="removeFile(file,i)"></i>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr />
-                    </ng-template>
-                </ngb-panel>
-                <ngb-panel id="static-10">
-                    <ng-template ngbPanelTitle>
-                        <div class="row btn-row align-items-center">
-                            <div class="col-8">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p> Notes</p>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="d-flex align-items-center justify-content-end flex-wrap margin-t">
-                                    <em
-                                        [ngClass]='activePanelId === "static-10" && nextState===false ? "bx bx-minus text-blue" : "bx bx-plus text-blue"'></em>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="form-group">
-                                        <textarea [formControl]="Notes" rows="100" class="form-control"
-                                            style="height: 100px !important;"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </ng-template>
-                </ngb-panel>
-            </ngb-accordion>
-        </div>
-    </form>
+              <div class="col">
+                <div
+                  class="d-flex align-items-center justify-content-end flex-wrap margin-t"
+                >
+                  <em
+                    [ngClass]="
+                      activePanelId === 'static-10' && nextState === false
+                        ? 'bx bx-minus text-blue'
+                        : 'bx bx-plus text-blue'
+                    "
+                  ></em>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <div class="form-group">
+                    <textarea
+                      [formControl]="Notes"
+                      rows="100"
+                      class="form-control"
+                      style="height: 100px !important"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+  </form>
 </div>
