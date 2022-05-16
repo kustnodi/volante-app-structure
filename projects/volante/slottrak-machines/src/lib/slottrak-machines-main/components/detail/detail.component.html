@@ -1,9 +1,686 @@
-<h2>Machine Detail</h2>
-<nav mat-tab-nav-bar [tabPanel]="tabPanel">
-  <a mat-tab-link *ngFor="let detailRoute of this.detailRouteService.detailRoutes"
-    [routerLink]="[detailRoute.route.path || '.']">{{detailRoute.displayText}}</a>
-</nav>
-<mat-tab-nav-panel #tabPanel>
-  <router-outlet>
-  </router-outlet>
-</mat-tab-nav-panel>
+<!-- <h2>Machine Detail</h2> -->
+
+<!-- Modal Start -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title title-display" id="modal-basic-title">Machine <span>{{machineDetail.Id}}</span>
+    </h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="main-heading">
+        EGM Information
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Slot Type</p>
+              <p class="machine-text" *ngIf="machineDetail.SlotTypeName">{{machineDetail.SlotTypeName}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.SlotTypeName">-</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Serial Number</p>
+              <p class="machine-text" *ngIf="machineDetail.SerialNumber">{{machineDetail.SerialNumber}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.SerialNumber">-</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Manufacturer</p>
+              <p class="machine-text" *ngIf="machineDetail.ManufacturerName">{{machineDetail.ManufacturerName}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.ManufacturerName">-</p>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Status</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.Status">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.Status}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.Status">-</p>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Cabinet Type</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.CabinetTypeName">-
+              </p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.CabinetTypeName">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.CabinetTypeName}}</p>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Model Number</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.ModelNumberName">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.ModelNumberName}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.ModelNumberName">-
+              </p>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Display Type</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.DisplayTypeName">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.DisplayTypeName}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.DisplayTypeName">-
+              </p>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Number of Reels</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.NumberOfReels">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.NumberOfReels}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.NumberOfReels">-</p>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Slot Number</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.SlotNumber">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.SlotNumber}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.SlotNumber">-</p>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Game Type</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.GameType">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.GameType}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.GameType">-</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Game Name</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.GameName">-</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.GameName">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.GameName}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="container">
+      <div class="main-heading">
+        Game Math
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Type Id</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.TypeId">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.TypeId}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.TypeId">-</p>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Paylines</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.PayLines">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.PayLines}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.PayLines">-</p>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> First Coin Percentage</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.FirstCoinPercentage">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.FirstCoinPercentage}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.FirstCoinPercentage">
+                -</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Max Coin Percentage</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.MaxCoinPercentage">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.MaxCoinPercentage}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.MaxCoinPercentage">-
+              </p>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Hold Percentage</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.HoldPercentage">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.HoldPercentage}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.HoldPercentage">-</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Max Jackpot</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.MaxJackpot">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.MaxJackpot}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.MaxJackpot">-</p>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Progressive Type</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.ProgressiveTypeName">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.ProgressiveTypeName}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.ProgressiveTypeName">
+                -</p>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Subtype</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.SubType">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.SubType}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.SubType">-</p>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> GLI Number</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.GliNumber">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.GliNumber}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.GliNumber">-</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Jackpot Base</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.JackpotBase">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.JackpotBase}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.JackpotBase">-</p>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading"> Coins Per Count</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.CoinsPerPoint">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.CoinsPerPoint}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.CoinsPerPoint">-</p>
+
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Points Awarded</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.PointsAwarded">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.PointsAwarded}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.PointsAwarded">-</p>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Adjusted Hold Percentage</p>
+              <p class="machine-text"
+                *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.AdjustedHoldPercentage">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.AdjustedHoldPercentage}}
+              </p>
+              <p class="machine-text"
+                *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.AdjustedHoldPercentage">-
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="container">
+      <div class="main-heading">
+        Eprom Configuration
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-3" *ngFor="let m of machineDetail.MachineChanges[0].MachineConfiguration.EpromConfigurations">
+            <div class="border-right-div">
+              <p class="heading">{{m.Name}}</p>
+              <p class="machine-text">{{m.Label}}</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="container">
+      <div class="main-heading">
+        Location Data
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Section</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.Section">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.Section}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.Section"> -</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Bank</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.Bank">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.Bank}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.Bank">-</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Slot</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.Slot">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.Slot}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.Slot">-</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Index Zone</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.IndexZone">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.IndexZone}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.IndexZone">-</p>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Bank Size</p>
+              <p class="machine-text" *ngif="machineDetail.MachineChanges[0].MachineConfiguration.BankSize">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.BankSize}}</p>
+              <p class="machine-text" *ngif="!machineDetail.MachineChanges[0].MachineConfiguration.BankSize">-</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="border-right-div">
+              <p class="heading">Seat position</p>
+              <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.SeatPosition">
+                {{machineDetail.MachineChanges[0].MachineConfiguration.SeatPosition}}</p>
+              <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.SeatPosition">-</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="container">
+        <div class="main-heading">
+          Lease Information
+        </div>
+        <div class="content">
+          <div class="row">
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Leased</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.LeasedName">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.LeasedName}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.LeasedName">-</p>
+
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Leased Category</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.LeaseCategoryName">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.LeaseCategoryName}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.LeaseCategoryName">
+                  -</p>
+
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Fee Flat</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.FeeFlat">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.FeeFlat}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.FeeFlat">-</p>
+              </div>
+            </div>
+
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Fee Percentage</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.FeePercentage">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.FeePercentage}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.FeePercentage"></p>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Fee Structure</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.FeeStructure">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.FeeStructure}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.FeeStructure">-</p>
+              </div>
+            </div>
+
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Contract ID</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.ContractId">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.ContractId}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.ContractId">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="container">
+        <div class="main-heading">
+          Player Tracking, Limits, & Options
+        </div>
+        <div class="content">
+          <div class="row">
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">SB EGM</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.SbEgmName">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.SbEgmName}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.SbEgmName">-</p>
+
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Protocol</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.Protocol">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.Protocol}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.Protocol">-</p>
+
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Protocol Version</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.ProtocolVersion">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.ProtocolVersion}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.ProtocolVersion">-
+                </p>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Player Tracking Type</p>
+                <p class="machine-text"
+                  *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.PlayerTrackingTypeName">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.PlayerTrackingTypeName}}
+                </p>
+                <p class="machine-text"
+                  *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.PlayerTrackingTypeName">-
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Jackpot Limit</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.JackpotLimit">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.JackpotLimit}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.JackpotLimit">-</p>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Printer Limit Option</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.PrinterLimitOption">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.PrinterLimitOption}}</p>
+                <p class="machine-text"
+                  *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.PrinterLimitOption">-</p>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Credit Limit Option</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.CreditLimitOption">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.CreditLimitOption}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.CreditLimitOption">
+                  -</p>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Ticket Limit Option</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.TicketLimitOption">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.TicketLimitOption}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.TicketLimitOption">
+                  -</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">W2G Jackpot Accrual Enabled</p>
+                <p class="machine-text"
+                  *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.W2GJackpotAccrualEnabled">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.W2GJackpotAccrualEnabled}}
+                </p>
+                <p class="machine-text"
+                  *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.W2GJackpotAccrualEnabled">
+                  -
+                </p>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">CWA Enabled</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.CWAEnabled">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.CWAEnabled}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.CWAEnabled">-</p>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Ticketing</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.TicketingName">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.TicketingName}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.TicketingName">-
+                </p>
+
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Funds Transfer Method</p>
+                <p class="machine-text"
+                  *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.FundsTransferMethodName">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.FundsTransferMethodName}}
+                </p>
+                <p class="machine-text"
+                  *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.FundsTransferMethodName">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="container">
+        <div class="main-heading">
+          Date Information
+        </div>
+        <div class="content">
+          <div class="row">
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Date</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].Date">
+                  {{machineDetail.MachineChanges[0].Date | date:'MM/dd/YYY'}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].Date">-</p>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">Purchase Date</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].PurchaseDate">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.PurchaseDate |
+                  date:'MM/dd/YYYY'}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].PurchaseDate">-</p>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="border-right-div">
+                <p class="heading">In Service Date</p>
+                <p class="machine-text" *ngIf="machineDetail.MachineChanges[0].InServiceDate">
+                  {{machineDetail.MachineChanges[0].MachineConfiguration.InServiceDate |
+                  date:'MM/dd/YYYY'}}</p>
+                <p class="machine-text" *ngIf="!machineDetail.MachineChanges[0].InServiceDate">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="container">
+        <div class="main-heading">
+          Game Configurations
+        </div>
+        <div class="content">
+          <div>
+            <table style="width: 100%;" class="game-table">
+              <tr>
+                <th>Theme</th>
+                <th>Denomination</th>
+                <th>Par</th>
+                <th>Min Bet</th>
+                <th>Max Bet</th>
+                <th>Easy Bet</th>
+              </tr>
+              <tr *ngFor="let m of machineDetail.MachineChanges[0].MachineConfiguration.GameConfigurations">
+                <td *ngIf="m.ThemeName">{{m.ThemeName}}</td>
+                <td *ngIf="!m.ThemeName">-</td>
+                <td *ngIf="!m.DenominationValue">${{m.DenominationValue}}</td>
+                <td *ngIf="m.DenominationValue">-</td>
+                <td *ngIf="m.Par">{{m.Par}}%</td>
+                <td *ngIf="!m.Par">-</td>
+                <td *ngIf="m.MinBet">{{m.MinBet}}</td>
+                <td *ngIf="!m.MinBet">-</td>
+                <td *ngIf="m.MaxBet">{{m.MaxBet}}</td>
+                <td *ngIf="!m.MaxBet">-</td>
+                <td *ngIf="m.EasyBet">{{m.EasyBet}}</td>
+                <td *ngIf="!m.EasyBet">-</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="main-heading">
+          Files
+        </div>
+        <div class="content">
+          <div class="row">
+            <div class="machine-files" *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.Files.length === 0">
+              No
+              Files</div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="container">
+        <div class="main-heading">
+          Notes
+        </div>
+        <div class="content">
+          <div class="row">
+            <div *ngIf="machineDetail.MachineChanges[0].MachineConfiguration.Notes">
+              {{machineDetail.MachineChanges[0].MachineConfiguration.Notes}}</div>
+            <div style="padding-left: 15px;" *ngIf="!machineDetail.MachineChanges[0].MachineConfiguration.Notes">-
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-template>
+<!-- Modal  Ends -->
+<!-- Page Content -->
+<div class="page-container">
+  <div>
+    <div class="row">
+      <div class="col-5">
+        <button class="back-button" (click)="goback()">
+          <em class='bx bx-chevron-left'></em> </button>
+      </div>
+      <div class="col-7 heading-text">
+        Details
+      </div>
+    </div>
+  </div>
+  <div class="machine-detail-grid">
+    <div class="d-flex justify-content-between flex-wrap">
+      <div class="div machine-name mx-2 my-2 machine-div-wrapper">
+        <p>Machine</p>
+        <p class="machine-detail-id">{{machineDetail?.Id}}</p>
+      </div>
+      <div class="div mx-2 my-2 machine-div-wrapper">
+        <p class="heading">Serial Number</p>
+        <p class="machine-text">{{machineDetail?.SerialNumber}}</p>
+      </div>
+      <div class="div mx-2 my-2 machine-div-wrapper">
+        <p class="heading">Manufacturer</p>
+        <p class="machine-text">{{machineDetail?.ManufacturerName}}</p>
+      </div>
+      <div class="div mx-2 my-2 machine-div-wrapper">
+        <p class="heading">Slot Number</p>
+        <p class="machine-text">-</p>
+        <!-- <p *ngIf="machineDetail.SlotNumber">{{machineDetail.SlotNumber}}</p> -->
+      </div>
+      <div class="div mx-2 my-2 machine-div-wrapper">
+        <p class="heading">Location</p>
+        <p class="machine-text">-</p>
+      </div>
+      <div class="div mx-2 my-2 machine-div-wrapper"> <button type="button" class="btn-add-meallog text-nowrap"
+          id="addMachine" (click)="open(content)">
+          <em class="bx bx-plus p-r-10" aria-hidden="true"></em>more deatils
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+    <a mat-tab-link *ngFor="let detailRoute of this.detailRouteService.detailRoutes"
+      [routerLink]="[detailRoute.route.path || '.']">{{detailRoute.displayText}}</a>
+  </nav>
+  <mat-tab-nav-panel #tabPanel>
+    <router-outlet>
+    </router-outlet>
+  </mat-tab-nav-panel>
+</div>

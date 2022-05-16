@@ -1249,18 +1249,18 @@ export class GridlistComponent implements OnInit {
   }
   infoButtonClick(d: any, serviceName: any) {
     console.log(d, serviceName);
-    // if (serviceName === 'machineService') {
-    //   this.authService.profile().subscribe(
-    //     (res) => {
-    //       this.permissionsData = res.Permissions;
-    //       this.loginService.permissions.next({
-    //         Permissions: this.permissionsData,
-    //       });
-    //     },
-    //     (err) => {}
-    //   );
-    //   this.router.navigate(['/machines/' + d.Id]);
-    // }
+    if (serviceName === 'machineService') {
+      // this.authService.profile().subscribe(
+      //   (res) => {
+      //     // this.permissionsData = res.Permissions;
+      //     // this.loginService.permissions.next({
+      //     //   Permissions: this.permissionsData,
+      //     // });
+      //   },
+      //   (err) => {}
+      // );
+      this.router.navigate(['/machines/' + d.Id]);
+    }
     // if (serviceName === 'mealLogService') {
     //   localStorage.setItem('meallogIfo', JSON.stringify(d));
     //   this.router.navigate(['/mealLog/' + d.Id]);
