@@ -277,6 +277,7 @@ button:focus {
     align-items: center;
     background: #fff;
     border-bottom: 2px solid #f7f8fb;
+    position: relative;
 }
 .btn-accordion .accordion-item:nth-child(even) .accordion-header {
     background-color: #f4f5f9 !important;
@@ -327,6 +328,18 @@ button:focus {
 }
  .accordion-button::after{
 display: none;
+}
+.accordion-button:not(.collapsed){
+    box-shadow: none !important;
+}
+.page-container-1 {
+    background: #fff;
+    box-shadow: 0 2px #e9ecf9;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 100%!important;
+    margin-top: 0;
+    border-top-left-radius: 0;
 }
 .btn, .btn-add-meallog, .btn-cancel, .btn-save {
     display: inline-block;
@@ -463,6 +476,9 @@ input[type="number"] {
 }
 .meal-log-tab .mat-tab-links .mat-tab-link:first-child{
     border-top-left-radius: 8px;
+}
+.meal-log-tab .mat-tab-links .mat-tab-link:last-child{
+    border-top-right-radius: 8px;
 }
 .meal-log-tab .mat-tab-link{
     background: #fff;
