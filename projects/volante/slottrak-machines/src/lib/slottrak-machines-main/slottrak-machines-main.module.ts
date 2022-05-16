@@ -6,7 +6,10 @@ import { DetailComponent } from './components/detail/detail.component';
 import { ConfigurationsComponent } from './components/detail/configurations/configurations.component';
 import { CommonModule } from '@angular/common';
 
-import { SlotTrakUiGridlistModule } from '@volante/slottrak-ui';
+import {
+  SlotTrakUiCustomDatePickerModule,
+  SlotTrakUiGridlistModule,
+} from '@volante/slottrak-ui';
 import { MachineAddComponent } from './components/entry/buttons/add/machine-add.component';
 import { AuthGuardService } from '@volante/slottrak-app';
 import { MachinesAddComponent } from './components/machines-add/machines-add.component';
@@ -43,6 +46,7 @@ import { MatInputModule } from '@angular/material/input';
     MatAutocompleteModule,
     MatTooltipModule,
     SlotTrakUiGridlistModule,
+    SlotTrakUiCustomDatePickerModule,
   ],
   providers: [AuthGuardService],
 })

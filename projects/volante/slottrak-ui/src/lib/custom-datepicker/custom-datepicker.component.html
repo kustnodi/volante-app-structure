@@ -1,0 +1,8 @@
+<mat-form-field floatLabel="never" class="custom-mat-field" [ngClass]="ngClass" (click)="focusOnInput($event)">
+    <input #input matInput [matDatepicker]="picker" (click)="picker.open()" [formControl]="control"
+        [placeholder]="placeholder" [(ngModel)]="model" autocomplete="off" (dateChange)="setISO()"
+        (dateInput)="setISO()">
+    <img *ngIf="model" class="clear-btn" src="assets/icons/close.svg" (click)="resetDate($event)">
+    <mat-datepicker #picker (closed)="input.blur()" [calendarHeaderComponent]="customheader">
+    </mat-datepicker>
+</mat-form-field>

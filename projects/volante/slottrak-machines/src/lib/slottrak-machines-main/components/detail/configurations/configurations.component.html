@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row mb-2">
             <div class="col">
                 <div class="d-flex flex-wrap reset-btn-div">
@@ -42,19 +42,19 @@
                         <option value="Move">Move</option>
                         <option value="NewMachine">New</option>
                     </select>
-                    <custom-datepicker class="custom-date mb-2" [placeholder]="'Start Date'" [(model)]="query.startDate"
-                        (modelOutput)="onStartDateChange($event)">
-                    </custom-datepicker>
-                    <custom-datepicker class="custom-date mb-2" [placeholder]="'End Date'" [(model)]="query.endDate"
-                        (modelOutput)="onEndDateChange($event)">
-                    </custom-datepicker>
+                    <volante-slottrak-ui-custom-datepicker class="custom-date mb-2" [placeholder]="'Start Date'"
+                        [model]="query.startDate" (modelOutput)="onStartDateChange($event)">
+                    </volante-slottrak-ui-custom-datepicker>
+                    <volante-slottrak-ui-custom-datepicker class="custom-date mb-2" [placeholder]="'End Date'"
+                        [model]="query.endDate" (modelOutput)="onEndDateChange($event)">
+                    </volante-slottrak-ui-custom-datepicker>
                     <button (click)="resetFilter()" class="reset-filters-btn m-r-10 mb-2" id="resetFiltersMealLog"><span
                             class="reset-filters-text">Reset
                             All</span></button>
 
                 </div>
             </div>
-        </div> -->
+        </div>
         <ngb-accordion #acc="ngbAccordion" [closeOthers]="true" class="btn-accordion"
             (panelChange)='panelShadow($event,acc)'>
 

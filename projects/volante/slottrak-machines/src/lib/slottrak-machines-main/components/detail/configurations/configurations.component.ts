@@ -57,7 +57,9 @@ export class ConfigurationsComponent implements OnInit {
   onSelectFilter(event: any) {
     this.search = event.target.value;
   }
+
   onStartDateChange(event: any) {
+    console.log(event);
     this.date = new Date(event);
     if (event !== '') {
       this.machineDetail.MachineChanges =
@@ -67,7 +69,7 @@ export class ConfigurationsComponent implements OnInit {
     }
     if (event === '') {
       this.route.params.subscribe((params) => {
-        this.machineId = params.machineId;
+        this.machineId = Number(params.id);
         this.machinesService.getItem(this.machineId).subscribe((response) => {
           this.machineDetail.MachineChanges = response.MachineChanges;
         });
@@ -92,7 +94,7 @@ export class ConfigurationsComponent implements OnInit {
     }
     if (event === '') {
       this.route.params.subscribe((params) => {
-        this.machineId = params.machineId;
+        this.machineId = Number(params.id);
         this.machinesService.getItem(this.machineId).subscribe((response) => {
           this.machineDetail.MachineChanges = response.MachineChanges;
         });
@@ -106,7 +108,7 @@ export class ConfigurationsComponent implements OnInit {
     this.query.endDate = null;
     this.search = '';
     this.route.params.subscribe((params) => {
-      this.machineId = params.machineId;
+      this.machineId = Number(params.id);
       this.machinesService.getItem(this.machineId).subscribe((response) => {
         this.machineDetail.MachineChanges = response.MachineChanges;
       });
