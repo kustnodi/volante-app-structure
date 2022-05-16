@@ -90,6 +90,9 @@
     background: #f4f5f9;
     border-radius: 4px;
 }
+select{
+    appearance: auto !important
+}
 /* Modal Window */
 .modal-xxl .modal-dialog {
     max-width: 1440px !important;
@@ -317,6 +320,7 @@ button:focus {
     border-bottom: 2px solid #f7f8fb !important;
     border-radius: 0;
     padding: 0.375rem 0 !important;
+    box-shadow: none;
 }
 .edit-page button.accordion-button[aria-expanded="true"] {
     border-bottom: 0 !important;
