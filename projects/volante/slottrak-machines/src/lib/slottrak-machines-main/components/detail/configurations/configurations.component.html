@@ -6,32 +6,32 @@
         <app-warehouse [hide]="'yes'"></app-warehouse>
     </div> -->
     <div *ngIf="splitUrl === undefined">
-        <!-- <div class="row mb-3 clone-btns">
+        <div class="row mb-3 clone-btns">
             <div class="col-md-3">
                 <div class="d-flex justify-content-between align-items-center flex-wrap text-center">
-                    <div class="content" *ngIf="machineCloneBtn == true">
+                    <div class="content">
                         <img src="assets/icons/copy-blue.svg" />
                         <p>Clone</p>
                     </div>
-                    <div class="content" *ngIf="machineConvertBtn == true">
+                    <div class="content">
                         <img src="assets/icons/account-blue.svg" />
                         <p>Convert</p>
                     </div>
-                    <div class="content" *ngIf="machineMoveBtn == true">
+                    <div class="content">
                         <img src="assets/icons/move-blue.svg" />
                         <p>move</p>
                     </div>
-                    <div class="content" (click)="goToWarehouse()" *ngIf="machineWarehouseBtn == true">
+                    <div class="content" (click)="goToWarehouse()">
                         <img src="assets/icons/account-blue.svg" />
                         <p>Warehouse</p>
                     </div>
-                    <div class="content" *ngIf="machineDecommissionBtn == true">
+                    <div class="content">
                         <img src="assets/icons/Union-blue.svg" (click)="goToDecommission()" />
                         <p>Decommission</p>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <div class="row mb-2">
             <div class="col">
                 <div class="d-flex flex-wrap reset-btn-div">

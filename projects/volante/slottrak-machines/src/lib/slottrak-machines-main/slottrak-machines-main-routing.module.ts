@@ -33,6 +33,10 @@ const routes: Routes = [
     component: MachinesAddComponent,
   },
   detailRoute,
+  {
+    path: ':machineId/edit/:id',
+    component: MachinesAddComponent,
+  },
 ];
 
 @NgModule({
