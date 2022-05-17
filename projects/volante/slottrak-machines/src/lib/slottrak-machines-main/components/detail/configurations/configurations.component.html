@@ -1,12 +1,12 @@
 <div class="page-container-1">
-    <!-- <div *ngIf="splitUrl === 'decommission'">
+  <!-- <div *ngIf="splitUrl === 'decommission'">
         <app-decommission [hide]="'yes'"></app-decommission>
     </div>
     <div *ngIf="splitUrl === 'warehouse'">
         <app-warehouse [hide]="'yes'"></app-warehouse>
     </div> -->
-    <div *ngIf="splitUrl === undefined">
-        <!-- <div class="row mb-3 clone-btns">
+  <div *ngIf="splitUrl === undefined">
+    <!-- <div class="row mb-3 clone-btns">
             <div class="col-md-3">
                 <div class="d-flex justify-content-between align-items-center flex-wrap text-center">
                     <div class="content" *ngIf="machineCloneBtn == true">
@@ -32,647 +32,691 @@
                 </div>
             </div>
         </div> -->
-        <div class="row mb-2">
-            <div class="col">
-                <div class="d-flex flex-wrap reset-btn-div">
-                    <select style="padding: 7px;" id="select" class="select mb-2" (change)="onSelectFilter($event)"
-                        [(ngModel)]="search">
-                        <option value="">Any</option>
-                        <option value="Conversion">Conversion</option>
-                        <option value="Move">Move</option>
-                        <option value="NewMachine">New</option>
-                    </select>
-                    <volante-slottrak-ui-custom-datepicker class="custom-date mb-2" [placeholder]="'Start Date'"
-                        [model]="query.startDate" (modelOutput)="onStartDateChange($event)">
-                    </volante-slottrak-ui-custom-datepicker>
-                    <volante-slottrak-ui-custom-datepicker class="custom-date mb-2" [placeholder]="'End Date'"
-                        [model]="query.endDate" (modelOutput)="onEndDateChange($event)">
-                    </volante-slottrak-ui-custom-datepicker>
-                    <button (click)="resetFilter()" class="reset-filters-btn m-r-10 mb-2" id="resetFiltersMealLog"><span
-                            class="reset-filters-text">Reset
-                            All</span></button>
-
-                </div>
-            </div>
-        </div> -->
-        <ngb-accordion #acc="ngbAccordion" [closeOthers]="true" class="btn-accordion"
-            (panelChange)="panelShadow($event, acc)">
-            <ngb-panel id="panel-{{ i }}" *ngFor="
+    <div class="row mb-2">
+      <div class="col">
+        <div class="d-flex flex-wrap reset-btn-div">
+          <select
+            style="padding: 7px"
+            id="select"
+            class="select mb-2"
+            (change)="onSelectFilter($event)"
+            [(ngModel)]="search"
+          >
+            <option value="">Any</option>
+            <option value="Conversion">Conversion</option>
+            <option value="Move">Move</option>
+            <option value="NewMachine">New</option>
+          </select>
+          <volante-slottrak-ui-custom-datepicker
+            class="custom-date mb-2"
+            [placeholder]="'Start Date'"
+            [model]="query.startDate"
+            (modelOutput)="onStartDateChange($event)"
+          >
+          </volante-slottrak-ui-custom-datepicker>
+          <volante-slottrak-ui-custom-datepicker
+            class="custom-date mb-2"
+            [placeholder]="'End Date'"
+            [model]="query.endDate"
+            (modelOutput)="onEndDateChange($event)"
+          >
+          </volante-slottrak-ui-custom-datepicker>
+          <button
+            (click)="resetFilter()"
+            class="reset-filters-btn m-r-10 mb-2"
+            id="resetFiltersMealLog"
+          >
+            <span class="reset-filters-text">Reset All</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    -->
+    <ngb-accordion
+      #acc="ngbAccordion"
+      [closeOthers]="true"
+      class="btn-accordion"
+      (panelChange)="panelShadow($event, acc)"
+    >
+      <ngb-panel
+        id="panel-{{ i }}"
+        *ngFor="
           let machineConfig of machineDetail?.MachineChanges;
           let i = index
-        ">
-                <ng-template ngbPanelTitle>
-                    <div class="row btn-row align-items-center">
-                        <div class="col-md-2 col-sm-3 text-left">
-                            <p>{{ machineConfig.ChangeType }}</p>
-                        </div>
-                        <div class="col-md-2 col-sm-3 text-left">
-                            <p>{{ machineConfig.Date | date: "MMM d, y" }}</p>
-                        </div>
-                        <div class="col-md-2 col-sm-3 text-left">
-                            <button class="status current" type="button" *ngIf="i == 0">
-                                Current
-                            </button>
-                        </div>
+        "
+      >
+        <ng-template ngbPanelTitle>
+          <div class="row btn-row align-items-center">
+            <div class="col-md-2 col-sm-3 text-left">
+              <p>{{ machineConfig.ChangeType }}</p>
+            </div>
+            <div class="col-md-2 col-sm-3 text-left">
+              <p>{{ machineConfig.Date | date: "MMM d, y" }}</p>
+            </div>
+            <div class="col-md-2 col-sm-3 text-left">
+              <button class="status current" type="button" *ngIf="i == 0">
+                Current
+              </button>
+            </div>
 
-                        <div class="col-md-6 col-3 plus-col">
-                            <div class="d-flex align-items-center justify-content-end flex-wrap margin-t">
-                                <em [ngClass]="
+            <div class="col-md-6 col-3 plus-col">
+              <div
+                class="d-flex align-items-center justify-content-end flex-wrap margin-t"
+              >
+                <em
+                  [ngClass]="
                     nextState === true && i == index
                       ? 'bx bx-minus text-blue'
                       : 'bx bx-plus text-blue'
-                  "></em>
-                            </div>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                    <div class="wrapper">
-                        <div class="d-flex align-items-center flex-wrap justify-content-end col-btns">
-                            <!-- <button class="ml-3" routerLink="edit/{{machineConfig.MachineConfiguration.Id}}"
+                  "
+                ></em>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div class="wrapper">
+            <div
+              class="d-flex align-items-center flex-wrap justify-content-end col-btns"
+            >
+              <!-- <button class="ml-3" routerLink="edit/{{machineConfig.MachineConfiguration.Id}}"
                                 *ngIf="machineEditBtn === true"><img src="assets/icons/edit-green.svg" alt="edit"
                                     class="mr-2" />edit</button>
                             <button class="ml-3" *ngIf="machineDeleteBtn === true"><img src="assets/icons/trash.svg"
                                     alt="edit" class="mr-2" />DELETE</button> -->
-                            <button class="ms-3">
-                                <img src="assets/icons/cloud.svg" alt="edit" class="me-2" />CHANGE SUMMARY
-                            </button>
-                            <button class="ms-3 me-3">
-                                <img src="assets/icons/cloud.svg" alt="edit" class="me-2" />DOWNLOAD <em
-                                    class="bx bx-caret-down"></em>
-                            </button>
-                        </div>
-                        <div class="main-heading mb-3">EGM Information</div>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Slot Type</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.SlotTypeName }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Serial Number</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.SerialNumber }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Manufacturer</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.ManufacturerName }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Status</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.Status }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Cabinet Type</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.CabinetTypeName }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Model Number</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.ModelNumberName }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Display Type</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.DisplayTypeName }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Number of Reels</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.NumberOfReels }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Slot Number</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.SlotNumber }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Game Type</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.GameType }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Game Name</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.GameName }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                    <div class="wrapper">
-                        <div class="main-heading mb-3">Game Math</div>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Type Id</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.TypeId }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Paylines</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.PayLines }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">First Coin Percentage</p>
-                                        <p class="machine-text">
-                                            {{
-                                            machineConfig.MachineConfiguration.FirstCoinPercentage
-                                            }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Max Coin Percentage</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.MaxCoinPercentage }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Hold Percentage</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.HoldPercentage }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Max Jackpot</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.MaxJackpot }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Progressive Type</p>
-                                        <p class="machine-text">
-                                            {{
-                                            machineConfig.MachineConfiguration.ProgressiveTypeName
-                                            }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Subtype</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.SubType }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">GLI Number</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.GliNumber }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Jackpot Base</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.JackpotBase }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Coins Per Count</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.CoinsPerPoint }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Points Awarded</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.PointsAwarded }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Adjusted Hold Percentage</p>
-                                        <p class="machine-text">
-                                            {{
-                                            machineConfig.MachineConfiguration
-                                            .AdjustedHoldPercentage
-                                            }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
+              <button class="ms-3">
+                <img
+                  src="assets/icons/cloud.svg"
+                  alt="edit"
+                  class="me-2"
+                />CHANGE SUMMARY
+              </button>
+              <button class="ms-3 me-3">
+                <img
+                  src="assets/icons/cloud.svg"
+                  alt="edit"
+                  class="me-2"
+                />DOWNLOAD <em class="bx bx-caret-down"></em>
+              </button>
+            </div>
+            <div class="main-heading mb-3">EGM Information</div>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Slot Type</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.SlotTypeName }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Serial Number</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.SerialNumber }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Manufacturer</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.ManufacturerName }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Status</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.Status }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Cabinet Type</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.CabinetTypeName }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Model Number</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.ModelNumberName }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Display Type</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.DisplayTypeName }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Number of Reels</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.NumberOfReels }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Slot Number</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.SlotNumber }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Game Type</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.GameType }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Game Name</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.GameName }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div class="wrapper">
+            <div class="main-heading mb-3">Game Math</div>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Type Id</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.TypeId }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Paylines</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.PayLines }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">First Coin Percentage</p>
+                    <p class="machine-text">
+                      {{
+                        machineConfig.MachineConfiguration.FirstCoinPercentage
+                      }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Max Coin Percentage</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.MaxCoinPercentage }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Hold Percentage</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.HoldPercentage }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Max Jackpot</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.MaxJackpot }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Progressive Type</p>
+                    <p class="machine-text">
+                      {{
+                        machineConfig.MachineConfiguration.ProgressiveTypeName
+                      }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Subtype</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.SubType }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">GLI Number</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.GliNumber }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Jackpot Base</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.JackpotBase }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Coins Per Count</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.CoinsPerPoint }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Points Awarded</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.PointsAwarded }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Adjusted Hold Percentage</p>
+                    <p class="machine-text">
+                      {{
+                        machineConfig.MachineConfiguration
+                          .AdjustedHoldPercentage
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
 
-                    <div class="wrapper">
-                        <div class="main-heading mb-3">Eprom Configuration</div>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6" *ngFor="
+          <div class="wrapper">
+            <div class="main-heading mb-3">Eprom Configuration</div>
+            <div class="content">
+              <div class="row">
+                <div
+                  class="col-md-3 col-sm-6"
+                  *ngFor="
                     let m of machineConfig.MachineConfiguration
                       .EpromConfigurations
-                  ">
-                                    <div class="border-right-div">
-                                        <p class="heading">{{ m.Name }}</p>
-                                        <p class="machine-text">{{ m.Label }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                    <div class="wrapper">
-                        <div class="main-heading mb-3">Location Data</div>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Section</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.Section }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Bank</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.Bank }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Slot</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.Slot }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Index Zone</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.IndexZone }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Bank Size</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.BankSize }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Seat position</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.SeatPosition }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                    <div class="wrapper">
-                        <div class="main-heading mb-3">Lease Information</div>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Leased</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.LeasedName }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Leased Category</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.LeaseCategoryName }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Fee Flat</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.FeeFlat }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Fee Percentage</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.FeePercentage }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Fee Structure</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.FeeStructure }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Contract ID</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.ContractId }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                    <div class="wrapper">
-                        <div class="main-heading mb-3">
-                            Player Tracking, Limits, & Options
-                        </div>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">SB EGM</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.SbEgmName }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Protocol</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.Protocol }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Protocol Version</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.ProtocolVersion }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Player Tracking Type</p>
-                                        <p class="machine-text">
-                                            {{
-                                            machineConfig.MachineConfiguration
-                                            .PlayerTrackingTypeName
-                                            }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Jackpot Limit</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.JackpotLimit }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Printer Limit Option</p>
-                                        <p class="machine-text">
-                                            {{
-                                            machineConfig.MachineConfiguration.PrinterLimitOption
-                                            }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Credit Limit Option</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.CreditLimitOption }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Ticket Limit Option</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.TicketLimitOption }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">W2G Jackpot Accrual Enabled</p>
-                                        <p class="machine-text">
-                                            {{
-                                            machineConfig.MachineConfiguration
-                                            .W2GJackpotAccrualEnabled
-                                            }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">CWA Enabled</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.CWAEnabled }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Ticketing</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.MachineConfiguration.TicketingName }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Funds Transfer Method</p>
-                                        <p class="machine-text">
-                                            {{
-                                            machineConfig.MachineConfiguration
-                                            .FundsTransferMethodName
-                                            }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                    <div class="wrapper">
-                        <div class="main-heading mb-3">Date Information</div>
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Date</p>
-                                        <p class="machine-text">
-                                            {{ machineConfig.Date | date: "MM/dd/YYY" }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">Purchase Date</p>
-                                        <p class="machine-text">
-                                            {{
-                                            machineConfig.MachineConfiguration.PurchaseDate
-                                            | date: "MM/dd/YYYY"
-                                            }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="border-right-div">
-                                        <p class="heading">In Service Date</p>
-                                        <p class="machine-text">
-                                            {{
-                                            machineConfig.MachineConfiguration.InServiceDate
-                                            | date: "MM/dd/YYYY"
-                                            }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                    <div class="wrapper">
-                        <div class="main-heading mb-3">Game Configurations</div>
-                        <div class="content">
-                            <div class="">
-                                <table style="width: 100%" class="game-table">
-                                    <tr>
-                                        <th>Theme</th>
-                                        <th>Denomination</th>
-                                        <th>Par</th>
-                                        <th>Min Bet</th>
-                                        <th>Max Bet</th>
-                                        <th>Easy Bet</th>
-                                    </tr>
-                                    <tr *ngFor="
+                  "
+                >
+                  <div class="border-right-div">
+                    <p class="heading">{{ m.Name }}</p>
+                    <p class="machine-text">{{ m.Label }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div class="wrapper">
+            <div class="main-heading mb-3">Location Data</div>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Section</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.Section }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Bank</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.Bank }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Slot</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.Slot }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Index Zone</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.IndexZone }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Bank Size</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.BankSize }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Seat position</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.SeatPosition }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div class="wrapper">
+            <div class="main-heading mb-3">Lease Information</div>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Leased</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.LeasedName }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Leased Category</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.LeaseCategoryName }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Fee Flat</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.FeeFlat }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Fee Percentage</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.FeePercentage }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Fee Structure</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.FeeStructure }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Contract ID</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.ContractId }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div class="wrapper">
+            <div class="main-heading mb-3">
+              Player Tracking, Limits, & Options
+            </div>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">SB EGM</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.SbEgmName }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Protocol</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.Protocol }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Protocol Version</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.ProtocolVersion }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Player Tracking Type</p>
+                    <p class="machine-text">
+                      {{
+                        machineConfig.MachineConfiguration
+                          .PlayerTrackingTypeName
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Jackpot Limit</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.JackpotLimit }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Printer Limit Option</p>
+                    <p class="machine-text">
+                      {{
+                        machineConfig.MachineConfiguration.PrinterLimitOption
+                      }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Credit Limit Option</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.CreditLimitOption }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Ticket Limit Option</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.TicketLimitOption }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">W2G Jackpot Accrual Enabled</p>
+                    <p class="machine-text">
+                      {{
+                        machineConfig.MachineConfiguration
+                          .W2GJackpotAccrualEnabled
+                      }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">CWA Enabled</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.CWAEnabled }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Ticketing</p>
+                    <p class="machine-text">
+                      {{ machineConfig.MachineConfiguration.TicketingName }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Funds Transfer Method</p>
+                    <p class="machine-text">
+                      {{
+                        machineConfig.MachineConfiguration
+                          .FundsTransferMethodName
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div class="wrapper">
+            <div class="main-heading mb-3">Date Information</div>
+            <div class="content">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Date</p>
+                    <p class="machine-text">
+                      {{ machineConfig.Date | date: "MM/dd/YYY" }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">Purchase Date</p>
+                    <p class="machine-text">
+                      {{
+                        machineConfig.MachineConfiguration.PurchaseDate
+                          | date: "MM/dd/YYYY"
+                      }}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <div class="border-right-div">
+                    <p class="heading">In Service Date</p>
+                    <p class="machine-text">
+                      {{
+                        machineConfig.MachineConfiguration.InServiceDate
+                          | date: "MM/dd/YYYY"
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div class="wrapper">
+            <div class="main-heading mb-3">Game Configurations</div>
+            <div class="content">
+              <div class="">
+                <table style="width: 100%" class="game-table">
+                  <tr>
+                    <th>Theme</th>
+                    <th>Denomination</th>
+                    <th>Par</th>
+                    <th>Min Bet</th>
+                    <th>Max Bet</th>
+                    <th>Easy Bet</th>
+                  </tr>
+                  <tr
+                    *ngFor="
                       let m of machineConfig.MachineConfiguration
                         .GameConfigurations
-                    ">
-                                        <td>{{ m.ThemeName }}</td>
-                                        <td>${{ m.DenominationValue }}</td>
-                                        <td>{{ m.Par }}%</td>
-                                        <td>{{ m.MinBet }}</td>
-                                        <td>{{ m.MaxBet }}</td>
-                                        <td>{{ m.EasyBet }}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                    <div class="wrapper">
-                        <div class="main-heading mb-3">Files</div>
-                        <div class="content">
-                            <div class="row">
-                                <div class="machine-files"
-                                    *ngIf="machineConfig.MachineConfiguration.Files.length === 0">
-                                    No Files
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                    <div class="wrapper">
-                        <div class="main-heading mb-3">Notes</div>
-                        <div class="content">
-                            <div class="row">
-                                <div>{{ machineConfig.MachineConfiguration.Notes }}</div>
-                            </div>
-                        </div>
-                        <hr />
-                    </div>
-                </ng-template>
-            </ngb-panel>
-        </ngb-accordion>
-    </div>
+                    "
+                  >
+                    <td>{{ m.ThemeName }}</td>
+                    <td>${{ m.DenominationValue }}</td>
+                    <td>{{ m.Par }}%</td>
+                    <td>{{ m.MinBet }}</td>
+                    <td>{{ m.MaxBet }}</td>
+                    <td>{{ m.EasyBet }}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div class="wrapper">
+            <div class="main-heading mb-3">Files</div>
+            <div class="content">
+              <div class="row">
+                <div
+                  class="machine-files"
+                  *ngIf="machineConfig.MachineConfiguration.Files.length === 0"
+                >
+                  No Files
+                </div>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div class="wrapper">
+            <div class="main-heading mb-3">Notes</div>
+            <div class="content">
+              <div class="row">
+                <div>{{ machineConfig.MachineConfiguration.Notes }}</div>
+              </div>
+            </div>
+            <hr />
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
 </div>

@@ -507,3 +507,61 @@ input[type="number"] {
 .meal-log-tab .mat-tab-links .mat-tab-link.cdk-mouse-focused{
     border-bottom: 2px solid #f2d670;
 }
+.datepicker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 18px 10px;
+}
+.datepicker-header button.left{
+    background: url(assets/icons/arrow-left.svg) no-repeat;
+    position: relative;
+    background-color: #fff;
+    border: 0;
+    width: 15px;
+    height: 15px;
+}
+.datepicker-header button.right{
+    background: url(assets/icons/arrow-right.svg) no-repeat;
+    position: relative;
+    background-color: #fff;
+    border: 0;
+    width: 15px;
+    height: 15px;
+}
+.datepicker-header span.datepicker-header-label {
+    text-align: center;
+    font-family: Nunito Sans;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 170%;
+    font-weight: 900;
+    color: #0c1024;
+}
+.datepicker-header button, .datepicker-header span{
+    cursor: pointer;
+}
+.mat-datepicker-content{
+    padding: 0 8px 10px!important;
+    box-shadow: 0 0 16px #46528126!important;
+}
+.mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+    border: unset;
+    background-color: #f4f5f9;
+    font-weight: 900;
+    color: #0c1024;
+    border-radius: 4px;
+}
+.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+    background-color: unset;
+}
+.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical):after {
+    content: "";
+    width: 4px;
+    height: 4px;
+    border: 1px solid #F2D670;
+    border-radius: 999px;
+    background: #F2D670;
+    position: absolute;
+    top: 75%;
+}
